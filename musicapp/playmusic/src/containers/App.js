@@ -1,61 +1,70 @@
-import React,{Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
 
 
-import ArtistView from '../components/ArtistView';
-import HeaderMenu from './HeaderMenu';
+import ArtistView           from '../components/ArtistView';
+import HeaderMenu           from './HeaderMenu';
 
 
-import {fetchMusicRequest,fetchMusicUpdateSaga} from '../actions/music'
+import {
+    fetchMusicRequest,
+    fetchMusicUpdateSaga,
+    fetchMusicDelete
+} from '../actions/music';
 
 class App extends Component {
-    state ={      
-        selectedId: undefined,
-        isOpenModal:false,
+    state = {
+        selectedId : undefined,
+        isOpenModal: false,
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.props.fetchMusicRequest();
-    }  
-    handleOpenModalWindow = ()=>{        
+    }
+
+    handleOpenModalWindow = () => {
         this.setState({
             isOpenModal: !this.state.isOpenModal,
-        })
-        console.log('IsOpenModal',this.isOpenModal);
+        });
     }
-    render(){       
-        return(
-            <div>                            
+
+    render() {
+        return (
+            <div>
                 <HeaderMenu />
                 <div className='wrap-track-view'>
-                {!this.props.music.length ? (
-                    <div>WAIT PLS</div>
-                ):(this.props.music.map((track, id) => (  
-                    <div key={id}>  
-                        <ArtistView 
-                        track={track} 
-                        trackid={id} 
-                        artistClick={this.handleArtistView}
-                        update = {this.props.fetchMusicUpdateSaga}/>                        
-                    </div>
+                    { !this.props.music.length ? (
+                        <div>WAIT PLS</div>
+                    ) : (this.props.music.map((track, id) => (
+                        <div key={ id }>
+                            <ArtistView
+                                track={ track }
+                                trackid={ id }
+                                artistClick={ this.handleArtistView }
+                                update={ this.props.fetchMusicUpdateSaga }
+                                onhandleDelete={ this.props.fetchMusicDelete }
+                            />
+                        </div>
                     )))
-                }    
-               
-                </div>   
-                
-                                    
+                    }
+
+                </div>
+
+
             </div>
-        )
+        );
     }
 }
 
-function mapStateToProps(state){
-    return({
+function mapStateToProps(state) {
+    return ({
         music: state.music.music,
-    })
-};
+    });
+}
 const mapDispatchToProps = {
     fetchMusicRequest,
-    fetchMusicUpdateSaga
-}
+    fetchMusicUpdateSaga,
+    fetchMusicDelete
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

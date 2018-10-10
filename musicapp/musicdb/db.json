@@ -39,7 +39,7 @@
               "title": "Separator",
               "length": "5:20"
             }
-          ],          
+          ],
           "image": "https://upload.wikimedia.org/wikipedia/ru/8/8d/The_King_of_Limbs_cover.jpg"
         },
         {
@@ -93,11 +93,11 @@
               "title": "The Tourist",
               "length": "5:24"
             }
-          ],          
+          ],
           "image": "https://upload.wikimedia.org/wikipedia/ru/9/93/RadioheadOkComputer.jpg"
         }
       ],
-      "image":"https://media.gettyimages.com/photos/rock-band-radiohead-poses-for-a-portrait-at-capitol-records-during-picture-id80530629"
+      "image": "https://media.gettyimages.com/photos/rock-band-radiohead-poses-for-a-portrait-at-capitol-records-during-picture-id80530629"
     },
     {
       "id": 2,
@@ -151,7 +151,7 @@
               "length": "5:06"
             }
           ],
-          "image":"https://upload.wikimedia.org/wikipedia/ru/d/d5/Portishead_Dummy.jpg"
+          "image": "https://upload.wikimedia.org/wikipedia/ru/d/d5/Portishead_Dummy.jpg"
         },
         {
           "title": "Third",
