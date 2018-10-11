@@ -12,6 +12,7 @@ import {
     FETCH_MUSIC_ADD_SAGA,
     fetchMusicAdd,
     FETCH_MUSIC_DELETE,
+    FETCH_MUSIC_UPDATE_SAGA
 } from '../actions/music';
 
 
@@ -26,7 +27,6 @@ export function* MusicRequest() {
     };
     try {
         const response = yield call(axios, options);
-        console.log(response);
         yield put(fetchMusicSuccess(response.data));
     } catch (error) {
         const message = `${ error.name } ${ error.message }`;
@@ -61,6 +61,20 @@ export function* ArtistDelete({ payload }) {
         yield put(fetchMusicError(message));
     }
 }
+export function* MusicUpdate({ payload }) {
+    const options = {
+        method: 'patch',
+        url   : `http://localhost:3000/music/${ payload.id }`,
+        data  : {
+            name: payload.name,
+        }
+    };
+    try {
+        yield call(axios, options);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 // export function* MusicUpdate({
 //     payload
@@ -87,6 +101,5 @@ export default function* () {
     yield takeEvery(FETCH_MUSIC_REQUEST, MusicRequest);
     yield takeEvery(FETCH_MUSIC_ADD_SAGA, MusicAdd);
     yield takeEvery(FETCH_MUSIC_DELETE, ArtistDelete);
-
-    // yield takeEvery(FETCH_MUSIC_UPDATE_SAGA, MusicUpdate);
+    yield takeEvery(FETCH_MUSIC_UPDATE_SAGA, MusicUpdate);
 }

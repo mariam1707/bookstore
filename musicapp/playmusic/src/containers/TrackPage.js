@@ -1,35 +1,36 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component }  from 'react';
+import { connect }           from 'react-redux';
 
-import TrackView from '../components/TrackView';
-import HeaderMenu from './HeaderMenu';
+import TrackView             from '../components/TrackView';
+import HeaderMenu            from './HeaderMenu';
 
-import {fetchMusicRequest} from '../actions/music';
+import { fetchMusicRequest } from '../actions/music';
 
 class TrackPage extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchMusicRequest();
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 <HeaderMenu />
-                {console.log(this.props)}
-                {!this.props.music ? <div className="Loader">WAIT PLS</div> :
-                <TrackView track={this.props.music[this.props.match.params.id]}/> }
+                { console.log('TrackPage', this.props) }
+                { !this.props.music ? <div className="Loader">WAIT PLS</div> :
+                <TrackView track={ this.props.music[this.props.match.params.id] } /> }
             </div>
-        )
+        );
     }
 }
 
-function mapStateToProps(state){
-    return( {
-       music: state.music.music
-    })
+function mapStateToProps(state) {
+    return ({
+        music: state.music.music
+    });
 }
 
 const mapDispatchToProps = {
     fetchMusicRequest
-}
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(TrackPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackPage);

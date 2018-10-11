@@ -14,6 +14,7 @@
     "redux": "4.0.0",
     "redux-actions": "^2.6.1",
     "redux-saga": "^0.16.0",
+    "sass": "^1.14.1",
     "semantic-ui-css": "^2.3.0",
     "semantic-ui-react": "^0.78.2"
   },
@@ -29,6 +30,8 @@
     "eslint-plugin-arca": "^0.6.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-varspacing": "^1.2.1"
+    "eslint-plugin-varspacing": "^1.2.1",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0"
   }
 }

@@ -4,6 +4,7 @@
     padding:0;
     font-family: 'Montserrat';
     font-weight: 400;
+    max-width: 100%;
 }
 body{
   background-color:#FBD796;
@@ -17,6 +18,10 @@ body{
     padding: 25px 0 5px;
     text-align: center;
     background: black;
+  }
+  .wrap-header-menu ul{
+    max-width: 1200px;
+    margin:0 auto;
   }
   .wrap-header-menu li {display: inline-block;}
   .wrap-header-menu li:after {
@@ -150,4 +155,60 @@ body{
 }
 .modal .btn {
     float: right;
+}
+.EditPageContainer{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.EditArtistComponent{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
+}
+.EditArtistComponent input{
+  width:300px;
+  height:30px;
+}
+.EditArtistComponent button{
+    height:34px;
+    width:50px;
+}
+.EditArtistComponent div{
+  padding:10px 0 ;
+
+}
+.EditTrackWrap{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+}
+.EditTrackComponent input{
+  height:30px;
+  width:150px;
+}
+.EditTrackAlbumTitle{
+  text-align: center;
+  padding:20px 0;
+  font-size:24px;
+}
+.EditTrackAlbumTitle p{
+  padding: 0 0 10px 0;
+}
+.EditTrackContent{
+  display:flex;
+}
+.EditTrackContent div{
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.EditTrackContent div input {
+  margin:0 20px;
+}
+.EditTrackLengthInput{
+  width: 60px!important;
 }

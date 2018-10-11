@@ -32,7 +32,11 @@ class ArtistView extends React.Component {
                     <img src={ this.props.track.image } alt='image is out' />
                     <p>{ this.props.track.name }</p>
                 </Link>
-                <button type='button' onClick={ this.handleOpenModalWindow }>Редактировать</button>
+                <button type='button'>
+                    <Link to={ {
+                        pathname: `/edittrack/${ this.props.trackid }`,
+                    } }
+                    >Редактировать</Link></button>
                 <button type='button' onClick={ this.handleDelete }>Удалить</button>
                 { this.state.isOpenModal &&
                     <ModalWindowArtist

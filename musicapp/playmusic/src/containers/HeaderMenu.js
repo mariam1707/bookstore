@@ -6,10 +6,10 @@ class HeaderMenu extends Component {
     render() {
         return (
             <div className='wrap-header-menu'>
-                <ul>
+                <ul className='header-menu'>
                     <li><Link to='/'>Главная</Link></li>
                     <li><Link to='/addnewartist'>Добавить трек</Link></li>
-                    <li><a href="">Видео</a></li>
+                    <li><Link to='/edittrack'>Редактировать трэк</Link></li>
                     <li><a href="">Выступления</a></li>
                     <li><a href="">Контакты</a></li>
                 </ul>

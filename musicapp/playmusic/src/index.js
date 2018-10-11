@@ -12,6 +12,7 @@ import reducer                          from './reducers';
 import App                              from './containers/App';
 import TrackPage                        from './containers/TrackPage';
 import AddNewArtistPage                 from './containers/AddNewArtistPage';
+import EditTrackPage                    from './containers/EditTrackPage';
 
 import './style/app.css';
 
@@ -32,6 +33,7 @@ ReactDOM.render(
                     <Route exact path='/' component={ App } />
                     <Route path='/trackpage/:id' component={ TrackPage } />
                     <Route path='/addnewartist' component={ AddNewArtistPage } />
+                    <Route path='/edittrack/:id' component={ EditTrackPage } />
                 </Switch>
             </BrowserRouter>
         </div>
