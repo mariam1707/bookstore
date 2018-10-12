@@ -14,7 +14,7 @@ const EditArtist = ({ artistName, handleUpdateName, value }) => (
                 value={ value }
                 onChange={ handleUpdateName }
             />
-            <button type='button' onClick={ () => handleUpdateName() }>Ok</button>
+            <button type='button'>Ok</button>
         </div>
     </div>
 );

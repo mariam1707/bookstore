@@ -8,39 +8,9 @@ import EditAlbum                                   from '../components/EditAlbum
 import HeaderMenu                                  from './HeaderMenu';
 
 class EditTrackPage extends Component {
-    // state = {
-    //     id    : '',
-    //     name  : '',
-    //     albums: {
-    //         title: '',
-    //         songs: [
-    //             {
-    //                 title : '',
-    //                 length: '',
-    //             }
-    //         ]
-    //     },
-    //     data: {},
-    // }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            id    : '',
-            name  : '',
-            albums: {
-                title: '',
-                songs: [
-                    {
-                        title : '',
-                        length: '',
-                    }
-                ]
-            },
-            data: {},
-        };
-        this.data  = {};
-    }
+    state = {
+        data: {},
+    };
 
     componentDidMount() {
         this.props.fetchMusicRequest();
@@ -48,12 +18,8 @@ class EditTrackPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            id  : nextProps.music[this.props.match.params.id].id,
-            name: nextProps.music[this.props.match.params.id].name,
             data: nextProps.music[this.props.match.params.id]
-
         });
-        this.data = JSON.parse(JSON.stringify(nextProps.music[this.props.match.params.id]));
     }
 
     handleUpdateName = (e) => {
@@ -63,24 +29,30 @@ class EditTrackPage extends Component {
     }
 
     handleSave = () => {
-        this.props.fetchMusicUpdateSaga(this.state);
+        // this.props.fetchMusicUpdateSaga(this.state);
+        console.log(this.state.data);
     }
 
     render() {
         return (
             <div>
-                { console.log('this.data', this.data) }
                 <HeaderMenu />
                 { !this.props.music ? <div className="Loader">WAIT PLS</div> :
                 <div className='EditPageContainer'>
                         <EditArtist
-                            artistName={ this.props.music[this.props.match.params.id].name }
+                            artistName={ this.state.data.name }
                             handleUpdateName={ this.handleUpdateName }
-                            value={ this.state.name }
+                            value={ this.state.data.name }
                         />
                         <div className='EditTrackWrap'>
-                            { this.props.music[this.props.match.params.id].albums && this.props.music[this.props.match.params.id].albums.map((album, idAlbum) => (
-                                <EditAlbum key={ idAlbum } album={ album } />
+                            { this.state.data.albums && this.state.data.albums.map((album, idAlbum) => (
+                                <EditAlbum
+                                    key={ idAlbum }
+                                    idAlbum={ idAlbum }
+                                    album={ album }
+                                    handleUpdateName={ this.handleUpdateName }
+                                    value={ this.state.data.albums.title }
+                                />
                             )) }
                         </div>
                     </div>
