@@ -1,63 +1,56 @@
-import React, { Component }                        from 'react';
-import { connect }                                 from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchMusicRequest, fetchMusicUpdateSaga } from '../actions/music';
+import {
+    fetchMusicRequest,
+    fetchMusicUpdateSaga,
+    fetchMusicUpdateArtistNameSaga,
+    fetchMusicUpdateAlbumNameSaga,
+    fetchMusicUpdateSongsSaga,
+} from '../actions/music';
 
-import EditArtist                                  from '../components/EditArtist';
-import EditAlbum                                   from '../components/EditAlbum';
-import HeaderMenu                                  from './HeaderMenu';
+import EditArtist from '../components/EditArtist';
+import EditAlbum from '../components/EditAlbum';
+import HeaderMenu from './HeaderMenu';
 
 class EditTrackPage extends Component {
     state = {
-        data: {},
+        data: [],
     };
 
     componentDidMount() {
         this.props.fetchMusicRequest();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            data: nextProps.music[this.props.match.params.id]
-        });
-    }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.data !== nextProps.music) {
+            return {
+                data: nextProps.music[nextProps.match.params.id]
+            }
+        }
 
-    handleUpdateName = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        return null;
     }
-
-    handleSave = () => {
-        // this.props.fetchMusicUpdateSaga(this.state);
-        console.log(this.state.data);
-    }
-
     render() {
         return (
             <div>
                 <HeaderMenu />
-                { !this.props.music ? <div className="Loader">WAIT PLS</div> :
-                <div className='EditPageContainer'>
+                {!this.props.music ? <div className="Loader">WAIT PLS</div> :
+                    <div className='EditPageContainer'>
                         <EditArtist
-                            artistName={ this.state.data.name }
-                            handleUpdateName={ this.handleUpdateName }
-                            value={ this.state.data.name }
+                            name={this.state.data.name}
+                            id={this.state.data.id}
+                            onActionUpdateName={this.props.fetchMusicUpdateArtistNameSaga}
                         />
                         <div className='EditTrackWrap'>
-                            { this.state.data.albums && this.state.data.albums.map((album, idAlbum) => (
-                                <EditAlbum
-                                    key={ idAlbum }
-                                    idAlbum={ idAlbum }
-                                    album={ album }
-                                    handleUpdateName={ this.handleUpdateName }
-                                    value={ this.state.data.albums.title }
-                                />
-                            )) }
+                            <EditAlbum
+                                albums={this.state.data.albums}
+                                id={this.state.data.id}
+                                onAlbumNameSave={this.props.fetchMusicUpdateAlbumNameSaga}
+                            />
                         </div>
                     </div>
                 }
-                <button type='button' onClick={ this.handleSave }>СОХРАНИТЬ</button>
             </div>
         );
     }
@@ -72,7 +65,10 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     fetchMusicRequest,
-    fetchMusicUpdateSaga
+    fetchMusicUpdateSaga,
+    fetchMusicUpdateArtistNameSaga,
+    fetchMusicUpdateAlbumNameSaga,
+    fetchMusicUpdateSongsSaga
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditTrackPage);

@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const EditArtist = ({ artistName, handleUpdateName, value }) => (
-    <div className='EditArtistComponent'>
+class EditArtist extends Component {
+    state = {
+        name: this.props.name,
+        id: this.props.id
+    }
+    onHandleUpdateName = (e) => {
+        this.setState({
+            name: e.target.value
+        })
+    }
 
-        <div>
-            <p>{ artistName }</p>
+    render() {
+        return (<div className='EditArtistComponent'>
+            <div>
+                <p>{this.state.name}</p>
+            </div>
+            <div>
+                <input
+                    type='text'
+                    placeholder='ArtistName'
+                    name='name'
+                    value={this.state.name}
+                    onChange={this.onHandleUpdateName}
+
+                />
+                <button type='button' onClick={() => this.props.onActionUpdateName(this.state)}>Save</button>
+            </div>
         </div>
-        <div>
-            <input
-                type='text'
-                placeholder='ArtistName'
-                name='name'
-                value={ value }
-                onChange={ handleUpdateName }
-            />
-            <button type='button'>Ok</button>
-        </div>
-    </div>
-);
+        );
+    }
+}
 
 export default EditArtist;

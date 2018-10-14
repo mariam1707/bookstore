@@ -158,7 +158,7 @@
           "songs": [
             {
               "title": "Silence",
-              "length": "4:58"
+              "length": "1:11"
             },
             {
               "title": "Hunter",
@@ -169,7 +169,7 @@
               "length": "3:16"
             },
             {
-              "title": "The Rip",
+              "title": "Rip",
               "length": "4:29"
             },
             {
@@ -189,7 +189,7 @@
               "length": "4:43"
             },
             {
-              "title": "Small",
+              "title": "Small ",
               "length": "6:45"
             },
             {
@@ -207,19 +207,19 @@
       "image": "https://media.gettyimages.com/photos/adrian-utley-beth-gibbons-and-geoff-barrow-of-the-band-portishead-on-picture-id563988249"
     },
     {
-      "name": "йцуйцк",
+      "name": "Blue Octo",
       "image": "http://nashemisto.dp.ua/wp-content/uploads/2018/01/1.jpg",
       "id": 3,
       "albums": [
         {
-          "title": "OK Computer",
+          "title": "OK",
           "songs": [
             {
-              "title": "Airbag",
-              "length": "4:44"
+              "title": "Air",
+              "length": "4"
             },
             {
-              "title": "Paranoid Android",
+              "title": "Paranoid",
               "length": "6:23"
             },
             {

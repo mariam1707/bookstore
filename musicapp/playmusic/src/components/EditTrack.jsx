@@ -2,61 +2,69 @@ import React, { Component } from 'react';
 
 class EditTrack extends Component {
     state = {
-        song: {}
+        albums: this.props.albums,
+        songId: '',
+        albumId: this.props.albumId,
+        id: this.props.artistId,
     }
 
-    componentDidMount() {
-        this.setState({
-            song: this.props.song,
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            song: nextProps.song,
-        });
-    }
-
-    onHandleSaveSong = (e) => {
+    onHandleSaveSong = (songId) => (e) => {
         this.setState({
             ...this.state,
-            song: {
-                ...this.state.song,
-                [e.target.name]: e.target.value
-            }
+            songId: songId,
+            albums: [
+                ...this.state.albums.slice(0, this.state.albumId),
+                {
+                    ...this.state.albums[this.state.albumId],
+                    songs: [
+                        ...this.state.albums[this.state.albumId].songs.slice(0, songId),
+                        {
+                            ...this.state.albums[this.state.albumId].songs[songId],
+                            [e.target.name]: e.target.value
+                        },
+                        ...this.state.albums[this.state.albumId].songs.slice(songId + 1),
+                    ]
+                },
+                ...this.state.albums.slice(this.state.albumId + 1)
+            ]
         });
     }
 
     render() {
         return (
-            <div className='EditTrackContent'>
-                <div>
-                    <p>{ this.state.song.title }</p>
-                    <div>
-                        <input
-                            type='text'
-                            placeholder='trackname'
-                            name='title'
-                            value={ this.state.song.title }
-                            onChange={ this.onHandleSaveSong }
-                        />
+            <div>
+                {console.log(this.state)}
+                {this.state.albums[this.state.albumId].songs && this.state.albums[this.state.albumId].songs.map((song, idSong) => (
+                    <div key={idSong} className='EditTrackContent'>
+                        <div>
+                            <p>{song.title}</p>
+                            <div>
+                                <input
+                                    type='text'
+                                    placeholder='trackname'
+                                    name='title'
+                                    value={song.title}
+                                    onChange={this.onHandleSaveSong(idSong)}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <p>{song.length}</p>
+                            <input
+                                type='text'
+                                placeholder='length'
+                                name='length'
+                                value={song.length}
+                                className='EditTrackLengthInput'
+                                onChange={this.onHandleSaveSong(idSong)}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <p>{ this.state.song.length }</p>
-                    <input
-                        type='text'
-                        placeholder='length'
-                        name='length'
-                        value={ this.state.song.length }
-                        className='EditTrackLengthInput'
-                        onChange={ this.onHandleSaveSong }
-                    />
-                </div>
-                <button type='button' onClick={ () => this.props.onSaveSong(this.props.id, this.state.song) }>Ok</button>
+                ))}
+                <button type='button' onClick={() => this.props.onSaveSongs(this.state)}>Save</button>
             </div>
         );
-    }
+    };
 }
 
 export default EditTrack;

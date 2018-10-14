@@ -1,64 +1,67 @@
 import React, { Component } from 'react';
-import EditTrack            from './EditTrack';
+import EditTrack from './EditTrack';
 
 class EditAlbum extends Component {
     state = {
-        album: {}
+        albums: this.props.albums,
+        id: this.props.id
     }
 
-    componentDidMount() {
+    onHandleSaveAlbumTitle = (id) => (e) => {
         this.setState({
-            album: this.props.album,
-        });
+            albums: [
+                ...this.state.albums.slice(0, id),
+                {
+                    ...this.state.albums[id],
+                    title: e.target.value
+                },
+                ...this.state.albums.slice(id + 1)
+            ]
+        })
     }
-
-
-    onHandleSaveAlbumTitle = (e) => {
+    onHandleSaveAlbumSong = (songId, song, albumId) => {
+        console.log(songId, song, albumId);
         this.setState({
-            ...this.state.album,
-            album: {
-                title: e.target.value
-            }
-        });
+            albums: [
+                ...this.state.albums.slice(0, albumId),
+                {
+                    ...this.state.albums[albumId],
+                    songs: [
+                        ...this.state.albums[albumId].songs.slice(0, songId),
+                        song,
+                        ...this.state.albums[albumId].songs.slice(songId + 1)
+                    ]
+                },
+                ...this.state.albums.slice(albumId + 1)
+            ]
+        })
     }
-
-    onHandleSaveAlbumSong = (id, song) => {
-        this.setState({
-            ...this.state.album,
-            songs: [ ...this.state.album.songs.slice(0, id), song, ...this.state.album.songs.slice(id + 1) ]
-        });
-    }
-
-
     render() {
         return (
-            <div className='EditTrackComponent' >
-                { console.log('ALBUM', this.state.album) }
-                <div className='EditTrackAlbumTitle' >
-                    <p>{ this.state.album.title }</p>
-                    <input
-                        type='text'
-                        placeholder='album-title'
-                        value={ this.state.album.title }
-                        onChange={ this.onHandleSaveAlbumTitle }
-                    />
-                    <button type='button'>Ok</button>
-                </div>
-                { console.log(this.state.album) }
-                {
-                    this.state.album.songs && this.state.album.songs.map((song, id) => (
+            <div className='EditTrackWrap'>
+                {this.state.albums && this.state.albums.map((album, id) => (
+                    <div key={id} className='EditTrackComponent' >
+                        <div className='EditTrackAlbumTitle' >
+                            <p>{album.title}</p>
+                            <input
+                                type='text'
+                                placeholder='album-title'
+                                name='title'
+                                value={album.title}
+                                onChange={this.onHandleSaveAlbumTitle(id)}
+                            />
+                            <button type='button' onClick={() => this.props.onAlbumNameSave(this.state)}>Save title</button>
+                        </div>
                         <EditTrack
-                            song={ song }
-                            key={ id }
-                            id={ id }
-                            onSaveSong={ this.onHandleSaveAlbumSong }
+                            albums={this.state.albums}
+                            albumId={id}
+                            artistId={this.state.id}
+                            onSaveSongs={this.props.onAlbumNameSave}
                         />
-                    ))
-                }
-
+                    </div>
+                ))}
             </div >
         );
     }
-}
-
+};
 export default EditAlbum;
