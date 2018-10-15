@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect }          from 'react-redux';
 
 import {
     fetchMusicRequest,
@@ -10,7 +10,7 @@ import {
 } from '../actions/music';
 
 import EditArtist from '../components/EditArtist';
-import EditAlbum from '../components/EditAlbum';
+import EditAlbum  from '../components/EditAlbum';
 import HeaderMenu from './HeaderMenu';
 
 class EditTrackPage extends Component {
@@ -18,35 +18,37 @@ class EditTrackPage extends Component {
         data: [],
     };
 
-    componentDidMount() {
-        this.props.fetchMusicRequest();
-    }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.data !== nextProps.music) {
             return {
                 data: nextProps.music[nextProps.match.params.id]
-            }
+            };
         }
 
         return null;
     }
+
+    componentDidMount() {
+        this.props.fetchMusicRequest();
+    }
+
     render() {
         return (
             <div>
                 <HeaderMenu />
-                {!this.props.music ? <div className="Loader">WAIT PLS</div> :
+                { !this.props.music ? <div className="Loader">WAIT PLS</div> :
                     <div className='EditPageContainer'>
                         <EditArtist
-                            name={this.state.data.name}
-                            id={this.state.data.id}
-                            onActionUpdateName={this.props.fetchMusicUpdateArtistNameSaga}
+                            name={ this.state.data.name }
+                            id={ this.state.data.id }
+                            handleActionUpdateName={ this.props.fetchMusicUpdateArtistNameSaga }
                         />
                         <div className='EditTrackWrap'>
                             <EditAlbum
-                                albums={this.state.data.albums}
-                                id={this.state.data.id}
-                                onAlbumNameSave={this.props.fetchMusicUpdateAlbumNameSaga}
+                                albums={ this.state.data.albums }
+                                id={ this.state.data.id }
+                                handleAlbumNameSave={ this.props.fetchMusicUpdateAlbumNameSaga }
                             />
                         </div>
                     </div>

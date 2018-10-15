@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import TextField            from '@material-ui/core/TextField';
+import SaveIcon             from '@material-ui/icons/Save';
+import Button               from '@material-ui/core/Button';
 
 class EditTrack extends Component {
     state = {
-        albums: this.props.albums,
-        songId: '',
+        albums : this.props.albums,
+        songId : '',
         albumId: this.props.albumId,
-        id: this.props.artistId,
+        id     : this.props.artistId,
     }
 
-    onHandleSaveSong = (songId) => (e) => {
+    onHandleSaveSong = songId => (e) => {
         this.setState({
             ...this.state,
-            songId: songId,
+            songId,
             albums: [
                 ...this.state.albums.slice(0, this.state.albumId),
                 {
@@ -33,38 +36,58 @@ class EditTrack extends Component {
     render() {
         return (
             <div>
-                {console.log(this.state)}
-                {this.state.albums[this.state.albumId].songs && this.state.albums[this.state.albumId].songs.map((song, idSong) => (
-                    <div key={idSong} className='EditTrackContent'>
-                        <div>
-                            <p>{song.title}</p>
+                { this.state.albums[this.state.albumId].songs &&
+                    this.state.albums[this.state.albumId].songs.map((song, idSong) => (
+                        <div key={ idSong } className='EditTrackContent'>
                             <div>
-                                <input
-                                    type='text'
-                                    placeholder='trackname'
-                                    name='title'
-                                    value={song.title}
-                                    onChange={this.onHandleSaveSong(idSong)}
+                                <div>
+                                    <TextField
+                                        id="outlined-multiline-flexible"
+                                        label="Track Name"
+                                        multiline
+                                        rowsMax="4"
+                                        rows='2'
+                                        value={ song.title }
+                                        onChange={ this.onHandleSaveSong(idSong) }
+                                        margin="normal"
+                                        variant="outlined"
+                                        name='title'
+                                        placeholder='trackname'
+                                        className='editPageInput'
+                                    />
+
+                                </div>
+                            </div>
+                            <div>
+                                <TextField
+                                    id="outlined-multiline-flexible"
+                                    label="Track Name"
+                                    multiline
+                                    rowsMax="4"
+                                    rows='2'
+                                    value={ song.length }
+                                    onChange={ this.onHandleSaveSong(idSong) }
+                                    margin="normal"
+                                    variant="outlined"
+                                    name='length'
+                                    placeholder='length'
+                                    className='editPageInput'
                                 />
                             </div>
                         </div>
-                        <div>
-                            <p>{song.length}</p>
-                            <input
-                                type='text'
-                                placeholder='length'
-                                name='length'
-                                value={song.length}
-                                className='EditTrackLengthInput'
-                                onChange={this.onHandleSaveSong(idSong)}
-                            />
-                        </div>
-                    </div>
-                ))}
-                <button type='button' onClick={() => this.props.onSaveSongs(this.state)}>Save</button>
+                    )) }
+                <Button
+                    variant="contained"
+                    size="large"
+                    onClick={ () => this.props.onSaveSongs(this.state) }
+                    className='editPageButton'
+                >
+                    <SaveIcon />
+                    Сохранить
+                </Button>
             </div>
         );
-    };
+    }
 }
 
 export default EditTrack;

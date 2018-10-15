@@ -25,29 +25,48 @@ export function* MusicRequest() {
     //     method: 'get',
     // };
     const options = {
-        url: 'http://localhost:3000/music',
+        url   : 'http://localhost:3000/music',
         method: 'get',
     };
     try {
         const response = yield call(axios, options);
         yield put(fetchMusicSuccess(response.data));
     } catch (error) {
-        const message = `${error.name} ${error.message}`;
+        const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
     }
 }
 
 export function* MusicAdd({ payload }) {
+    const data = {
+        name  : 'name',
+        image : 'image',
+        albums: [ {
+
+
+            title: 'title',
+            songs: [
+                {
+                    title : 'songtitile',
+                    length: '22'
+                }
+            ]
+        }
+        ]
+
+    };
     try {
-        const options = {
-            url: 'http://localhost:3000/music',
+        const options  = {
+            url   : 'http://localhost:3000/music',
             method: 'post',
-            data: payload
+            data
         };
-        yield call(axios, options);
-        yield put(fetchMusicAdd(payload));
+        const response = yield call(axios, options);
+        console.log(response);
+
+        // yield put(fetchMusicAdd(payload));
     } catch (error) {
-        const message = `${error.name} ${error.message}`;
+        const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
     }
 }
@@ -55,20 +74,20 @@ export function* ArtistDelete({ payload }) {
     try {
         const options = {
             method: 'delete',
-            url: `http://localhost:3000/music/${payload.trackid}`,
+            url   : `http://localhost:3000/music/${ payload.trackid }`,
 
         };
         yield call(axios, options);
     } catch (error) {
-        const message = `${error.name} ${error.message}`;
+        const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
     }
 }
 export function* MusicUpdate({ payload }) {
     const options = {
         method: 'patch',
-        url: `http://localhost:3000/music/${payload.id}`,
-        data: {
+        url   : `http://localhost:3000/music/${ payload.id }`,
+        data  : {
             name: payload.name,
         }
     };
@@ -81,34 +100,32 @@ export function* MusicUpdate({ payload }) {
 export function* ArtistNameUpdate({ payload }) {
     const options = {
         method: 'patch',
-        url: `http://localhost:3000/music/${payload.id}`,
-        data: {
+        url   : `http://localhost:3000/music/${ payload.id }`,
+        data  : {
             name: payload.name
         }
-    }
+    };
     try {
         const response = yield call(axios, options);
         console.log(response);
-
     } catch (error) {
-        const message = `${error.name} ${error.message}`;
+        const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
     }
 }
 export function* AlbumNameUpdate({ payload }) {
     const options = {
         method: 'patch',
-        url: `http://localhost:3000/music/${payload.id}`,
-        data: {
-            albums: [...payload.albums]
+        url   : `http://localhost:3000/music/${ payload.id }`,
+        data  : {
+            albums: [ ...payload.albums ]
         }
-    }
+    };
     try {
         const response = yield call(axios, options);
         console.log(response);
-
     } catch (error) {
-        const message = `${error.name} ${error.message}`;
+        const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
     }
 }

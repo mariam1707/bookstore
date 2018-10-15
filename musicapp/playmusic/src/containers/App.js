@@ -40,7 +40,6 @@ class App extends Component {
                             <ArtistView
                                 track={ track }
                                 trackid={ id }
-                                artistClick={ this.handleArtistView }
                                 update={ this.props.fetchMusicUpdateSaga }
                                 onhandleDelete={ this.props.fetchMusicDelete }
                             />

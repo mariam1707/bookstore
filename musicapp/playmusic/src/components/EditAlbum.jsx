@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import EditTrack from './EditTrack';
+import TextField            from '@material-ui/core/TextField';
+import SaveIcon             from '@material-ui/icons/Save';
+import Button               from '@material-ui/core/Button';
+
+import EditTrack            from './EditTrack';
 
 class EditAlbum extends Component {
     state = {
         albums: this.props.albums,
-        id: this.props.id
+        id    : this.props.id
     }
 
-    onHandleSaveAlbumTitle = (id) => (e) => {
+    onHandleSaveAlbumTitle = id => (e) => {
         this.setState({
             albums: [
                 ...this.state.albums.slice(0, id),
@@ -17,10 +21,10 @@ class EditAlbum extends Component {
                 },
                 ...this.state.albums.slice(id + 1)
             ]
-        })
+        });
     }
+
     onHandleSaveAlbumSong = (songId, song, albumId) => {
-        console.log(songId, song, albumId);
         this.setState({
             albums: [
                 ...this.state.albums.slice(0, albumId),
@@ -34,34 +38,49 @@ class EditAlbum extends Component {
                 },
                 ...this.state.albums.slice(albumId + 1)
             ]
-        })
+        });
     }
+
     render() {
         return (
             <div className='EditTrackWrap'>
-                {this.state.albums && this.state.albums.map((album, id) => (
-                    <div key={id} className='EditTrackComponent' >
+                { this.state.albums && this.state.albums.map((album, id) => (
+                    <div key={ id } className='EditTrackComponent' >
                         <div className='EditTrackAlbumTitle' >
-                            <p>{album.title}</p>
-                            <input
-                                type='text'
-                                placeholder='album-title'
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="Album title"
+                                multiline
+                                rowsMax="4"
+                                rows='1'
+                                value={ album.title }
+                                onChange={ this.onHandleSaveAlbumTitle(id) }
+                                margin="normal"
+                                variant="outlined"
                                 name='title'
-                                value={album.title}
-                                onChange={this.onHandleSaveAlbumTitle(id)}
+                                placeholder='album title'
+                                className='editPageAlbumInput'
                             />
-                            <button type='button' onClick={() => this.props.onAlbumNameSave(this.state)}>Save title</button>
+                            <Button
+                                variant="contained"
+                                size="small"
+                                onClick={ () => this.props.handleAlbumNameSave(this.state) }
+                                className='editPageAlbumButton'
+                            >
+                                <SaveIcon />
+                                Сохранить
+                            </Button>
                         </div>
                         <EditTrack
-                            albums={this.state.albums}
-                            albumId={id}
-                            artistId={this.state.id}
-                            onSaveSongs={this.props.onAlbumNameSave}
+                            albums={ this.state.albums }
+                            albumId={ id }
+                            artistId={ this.state.id }
+                            onSaveSongs={ this.props.handleAlbumNameSave }
                         />
                     </div>
-                ))}
+                )) }
             </div >
         );
     }
-};
+}
 export default EditAlbum;

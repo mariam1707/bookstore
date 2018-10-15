@@ -207,27 +207,27 @@
       "image": "https://media.gettyimages.com/photos/adrian-utley-beth-gibbons-and-geoff-barrow-of-the-band-portishead-on-picture-id563988249"
     },
     {
-      "name": "Blue Octo",
+      "name": "Imagine Dragons",
       "image": "http://nashemisto.dp.ua/wp-content/uploads/2018/01/1.jpg",
       "id": 3,
       "albums": [
         {
-          "title": "OK",
+          "title": "OK Computer",
           "songs": [
             {
-              "title": "Air",
-              "length": "4"
+              "title": "Airbag",
+              "length": "4:44"
             },
             {
               "title": "Paranoid",
-              "length": "6:23"
+              "length": "6:20"
             },
             {
               "title": "Subterranean Homesick Alien",
               "length": "4:27"
             },
             {
-              "title": "Exit Music (For a Film)",
+              "title": "Exit Music ",
               "length": "4:24"
             },
             {
@@ -268,9 +268,34 @@
       ]
     },
     {
-      "name": "ytrewq",
-      "image": "http://nashemisto.dp.ua/wp-content/uploads/2018/01/1.jpg",
+      "name": "name",
+      "image": "image",
+      "albums": {
+        "title": "title",
+        "songs": [
+          {
+            "title": "songtitile",
+            "length": "22"
+          }
+        ]
+      },
       "id": 4
+    },
+    {
+      "name": "name",
+      "image": "image",
+      "albums": [
+        {
+          "title": "title",
+          "songs": [
+            {
+              "title": "songtitile",
+              "length": "22"
+            }
+          ]
+        }
+      ],
+      "id": 5
     }
   ]
 }

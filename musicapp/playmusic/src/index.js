@@ -17,12 +17,12 @@ import EditTrackPage                    from './containers/EditTrackPage';
 import './style/app.css';
 
 
-const sagaMiddleware = createSagaMiddleware();
-const store          = createStore(
+const sagaMiddleware                        = createSagaMiddleware();
+const store                                 = createStore(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(sagaMiddleware));
-
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 sagaMiddleware.run(musicSaga);
 
 ReactDOM.render(
