@@ -15,7 +15,6 @@ import {
     FETCH_MUSIC_UPDATE_SAGA,
     FETCH_MUSIC_UPDATE_ARTIST_NAME_SAGA,
     FETCH_MUSIC_UPDATE_ALBUM_NAME_SAGA,
-    FETCH_MUSIC_UPDATE_SONGS_SAGA
 } from '../actions/music';
 
 
@@ -38,33 +37,17 @@ export function* MusicRequest() {
 }
 
 export function* MusicAdd({ payload }) {
-    const data = {
-        name  : 'name',
-        image : 'image',
-        albums: [ {
-
-
-            title: 'title',
-            songs: [
-                {
-                    title : 'songtitile',
-                    length: '22'
-                }
-            ]
-        }
-        ]
-
-    };
     try {
-        const options  = {
+        const options = {
             url   : 'http://localhost:3000/music',
             method: 'post',
-            data
+            data  : payload
         };
-        const response = yield call(axios, options);
-        console.log(response);
 
-        // yield put(fetchMusicAdd(payload));
+        const response = yield call(axios, options);
+        if (response.status === 201) {
+            yield put(fetchMusicAdd(payload));
+        }
     } catch (error) {
         const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
@@ -94,7 +77,8 @@ export function* MusicUpdate({ payload }) {
     try {
         yield call(axios, options);
     } catch (error) {
-        console.log(error.message);
+        const message = `${ error.name } ${ error.message }`;
+        yield put(fetchMusicError(message));
     }
 }
 export function* ArtistNameUpdate({ payload }) {
@@ -106,8 +90,7 @@ export function* ArtistNameUpdate({ payload }) {
         }
     };
     try {
-        const response = yield call(axios, options);
-        console.log(response);
+        yield call(axios, options);
     } catch (error) {
         const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
@@ -122,8 +105,7 @@ export function* AlbumNameUpdate({ payload }) {
         }
     };
     try {
-        const response = yield call(axios, options);
-        console.log(response);
+        yield call(axios, options);
     } catch (error) {
         const message = `${ error.name } ${ error.message }`;
         yield put(fetchMusicError(message));
@@ -140,7 +122,8 @@ export function* AlbumNameUpdate({ payload }) {
 //     }            = yield select(state => state);
 //     const tracks = JSON.parse(JSON.stringify(music));
 
-//     //  music: [ ...state.music.slice(0, action.payload.id), ...action.payload.newArr, ...state.music.slice(action.payload.id + 1) ];
+//     //  music: [ ...state.music.slice(0,
+// action.payload.id), ...action.payload.newArr, ...state.music.slice(action.payload.id + 1) ];
 //     console.log(tracks);
 
 //     const options = {};

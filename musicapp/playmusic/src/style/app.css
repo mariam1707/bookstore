@@ -147,8 +147,8 @@ body{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -moz-transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
+    /* -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out; */
 }
 
 
@@ -236,4 +236,39 @@ body{
 
 .editPageArtistInput .MuiInputLabel-outlined-11.MuiInputLabel-shrink-8{
   transform: translate(12px, -6px) scale(0.75)!important;
+}
+.AddPageWrap{
+  width:100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.NewArtistViewContent{   
+  width:400px;
+  height: 643px;
+  background-color:white;
+  /* overflow: hidden; */
+}
+.NewArtistViewContent img{
+  width:75%;
+  height:300px;
+  margin: 20px 50px;
+}
+.NewArtistViewContent > p{
+  text-align: center;
+  padding: 20px 0;
+}
+.NewArtistViewContent div {
+  display:flex;
+  justify-content: space-between;
+  margin:0 40px;
+  padding: 10px 0px;
+  border-top:1px solid rgba(42,42,42,0.5);
+}
+.NewArtistViewContent div span{
+  padding-right:10px;
+}
+.AddPageInputs{
+  display: flex;
+  flex-direction: column;
 }

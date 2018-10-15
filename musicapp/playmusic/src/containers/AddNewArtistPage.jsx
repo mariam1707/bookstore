@@ -17,7 +17,10 @@ class AddNewArtistPage extends Component {
         return (
             <div>
                 <HeaderMenu />
-                <AddNewArtist handleAdd={ this.props.fetchMusicAddSaga } />
+                <div className='wrap-track-view'>
+                    <AddNewArtist handleAdd={ this.props.fetchMusicAddSaga } />
+                </div>
+
             </div>
         );
     }
