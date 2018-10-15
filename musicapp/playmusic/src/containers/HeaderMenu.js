@@ -9,9 +9,6 @@ class HeaderMenu extends Component {
                 <ul className='header-menu'>
                     <li><Link to='/'>Главная</Link></li>
                     <li><Link to='/addnewartist'>Добавить трек</Link></li>
-                    <li><Link to='#'>Редактировать трэк</Link></li>
-                    <li><a href="">Выступления</a></li>
-                    <li><a href="">Контакты</a></li>
                 </ul>
             </div>
         );

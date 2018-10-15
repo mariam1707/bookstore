@@ -111,9 +111,10 @@ body{
   } 
   .ArtistView-content{   
     width:400px;
-    height: 643px;
+    /* height: 643px; */
     background-color:white;
     /* overflow: hidden; */
+    margin: 20px 0;
   }
   .ArtistView-content img{
     width:75%;
@@ -245,7 +246,7 @@ body{
 }
 .NewArtistViewContent{   
   width:400px;
-  height: 643px;
+  min-height: 643px;
   background-color:white;
   /* overflow: hidden; */
 }
