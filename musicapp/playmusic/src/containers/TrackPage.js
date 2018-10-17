@@ -17,7 +17,7 @@ class TrackPage extends Component {
                 <HeaderMenu />
                 { console.log('TrackPage', this.props) }
                 { !this.props.music ? <div className="Loader">WAIT PLS</div> :
-                <TrackView track={ this.props.music[this.props.match.params.id] } /> }
+                    <TrackView track={ this.props.music[this.props.match.params.id] } /> }
             </div>
         );
     }

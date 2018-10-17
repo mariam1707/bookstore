@@ -14,7 +14,7 @@ import TrackPage                        from './containers/TrackPage';
 import AddNewArtistPage                 from './containers/AddNewArtistPage';
 import EditTrackPage                    from './containers/EditTrackPage';
 
-import './style/app.css';
+import './style/app.scss';
 
 
 const sagaMiddleware                        = createSagaMiddleware();
