@@ -24,22 +24,22 @@ class EditAlbum extends Component {
         });
     }
 
-    onHandleSaveAlbumSong = (songId, song, albumId) => {
-        this.setState({
-            albums: [
-                ...this.state.albums.slice(0, albumId),
-                {
-                    ...this.state.albums[albumId],
-                    songs: [
-                        ...this.state.albums[albumId].songs.slice(0, songId),
-                        song,
-                        ...this.state.albums[albumId].songs.slice(songId + 1)
-                    ]
-                },
-                ...this.state.albums.slice(albumId + 1)
-            ]
-        });
-    }
+    // onHandleSaveAlbumSong = (songId, song, albumId) => {
+    //     this.setState({
+    //         albums: [
+    //             ...this.state.albums.slice(0, albumId),
+    //             {
+    //                 ...this.state.albums[albumId],
+    //                 songs: [
+    //                     ...this.state.albums[albumId].songs.slice(0, songId),
+    //                     song,
+    //                     ...this.state.albums[albumId].songs.slice(songId + 1)
+    //                 ]
+    //             },
+    //             ...this.state.albums.slice(albumId + 1)
+    //         ]
+    //     });
+    // }
 
     render() {
         return (

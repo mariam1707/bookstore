@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField            from '@material-ui/core/TextField';
-
+import MaskedInput          from 'react-text-mask';
+import Input                from '@material-ui/core/Input';
 import NewArtistView        from './NewArtistView';
 
 class AddNewArtist extends Component {
@@ -10,11 +11,12 @@ class AddNewArtist extends Component {
         title: '',
         song : {
             title : '',
-            length: '',
+            length: '  :  ',
         },
         songs: [
 
         ],
+        textmask: '  :  ',
     }
 
     handleChangeData = (e) => {
@@ -58,6 +60,12 @@ class AddNewArtist extends Component {
             ]
 
         });
+        this.setState({
+            song: {
+                title : '',
+                length: ''
+            }
+        });
     }
 
     render() {
@@ -92,14 +100,14 @@ class AddNewArtist extends Component {
                         margin="normal"
                         variant="filled"
                     />
-                    <TextField
-                        id="filled-name"
-                        label="Длина трека:"
-                        name='length'
+                    <Input
                         value={ this.state.song.length }
+                        name='length'
                         onChange={ this.handleChangeSongName }
-                        margin="normal"
-                        variant="filled"
+                        id="formatted-text-mask-input"
+                        inputComponent={ TextMaskCustom }
+                        className="InputLength"
+
                     />
                     <button type='button' onClick={ this.handleAddSong }>Добавить трек</button>
                     <button type='button' onClick={ this.handleSaveArtist }>Сохранить альбом</button>
@@ -108,6 +116,19 @@ class AddNewArtist extends Component {
             </div>
         );
     }
+}
+function TextMaskCustom(props) {
+    const { inputRef, ...other } = props;
+
+    return (
+        <MaskedInput
+            { ...other }
+            ref={ inputRef }
+            mask={ [ /\d/, /\d/, ':', /\d/, /\d/ ] }
+            placeholderChar={ '\u2000' }
+            showMask
+        />
+    );
 }
 
 export default AddNewArtist;

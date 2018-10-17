@@ -61,7 +61,7 @@ class EditTrack extends Component {
                             <div>
                                 <TextField
                                     id="outlined-multiline-flexible"
-                                    label="Track Name"
+                                    label="Track length"
                                     multiline
                                     rowsMax="4"
                                     rows='2'

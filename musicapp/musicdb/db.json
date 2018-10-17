@@ -212,7 +212,7 @@
       "id": 3,
       "albums": [
         {
-          "title": "OK Computer",
+          "title": "Computer",
           "songs": [
             {
               "title": "Airbag",
@@ -268,39 +268,31 @@
       ]
     },
     {
-      "name": "111",
+      "name": "AC/DC",
       "image": "https://images-na.ssl-images-amazon.com/images/I/81k-3sh8OhL._SX355_.jpg",
       "albums": [
         {
-          "title": "1111",
+          "title": "BallBreaker",
           "songs": [
             {
-              "title": "1111",
-              "length": "11111"
+              "title": "Hard as a Rock",
+              "length": "04:31"
             },
             {
-              "title": "1111",
-              "length": "11111"
+              "title": "Cover You in Oil",
+              "length": "03:37"
             },
             {
-              "title": "1111",
-              "length": "11111"
+              "title": "The Furor",
+              "length": "02:40"
             },
             {
-              "title": "1111",
-              "length": "11111"
+              "title": "Boogie Man",
+              "length": "04:41"
             },
             {
-              "title": "1111",
-              "length": "11111"
-            },
-            {
-              "title": "1111",
-              "length": "11111"
-            },
-            {
-              "title": "1111",
-              "length": "11111"
+              "title": "The Honey Roll",
+              "length": "05:25"
             }
           ],
           "image": "https://images-na.ssl-images-amazon.com/images/I/81k-3sh8OhL._SX355_.jpg"
