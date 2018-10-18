@@ -26,6 +26,7 @@ class AddNewArtist extends Component {
     }
 
     handleSaveArtist = () => {
+        if (!(this.state.name && this.state.image)) return;
         const artist = {
             name  : this.state.name,
             image : this.state.image,
@@ -53,6 +54,7 @@ class AddNewArtist extends Component {
     }
 
     handleAddSong = () => {
+        if (!this.state.song.title && !this.state.song.length) { return false }
         this.setState({
             ...this.state,
             songs: [
