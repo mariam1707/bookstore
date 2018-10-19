@@ -122,7 +122,7 @@ class AddNewArtist extends Component {
                         onClick={ this.handleAddSong }
                         className='editPageButton'
                     >
-                        Add track
+                        Add new track
                     </Button>
                     <Button
                         variant="contained"
