@@ -59,6 +59,7 @@ class AddNewArtist extends Component {
     }
 
     handleAddSong = () => {
+        if (!this.state.song.title && !this.state.song.length) { return false }
         this.setState({
             ...this.state,
             songs: [
