@@ -14,10 +14,6 @@ import EditAlbum  from '../components/EditAlbum';
 import HeaderMenu from './HeaderMenu';
 
 class EditTrackPage extends Component {
-    state = {
-        data: [],
-    };
-
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.data !== nextProps.music) {
@@ -28,6 +24,9 @@ class EditTrackPage extends Component {
 
         return null;
     }
+    state = {
+        data: [],
+    };
 
     componentDidMount() {
         this.props.fetchMusicRequest();

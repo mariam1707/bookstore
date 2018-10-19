@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import TextField            from '@material-ui/core/TextField';
 import MaskedInput          from 'react-text-mask';
 import Input                from '@material-ui/core/Input';
+import SaveIcon             from '@material-ui/icons/Save';
+import Button               from '@material-ui/core/Button';
 import NewArtistView        from './NewArtistView';
+
 
 class AddNewArtist extends Component {
     state = {
@@ -17,6 +20,7 @@ class AddNewArtist extends Component {
 
         ],
         textmask: '  :  ',
+        message : '',
     }
 
     handleChangeData = (e) => {
@@ -26,6 +30,7 @@ class AddNewArtist extends Component {
     }
 
     handleSaveArtist = () => {
+        if (!(this.state.name && this.state.image)) return;
         const artist = {
             name  : this.state.name,
             image : this.state.image,
@@ -38,8 +43,9 @@ class AddNewArtist extends Component {
             ]
 
         };
-
         this.props.handleAdd(artist);
+
+
     }
 
     handleChangeSongName = (e) => {
@@ -109,8 +115,23 @@ class AddNewArtist extends Component {
                         className="InputLength"
 
                     />
-                    <button type='button' onClick={ this.handleAddSong }>Добавить трек</button>
-                    <button type='button' onClick={ this.handleSaveArtist }>Сохранить альбом</button>
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        onClick={ this.handleAddSong }
+                        className='editPageButton'
+                    >
+                        Add track
+                    </Button>
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        onClick={ this.handleSaveArtist }
+                        className='editPageButton'
+                    >
+                        <SaveIcon />
+                        Save artist
+                    </Button>
                 </div>
                 <NewArtistView props={ this.state } />
             </div>
