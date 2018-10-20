@@ -111,7 +111,7 @@ body{
     /* height: 643px; */
     background-color:white;
     /* overflow: hidden; */
-    margin: 20px 0;
+    margin: 20px 20px;
     img{
         width:75%;
         height:300px;
@@ -164,6 +164,9 @@ body{
   align-items: center;
   flex-direction: column;
   padding: 50px 0 30px 0;
+  label {
+    color:black;
+  }
 }
 /* .EditArtistComponent input{
   width:300px;
@@ -197,6 +200,9 @@ body{
   p{
     padding: 0 0 10px 0;
   }
+  label {
+    color: black
+  }
 }
 .EditTrackContent{
   display:flex; 
@@ -211,6 +217,12 @@ body{
   div input {
     margin:0 20px;
     width: 100%;
+  }
+  .MuiInputLabel-outlined-71.MuiInputLabel-shrink-68 {
+    transform: translate(22px, -6px) scale(0.75);
+  }
+  label{
+    color: black
   }
 }
 .EditTrackLengthInput{
@@ -245,7 +257,7 @@ body{
 }
 .NewArtistViewContent{   
   width:400px;
-  min-height: 643px;
+  min-height: 443px;
   background-color:white;
   /* overflow: hidden; */
   img{

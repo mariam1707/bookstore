@@ -21,6 +21,7 @@ class AddNewArtist extends Component {
         ],
         textmask: '  :  ',
         message : '',
+        albums  : [],
     }
 
     handleChangeData = (e) => {
@@ -34,13 +35,7 @@ class AddNewArtist extends Component {
         const artist = {
             name  : this.state.name,
             image : this.state.image,
-            albums: [
-                {
-                    title: this.state.title,
-                    songs: this.state.songs,
-                    image: 'https://images-na.ssl-images-amazon.com/images/I/81k-3sh8OhL._SX355_.jpg'
-                }
-            ]
+            albums: this.state.albums
 
         };
         this.props.handleAdd(artist);
@@ -74,10 +69,27 @@ class AddNewArtist extends Component {
             }
         });
     }
+    handleSaveAlbums = () => {
+        this.setState({
+            albums: [
+                ...this.state.albums,
+                {
+                    title: this.state.title,
+                    songs: this.state.songs,
+                    image: 'https://images-na.ssl-images-amazon.com/images/I/81k-3sh8OhL._SX355_.jpg',
+                }
+            ]
+        })
+        this.setState({
+            title: '',
+            songs: [],
+        })
+    }
 
     render() {
         return (
             <div className='AddPageWrap'>
+                { console.log(this.state.songs, 'albums: ', this.state.albums) }
                 <div className='AddPageInputs'>
                     <TextField
                         id="filled-name"
@@ -124,6 +136,7 @@ class AddNewArtist extends Component {
                     >
                         Add new track
                     </Button>
+                    <button onClick={ this.handleSaveAlbums }>Сохранить альбом</button>
                     <Button
                         variant="contained"
                         size="medium"
