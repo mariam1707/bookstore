@@ -1,11 +1,9 @@
-import React             from 'react';
-import { Link }          from 'react-router-dom';
-import Button            from '@material-ui/core/Button';
-import DeleteIcon        from '@material-ui/icons/Delete';
-import Icon              from '@material-ui/core/Icon';
-import IconButton        from '@material-ui/core/IconButton';
-
-import ModalWindowArtist from '../components/ModalWindow';
+import React      from 'react';
+import { Link }   from 'react-router-dom';
+import Button     from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Icon       from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 
 class ArtistView extends React.Component {
     state = {
@@ -47,13 +45,7 @@ class ArtistView extends React.Component {
                 <IconButton aria-label="Delete" className='mainButton' onClick={ this.handleDelete }>
                     <DeleteIcon fontSize="large" />
                 </IconButton>
-                { this.state.isOpenModal &&
-                    <ModalWindowArtist
-                        close={ this.onhandleOpenModalWindow }
-                        track={ this.props.track }
-                        save={ this.props.update }
-                    />
-                }
+
             </div>
         );
     }
