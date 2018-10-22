@@ -8,7 +8,7 @@ class HeaderMenu extends Component {
             <div className='wrap-header-menu'>
                 <ul className='header-menu'>
                     <li><Link to='/'>Главная</Link></li>
-                    <li><Link to='/addnewartist'>Добавить трек</Link></li>
+                    <li><Link to='/addnewartist'>Добавить трэк</Link></li>
                 </ul>
             </div>
         );
