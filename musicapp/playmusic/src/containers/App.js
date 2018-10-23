@@ -14,8 +14,9 @@ import {
 
 class App extends Component {
     state = {
-        selectedId : undefined,
-        isOpenModal: false,
+        selectedId   : undefined,
+        isOpenModal  : false,
+        filterArtists: '',
     }
 
     componentDidMount() {
@@ -27,15 +28,26 @@ class App extends Component {
             isOpenModal: !this.state.isOpenModal,
         });
     }
+    handleFilter = (e) => {
+        this.setState({
+            filterArtists: e.target.value.toLowerCase(),
+        })
+    }
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <HeaderMenu />
+                <div className='filterWrap'>
+                    <label>Поиск</label>
+                    <input type='text' name='filter' onChange={ this.handleFilter } />
+                </div>
                 <div className='wrap-track-view'>
                     { !this.props.music.length ? (
                         <div>WAIT PLS</div>
-                    ) : (this.props.music.map((track, id) => (
+                    ) : (this.props.music.filter(
+                        track => track.name.toLowerCase().includes(this.state.filterArtists)
+                    ).map((track, id) => (
                         <div key={ id }>
                             <ArtistView
                                 track={ track }
@@ -49,8 +61,7 @@ class App extends Component {
 
                 </div>
 
-
-            </div>
+            </React.Fragment>
         );
     }
 }
