@@ -16,8 +16,10 @@ class App extends Component {
     return (
       <div>
         <Menu />
-        <BooksWrap />
-        {console.log(this.props.books)}
+        {!this.props.books.length ? (
+          <div>WAIT</div>
+        ) : <BooksWrap />}
+
       </div>
     );
   }

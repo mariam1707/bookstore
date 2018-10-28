@@ -6,25 +6,23 @@ import {
   fetchBooksRequest,
 } from '../actions/books';
 import Book from '../components/Book'
+
 class BooksWrap extends Component {
+  state = {
+    books: this.props.books,
+  }
   componentDidMount() {
     this.props.fetchBooksRequest();
   }
   render() {
+    const { books } = this.state;
     return (
-      <div class="container">
-        <div class="row">
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
+      <div className="container">
+        <div className="row">
+          {books && books.map((book, id) => (
+            <Book key={id} book={book} />
+          ))}
+
         </div>
       </div>
     );
