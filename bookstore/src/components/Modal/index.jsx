@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditButton = () => (
+const Modal = () => (
     <React.Fragment>
         <button
             type="button"
@@ -32,4 +32,4 @@ const EditButton = () => (
     </React.Fragment>
 )
 
-export default EditButton;
+export default Modal;
