@@ -27,16 +27,14 @@ sagaMiddleware.run(musicSaga);
 
 ReactDOM.render(
     <Provider store={ store }>
-        <div>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path='/' component={ App } />
-                    <Route path='/trackpage/:id' component={ TrackPage } />
-                    <Route path='/addnewartist' component={ AddNewArtistPage } />
-                    <Route path='/edittrack/:id' component={ EditTrackPage } />
-                </Switch>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path='/' component={ App } />
+                <Route path='/trackpage/:id' component={ TrackPage } />
+                <Route path='/addnewartist' component={ AddNewArtistPage } />
+                <Route path='/edittrack/:id' component={ EditTrackPage } />
+            </Switch>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
