@@ -6,6 +6,7 @@ import {
   fetchBooksRequest,
 } from '../actions/books';
 import Menu from '../components/Menu'
+import BooksWrap from './BooksWrap'
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <div>
         <Menu />
-        BOOK STORE
+        <BooksWrap />
         {console.log(this.props.books)}
       </div>
     );
