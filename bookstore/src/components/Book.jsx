@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EditButton from './Button'
+import ModalEdit from './ModalEdit'
 
 const Book = ({ book }) => (
     <div className="card-wrap col-md-4 ">
@@ -13,7 +13,7 @@ const Book = ({ book }) => (
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
                         <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                        <EditButton />
+                        <ModalEdit />
                     </div>
                     <small className="text-muted">9 mins</small>
                 </div>
