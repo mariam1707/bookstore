@@ -14,6 +14,7 @@ class BooksWrap extends Component {
   componentDidMount() {
     this.props.fetchBooksRequest();
   }
+
   render() {
     const { books } = this.state;
     return (
