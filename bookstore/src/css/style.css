@@ -45,3 +45,18 @@
   .card-wrap {
     padding-top: 15px;
   }
+  #modal-root {
+    position: relative;
+    z-index: 999;
+  }
+  .modal {
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

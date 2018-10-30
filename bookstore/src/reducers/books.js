@@ -1,6 +1,7 @@
 import {
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_ERROR,
+    BOOK_SAVE
 } from '../actions/books';
 
 const initState = {
@@ -19,6 +20,16 @@ export default function (state = initState, action) {
                 ...state,
                 error: action.payload
             };
+        case BOOK_SAVE:
+            return {
+                ...state,
+                books: [
+                    ...state.books.slice(0, action.payload.id),
+                    action.payload,
+                    ...state.books.slice(action.payload.id + 1)
+                ]
+
+            }
         default:
             return state;
     }

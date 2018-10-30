@@ -8,6 +8,15 @@ import {
 import Book from '../components/Book'
 
 class BooksWrap extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.data !== nextProps.books) {
+      return {
+        books: nextProps.books
+      };
+    }
+
+    return null;
+  }
   state = {
     books: this.props.books,
   }
