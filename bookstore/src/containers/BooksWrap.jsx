@@ -9,7 +9,8 @@ import Book from '../components/Book'
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.data !== nextProps.books) {
+    if (prevState.books !== nextProps.books) {
+      console.log(prevState.books, nextProps.books);
       return {
         books: nextProps.books
       };
