@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 
 import {
   fetchBooksRequest,
+  sagaBookDelete
 } from '../actions/books';
 import Book from '../components/Book'
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps, prevState);
     if (prevState.books !== nextProps.books) {
       console.log(prevState.books, nextProps.books);
       return {
@@ -31,7 +33,7 @@ class BooksWrap extends Component {
       <div className="container">
         <div className="row">
           {books && books.map((book, id) => (
-            <Book key={id} book={book} />
+            <Book key={id} book={book} handleDelete={this.props.sagaBookDelete} arrId={id} />
           ))}
 
         </div>
@@ -47,6 +49,7 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
   fetchBooksRequest,
+  sagaBookDelete
 };
 
 

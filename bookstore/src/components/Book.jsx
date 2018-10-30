@@ -3,6 +3,15 @@ import Modal from './Modal';
 
 
 class Book extends Component {
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.book !== nextProps.book) {
+            return {
+                book: nextProps.book
+            };
+        }
+
+        return null;
+    }
     state = {
         book: this.props.book,
         showModal: false,
@@ -17,6 +26,13 @@ class Book extends Component {
             showModal: false,
         })
     }
+    handleDelete = () => {
+        const opt = {
+            id_db: this.state.book.id,
+            id_arr: this.props.arrId,
+        }
+        this.props.handleDelete(opt);
+    }
     render() {
         const { book } = this.state;
         return (
@@ -28,7 +44,7 @@ class Book extends Component {
                         <p className="card-text">{book.title}</p>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="btn-group">
-                                <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" className="btn btn-primary">View</button>
                                 <button type="button" className="btn btn-primary" onClick={this.handleShow}>
                                     Edit
                                 </button>
@@ -36,7 +52,10 @@ class Book extends Component {
                                     <Modal book={book} handleClose={this.handleClose} />
                                 ) : null}
                             </div>
-                            <small className="text-muted">9 mins</small>
+                            <small className="text-muted">
+                                <button type="button" className="btn btn-primary" onClick={this.handleDelete}>
+                                    Delete
+                                </button></small>
                         </div>
                     </div>
                 </div>

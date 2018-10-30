@@ -1,7 +1,8 @@
 import {
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_ERROR,
-    BOOK_SAVE
+    BOOK_SAVE,
+    BOOK_DELETE
 } from '../actions/books';
 
 const initState = {
@@ -28,7 +29,14 @@ export default function (state = initState, action) {
                     action.payload,
                     ...state.books.slice(action.payload.id + 1)
                 ]
-
+            }
+        case BOOK_DELETE:
+            return {
+                ...state,
+                books: [
+                    ...state.books.slice(0, action.payload),
+                    ...state.books.slice(action.payload + 1),
+                ]
             }
         default:
             return state;

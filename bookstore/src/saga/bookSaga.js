@@ -7,6 +7,8 @@ import {
     fetchBooksError,
     SAGA_BOOK_SAVE,
     bookSave,
+    SAGA_BOOK_DELETE,
+    bookDelete,
 } from '../actions/books';
 
 export function* fetchBooks() {
@@ -42,8 +44,27 @@ export function* saveBook({ payload }) {
         yield put(fetchBooksError(message));
     }
 }
+export function* deleteBook({ payload }) {
+    console.log(payload)
+    let options = {
+        url: `http://localhost:3001/books/${payload.id_db}`,
+        method: 'delete',
+    }
+    try {
+        let response = yield call(axios, options);
+        if (response) {
+            yield put(bookDelete(payload.id_arr));
+        }
+
+    } catch (error) {
+        const message = error.name + ' ' + error.message;
+        yield put(fetchBooksError(message));
+    }
+
+}
 
 export default function* () {
     yield takeEvery(FETCH_BOOKS_REQUEST, fetchBooks);
     yield takeEvery(SAGA_BOOK_SAVE, saveBook);
+    yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
 }
