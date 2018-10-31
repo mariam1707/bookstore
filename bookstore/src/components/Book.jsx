@@ -42,12 +42,11 @@ class Book extends Component {
                     <div className="card-body">
                         <h4>{book.author}</h4>
                         <p className="card-text">{book.title}</p>
+                        <p className="card-text">{book.genre}</p>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="btn-group">
                                 <button type="button" className="btn btn-primary">View</button>
-                                <button type="button" className="btn btn-primary" onClick={this.handleShow}>
-                                    Edit
-                                </button>
+                                <button type="button" className="btn btn-primary" onClick={this.handleShow}>Edit</button>
                                 {this.state.showModal ? (
                                     <Modal book={book} handleClose={this.handleClose} />
                                 ) : null}

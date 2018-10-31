@@ -9,6 +9,7 @@ import {
     bookSave,
     SAGA_BOOK_DELETE,
     bookDelete,
+    bookSetGenres
 } from '../actions/books';
 
 export function* fetchBooks() {
@@ -18,7 +19,15 @@ export function* fetchBooks() {
     };
     try {
         const response = yield call(axios, options);
+        let genres = ['none'];
+        response.data.map((book, id) => {
+            if (genres.indexOf(book.genre) === -1) {
+                genres.push(book.genre);
+            }
+            return genres
+        });
         yield put(fetchBooksSuccess(response.data));
+        yield put(bookSetGenres(genres));
     } catch (error) {
         const message = error.name + ' ' + error.message;
         yield put(fetchBooksError(message));

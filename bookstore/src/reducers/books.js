@@ -2,12 +2,14 @@ import {
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_ERROR,
     BOOK_SAVE,
-    BOOK_DELETE
+    BOOK_DELETE,
+    BOOK_SET_GENRES
 } from '../actions/books';
 
 const initState = {
     books: [],
-    message: ''
+    message: '',
+    genres: [],
 }
 export default function (state = initState, action) {
     switch (action.type) {
@@ -37,6 +39,11 @@ export default function (state = initState, action) {
                     ...state.books.slice(0, action.payload),
                     ...state.books.slice(action.payload + 1),
                 ]
+            }
+        case BOOK_SET_GENRES:
+            return {
+                ...state,
+                genres: action.payload
             }
         default:
             return state;

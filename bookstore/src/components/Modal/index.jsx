@@ -57,6 +57,10 @@ class Modal extends React.Component {
                                     <label>{book.price}</label>
                                     <input type="text" className="form-control" name="price" value={book.price} onChange={this.handleChange} />
                                 </div>
+                                <div className="form-group">
+                                    <label>{book.genre}</label>
+                                    <input type="text" className="form-control" name="genre" value={book.genre} onChange={this.handleChange} />
+                                </div>
                             </ul>
                             <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>
                                 Save
