@@ -7,7 +7,7 @@ import {
   sagaBookDelete
 } from '../actions/books';
 import Book from '../components/Book'
-import PaginationView from '../components/PaginationView';
+import Pagination from './Pagination';
 import FiltersView from '../components/FiltersView'
 
 class BooksWrap extends Component {
@@ -55,10 +55,6 @@ class BooksWrap extends Component {
     return book.genre.toLowerCase().includes(this.state.selectedvalue);
   }
   filterTitle = (book) => {
-    let arr = book.title
-      .toLowerCase().replace(/\s+/g, '')
-      .includes(this.state.filterTitle.replace(/\s+/g, ''));
-    console.log('arr', arr);
     return book.title
       .toLowerCase().replace(/\s+/g, '')
       .includes(this.state.filterTitle.replace(/\s+/g, ''));
@@ -70,11 +66,10 @@ class BooksWrap extends Component {
       .includes(this.state.filterAuthor.replace(/\s+/g, ''));
   }
   onPageChanged = data => {
-    const { books, filterAuthor, filterTitle } = this.state;
+    const { books } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
     const currentBooks = books.slice(offset, offset + pageLimit);
-    console.log('corre', currentBooks);
     this.setState({ currentPage, currentBooks, totalPages });
   };
   render() {
@@ -94,7 +89,7 @@ class BooksWrap extends Component {
     return (
       <div className="container">
         <div className="row">
-          <PaginationView
+          <Pagination
             totalBooks={totalBooks}
             currentPage={currentPage}
             totalPages={totalPages}
