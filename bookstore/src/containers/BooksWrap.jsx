@@ -7,7 +7,8 @@ import {
   sagaBookDelete
 } from '../actions/books';
 import Book from '../components/Book'
-import Pagination from '../components/Pagination';
+import PaginationView from '../components/PaginationView';
+import FiltersView from '../components/FiltersView'
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -54,22 +55,28 @@ class BooksWrap extends Component {
     return book.genre.toLowerCase().includes(this.state.selectedvalue);
   }
   filterTitle = (book) => {
-    return book.title.toLowerCase().includes(this.state.filterTitle);
+    let arr = book.title
+      .toLowerCase().replace(/\s+/g, '')
+      .includes(this.state.filterTitle.replace(/\s+/g, ''));
+    console.log('arr', arr);
+    return book.title
+      .toLowerCase().replace(/\s+/g, '')
+      .includes(this.state.filterTitle.replace(/\s+/g, ''));
   }
   filterAuthor = (book) => {
-    return book.author.toLowerCase().includes(this.state.filterAuthor);
+
+    return book.author
+      .toLowerCase().replace(/\s+/g, '')
+      .includes(this.state.filterAuthor.replace(/\s+/g, ''));
   }
   onPageChanged = data => {
-    const { books } = this.state;
+    const { books, filterAuthor, filterTitle } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
-
     const offset = (currentPage - 1) * pageLimit;
     const currentBooks = books.slice(offset, offset + pageLimit);
-
+    console.log('corre', currentBooks);
     this.setState({ currentPage, currentBooks, totalPages });
   };
-
-
   render() {
     const {
       books,
@@ -87,49 +94,24 @@ class BooksWrap extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
-            <div className="d-flex flex-row align-items-center">
-              <h2>
-                <strong className="text-secondary">{totalBooks}</strong>{" "}
-                Books
-              </h2>
-              {currentPage && (
-                <span className="current-page d-inline-block h-100 pl-4 text-secondary">
-                  Page <span className="font-weight-bold">{currentPage}</span> /{" "}
-                  <span className="font-weight-bold">{totalPages}</span>
-                </span>
-              )}
-            </div>
-            <div className="d-flex flex-row py-4 align-items-center">
-              <Pagination
-                totalRecords={totalBooks}
-                pageLimit={6}
-                pageNeighbours={1}
-                onPageChanged={this.onPageChanged}
-              />
-            </div>
-          </div>
+          <PaginationView
+            totalBooks={totalBooks}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChanged={this.onPageChanged} />
+        </div>
+        <div className="row justify-content-sm-around">
+          <FiltersView
+            genres={this.props.genres}
+            handleChangeSelect={this.handleChangeSelect}
+            filterTitle={filterTitle}
+            filterAuthor={filterAuthor}
+            handleChangeFilter={this.handleChangeFilter}
+            selectedvalue={selectedvalue}
+          />
         </div>
         <div className="row">
-          <div className="form-group">
-            <label>Genres</label>
-            <select className="form-control" value={selectedvalue} onChange={this.handleChangeSelect}>
-              {this.props.genres && this.props.genres.map((genre, id) => (
-                <option key={id}> {genre} </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Фильтр по названию книги</label>
-            <input type="text" className="form-control" name="filterTitle" value={filterTitle} onChange={this.handleChangeFilter} />
-          </div>
-          <div className="form-group">
-            <label>Фильтр по названию автора</label>
-            <input type="text" className="form-control" name="filterAuthor" value={filterAuthor} onChange={this.handleChangeFilter} />
-          </div>
-        </div>
-        <div className="row">
-          {console.log(currentBooks)}
+          {console.log(totalPages)}
           {currentBooks && currentBooks.filter(this.filterGenres).filter(this.filterTitle).filter(this.filterAuthor).map((book, id) => (
             <Book key={id} book={book} handleDelete={this.props.sagaBookDelete} arrId={id} />
           ))}
