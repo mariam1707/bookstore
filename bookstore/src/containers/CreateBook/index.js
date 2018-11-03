@@ -3,36 +3,38 @@ import { connect } from 'react-redux';
 import { sagaBookAdd } from '../../actions/books';
 import ModalCreate from '../../components/ModalCreate';
 
-
 class CreateBook extends Component {
-    state = {
-        showModal: false,
-    }
+  state = {
+    showModal: false,
+  };
 
-    handleShow = () => (
-        this.setState({
-            showModal: !this.state.showModal,
-        })
-    )
-    render() {
-        const { showModal } = this.state;
-        const { sagaBookAdd } = this.props;
-        return (
-            <Fragment>
-                <button type="button" className="btn btn-light" onClick={this.handleShow}>CreateBook</button>
-                {showModal && <ModalCreate handleShow={this.handleShow} handleSave={sagaBookAdd} />}
-            </Fragment>
-        );
-    }
+  handleShow = () =>
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+
+  render() {
+    const { showModal } = this.state;
+    const { sagaBookAdd } = this.props;
+    return (
+      <Fragment>
+        <button type="button" className="btn btn-light" onClick={this.handleShow}>
+          CreateBook
+        </button>
+        {showModal && <ModalCreate handleShow={this.handleShow} handleSave={sagaBookAdd} />}
+      </Fragment>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-    return ({
-
-    });
+function mapStateToProps() {
+  return {};
 }
 const mapDispatchToProps = {
-    sagaBookAdd
-}
+  sagaBookAdd,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateBook);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateBook);

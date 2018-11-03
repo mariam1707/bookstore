@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
-import {
-  fetchBooksRequest,
-  sagaBookDelete
-} from '../actions/books';
-import Book from '../components/Book'
+import { fetchBooksRequest, sagaBookDelete } from '../actions/books';
+import Book from '../components/Book';
 import Pagination from './Pagination';
-import FiltersView from '../components/FiltersView'
+import FiltersView from '../components/FiltersView';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.books !== nextProps.books) {
       return {
         ...prevState,
-        books: nextProps.books
-
+        books: nextProps.books,
       };
     }
 
     return null;
   }
+
   state = {
     books: this.props.books,
     filterGenres: '',
@@ -30,59 +26,56 @@ class BooksWrap extends Component {
     filterAuthor: '',
     currentBooks: [],
     currentPage: null,
-    totalPages: null
-  }
+    totalPages: null,
+  };
+
   componentDidMount() {
     this.props.fetchBooksRequest();
   }
 
-  handleChangeSelect = (e) => {
+  handleChangeSelect = e => {
     this.setState({
       ...this.state,
       selectedvalue: e.target.value.toLowerCase(),
-    })
-  }
-  handleChangeFilter = (e) => {
+    });
+  };
+
+  handleChangeFilter = e => {
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value.toLowerCase(),
-    })
-  }
-  filterGenres = (book) => {
+    });
+  };
+
+  filterGenres = book => {
     if (this.state.selectedvalue === 'none') {
       return book.genre.toLowerCase();
     }
     return book.genre.toLowerCase().includes(this.state.selectedvalue);
-  }
-  filterTitle = (book) => {
-    return book.title
-      .toLowerCase().replace(/\s+/g, '')
-      .includes(this.state.filterTitle.replace(/\s+/g, ''));
-  }
-  filterAuthor = (book) => {
+  };
 
-    return book.author
-      .toLowerCase().replace(/\s+/g, '')
+  filterTitle = book =>
+    book.title
+      .toLowerCase()
+      .replace(/\s+/g, '')
+      .includes(this.state.filterTitle.replace(/\s+/g, ''));
+
+  filterAuthor = book =>
+    book.author
+      .toLowerCase()
+      .replace(/\s+/g, '')
       .includes(this.state.filterAuthor.replace(/\s+/g, ''));
-  }
+
   onPageChanged = data => {
     const { books } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
     const currentBooks = books.slice(offset, offset + pageLimit);
-    console.log('onpagechanged', offset, offset + pageLimit);
     this.setState({ currentPage, currentBooks, totalPages });
   };
+
   render() {
-    const {
-      books,
-      selectedvalue,
-      filterTitle,
-      filterAuthor,
-      currentBooks,
-      currentPage,
-      totalPages
-    } = this.state;
+    const { books, selectedvalue, filterTitle, filterAuthor, currentBooks } = this.state;
 
     const totalBooks = books.length;
     if (totalBooks === 0) return null;
@@ -100,17 +93,27 @@ class BooksWrap extends Component {
           />
         </div>
         <div className="row">
-          {currentBooks && currentBooks.filter(this.filterGenres).filter(this.filterTitle).filter(this.filterAuthor).map((book, id) => (
-            <Book key={id} book={book} handleDelete={this.props.sagaBookDelete} arrId={id} />
-          ))}
-
+          {currentBooks &&
+            currentBooks
+              .filter(this.filterGenres)
+              .filter(this.filterTitle)
+              .filter(this.filterAuthor)
+              .map((book, id) => (
+                <Book
+                  key={book.id}
+                  book={book}
+                  handleDelete={this.props.sagaBookDelete}
+                  arrId={id}
+                />
+              ))}
         </div>
         <div className="row justify-content-center">
           <Pagination
             totalRecords={totalBooks}
             pageLimit={6}
             pageNeighbours={1}
-            onPageChanged={this.onPageChanged} />
+            onPageChanged={this.onPageChanged}
+          />
         </div>
       </div>
     );
@@ -118,15 +121,17 @@ class BooksWrap extends Component {
 }
 
 function mapStateToProps(state) {
-  return ({
+  return {
     books: state.books.books,
     genres: state.books.genres,
-  });
+  };
 }
 const mapDispatchToProps = {
   fetchBooksRequest,
-  sagaBookDelete
+  sagaBookDelete,
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(BooksWrap);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BooksWrap);

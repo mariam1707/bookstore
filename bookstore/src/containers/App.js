@@ -1,25 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import Menu from '../components/Menu';
+import BooksWrap from './BooksWrap';
 
-
-import Menu from '../components/Menu'
-import BooksWrap from './BooksWrap'
-
-
-
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <Menu />
-        <BooksWrap />
-      </div>
-    );
-  }
-}
-
-
-
+const App = () => (
+  <React.Fragment>
+    <Menu />
+    <BooksWrap />
+  </React.Fragment>
+);
 
 export default App;
