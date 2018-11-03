@@ -70,6 +70,7 @@ class BooksWrap extends Component {
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
     const currentBooks = books.slice(offset, offset + pageLimit);
+    console.log('onpagechanged', offset, offset + pageLimit);
     this.setState({ currentPage, currentBooks, totalPages });
   };
   render() {
@@ -88,13 +89,6 @@ class BooksWrap extends Component {
 
     return (
       <div className="container">
-        <div className="row">
-          <Pagination
-            totalBooks={totalBooks}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChanged={this.onPageChanged} />
-        </div>
         <div className="row justify-content-sm-around">
           <FiltersView
             genres={this.props.genres}
@@ -106,11 +100,17 @@ class BooksWrap extends Component {
           />
         </div>
         <div className="row">
-          {console.log(totalPages)}
           {currentBooks && currentBooks.filter(this.filterGenres).filter(this.filterTitle).filter(this.filterAuthor).map((book, id) => (
             <Book key={id} book={book} handleDelete={this.props.sagaBookDelete} arrId={id} />
           ))}
 
+        </div>
+        <div className="row justify-content-center">
+          <Pagination
+            totalRecords={totalBooks}
+            pageLimit={6}
+            pageNeighbours={1}
+            onPageChanged={this.onPageChanged} />
         </div>
       </div>
     );
