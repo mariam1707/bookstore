@@ -3,7 +3,8 @@ import {
     FETCH_BOOKS_ERROR,
     BOOK_SAVE,
     BOOK_DELETE,
-    BOOK_SET_GENRES
+    BOOK_SET_GENRES,
+    BOOK_ADD
 } from '../actions/books';
 
 const initState = {
@@ -44,6 +45,15 @@ export default function (state = initState, action) {
             return {
                 ...state,
                 genres: action.payload
+            }
+        case BOOK_ADD:
+            return {
+                ...state,
+                books: [
+                    ...state.books,
+                    action.payload,
+
+                ]
             }
         default:
             return state;

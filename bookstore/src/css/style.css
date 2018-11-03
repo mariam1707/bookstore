@@ -59,3 +59,8 @@
     align-items: center;
     justify-content: center;
 }
+.btn-light {
+  color: white;
+  background-color: inherit;
+  border-color: transparent;
+}
