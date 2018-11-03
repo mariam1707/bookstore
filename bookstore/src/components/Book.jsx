@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from './Modal';
+import ModalEdit from './ModalEdit';
 
 
 class Book extends Component {
@@ -48,7 +48,7 @@ class Book extends Component {
                                 <button type="button" className="btn btn-primary">View</button>
                                 <button type="button" className="btn btn-primary" onClick={this.handleShow}>Edit</button>
                                 {this.state.showModal ? (
-                                    <Modal book={book} handleClose={this.handleClose} />
+                                    <ModalEdit book={book} handleClose={this.handleClose} />
                                 ) : null}
                             </div>
                             <small className="text-muted">

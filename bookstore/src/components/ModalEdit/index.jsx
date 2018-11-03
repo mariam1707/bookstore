@@ -6,7 +6,7 @@ import { sagaBookSave } from '../../actions/books'
 
 const modalRoot = document.getElementById('modal-root');
 
-class Modal extends React.Component {
+class ModalEdit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -86,4 +86,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEdit);
