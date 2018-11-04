@@ -9,9 +9,11 @@ import {
   bookSave,
   SAGA_BOOK_DELETE,
   bookDelete,
-  bookSetGenres,
+  // bookSetGenres,
   SAGA_BOOK_ADD,
   bookAdd,
+  FETCH_GENRES_REQUEST,
+  fetchGenresSuccess,
 } from '../actions/books';
 
 export function* fetchBooks() {
@@ -21,15 +23,20 @@ export function* fetchBooks() {
   };
   try {
     const response = yield call(axios, options);
-    const genres = ['none'];
-    response.data.map(book => {
-      if (genres.indexOf(book.genre) === -1) {
-        genres.push(book.genre);
-      }
-      return genres;
-    });
     yield put(fetchBooksSuccess(response.data));
-    yield put(bookSetGenres(genres));
+  } catch (error) {
+    const message = `${error.name} ${error.message}`;
+    yield put(fetchBooksError(message));
+  }
+}
+export function* fetchGenres() {
+  const options = {
+    url: 'http://localhost:3001/genres',
+    method: 'get',
+  };
+  try {
+    const response = yield call(axios, options);
+    yield put(fetchGenresSuccess(response.data));
   } catch (error) {
     const message = `${error.name} ${error.message}`;
     yield put(fetchBooksError(message));
@@ -91,4 +98,5 @@ export default function*() {
   yield takeEvery(SAGA_BOOK_SAVE, saveBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
+  yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
 }

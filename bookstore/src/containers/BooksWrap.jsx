@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchBooksRequest, sagaBookDelete } from '../actions/books';
+import { fetchBooksRequest, sagaBookDelete, fetchGenresRequest } from '../actions/books';
 import Book from '../components/Book';
 import Pagination from './Pagination';
 import FiltersView from '../components/FiltersView';
@@ -12,31 +12,34 @@ class BooksWrap extends Component {
       return {
         ...prevState,
         books: nextProps.books,
+        currentBooks: nextProps.books,
+        totalBooks: nextProps.books.length,
       };
     }
-
     return null;
   }
 
   state = {
     books: this.props.books,
     filterGenres: '',
-    selectedvalue: 'none',
+    selectedvalue: 'None',
     filterTitle: '',
     filterAuthor: '',
-    currentBooks: [],
+    currentBooks: this.props.books,
     currentPage: null,
     totalPages: null,
+    totalBooks: this.props.books.length,
   };
 
   componentDidMount() {
     this.props.fetchBooksRequest();
+    this.props.fetchGenresRequest();
   }
 
   handleChangeSelect = e => {
     this.setState({
       ...this.state,
-      selectedvalue: e.target.value.toLowerCase(),
+      selectedvalue: e.target.value,
     });
   };
 
@@ -48,10 +51,10 @@ class BooksWrap extends Component {
   };
 
   filterGenres = book => {
-    if (this.state.selectedvalue === 'none') {
+    if (this.state.selectedvalue.toLowerCase() === 'none') {
       return book.genre.toLowerCase();
     }
-    return book.genre.toLowerCase().includes(this.state.selectedvalue);
+    return book.genre.toLowerCase().includes(this.state.selectedvalue.toLowerCase());
   };
 
   filterTitle = book =>
@@ -75,9 +78,7 @@ class BooksWrap extends Component {
   };
 
   render() {
-    const { books, selectedvalue, filterTitle, filterAuthor, currentBooks } = this.state;
-
-    const totalBooks = books.length;
+    const { totalBooks, selectedvalue, filterTitle, filterAuthor, currentBooks } = this.state;
     if (totalBooks === 0) return null;
 
     return (
@@ -129,6 +130,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   fetchBooksRequest,
   sagaBookDelete,
+  fetchGenresRequest,
 };
 
 export default connect(

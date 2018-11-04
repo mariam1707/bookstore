@@ -10,9 +10,9 @@ const FiltersView = ({
 }) => (
   <React.Fragment>
     <div className="form-group">
-      <p>Genres</p>
+      <p>Жанры</p>
       <select className="form-control" value={selectedvalue} onChange={handleChangeSelect}>
-        {genres && genres.map((genre, id) => <option key={id}> {genre} </option>)}
+        {genres && genres.map(genre => <option key={genre.id}> {genre.genre} </option>)}
       </select>
     </div>
     <div className="form-group">

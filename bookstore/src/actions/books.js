@@ -1,7 +1,9 @@
 import { createAction } from 'redux-actions';
 
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST';
+export const FETCH_GENRES_REQUEST = 'FETCH_GENRES_REQUEST';
 export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
+export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS';
 export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR';
 export const BOOK_SAVE = 'BOOK_SAVE';
 export const SAGA_BOOK_SAVE = 'SAGA_BOOK_SAVE';
@@ -21,3 +23,5 @@ export const sagaBookDelete = createAction(SAGA_BOOK_DELETE);
 export const bookSetGenres = createAction(BOOK_SET_GENRES);
 export const bookAdd = createAction(BOOK_ADD);
 export const sagaBookAdd = createAction(SAGA_BOOK_ADD);
+export const fetchGenresRequest = createAction(FETCH_GENRES_REQUEST);
+export const fetchGenresSuccess = createAction(FETCH_GENRES_SUCCESS);

@@ -5,6 +5,7 @@ import {
   BOOK_DELETE,
   BOOK_SET_GENRES,
   BOOK_ADD,
+  FETCH_GENRES_SUCCESS,
 } from '../actions/books';
 
 const initState = {
@@ -47,6 +48,11 @@ export default function(state = initState, action) {
       return {
         ...state,
         books: [...state.books, action.payload],
+      };
+    case FETCH_GENRES_SUCCESS:
+      return {
+        ...state,
+        genres: [...action.payload],
       };
     default:
       return state;
