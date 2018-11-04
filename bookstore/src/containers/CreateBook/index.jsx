@@ -21,14 +21,22 @@ class CreateBook extends Component {
         <button type="button" className="btn btn-light" onClick={this.handleShow}>
           CreateBook
         </button>
-        {showModal && <ModalCreate handleShow={this.handleShow} handleSave={sagaBookAdd} />}
+        {showModal && (
+          <ModalCreate
+            handleShow={this.handleShow}
+            handleSave={sagaBookAdd}
+            genres={this.props.genres}
+          />
+        )}
       </Fragment>
     );
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    genres: state.books.genres,
+  };
 }
 const mapDispatchToProps = {
   sagaBookAdd,
