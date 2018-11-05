@@ -5,14 +5,14 @@ const RIGHT_PAGE = 'RIGHT';
 
 const range = (from, to, step = 1) => {
   let i = from;
-  const range = [];
+  const rangeArr = [];
 
   while (i <= to) {
-    range.push(i);
+    rangeArr.push(i);
     i += step;
   }
 
-  return range;
+  return rangeArr;
 };
 
 class Pagination extends Component {
