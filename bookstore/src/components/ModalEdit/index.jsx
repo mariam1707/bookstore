@@ -33,6 +33,15 @@ class ModalEdit extends React.Component {
     });
   };
 
+  handleChangeSelect = e =>
+    this.setState({
+      ...this.state,
+      book: {
+        ...this.state.book,
+        genre: e.target.value,
+      },
+    });
+
   handleSubmit = () => {
     this.props.handleClose();
     this.props.sagaBookSave(this.state.book);
@@ -40,6 +49,7 @@ class ModalEdit extends React.Component {
 
   render() {
     const { book } = this.state;
+    const { genres } = this.props;
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">
@@ -76,14 +86,14 @@ class ModalEdit extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <p>{book.genre}</p>
-                <input
-                  type="text"
+                <p>Жанры</p>
+                <select
                   className="form-control"
-                  name="genre"
-                  value={book.genre}
-                  onChange={this.handleChange}
-                />
+                  value={this.state.book.genre}
+                  onChange={this.handleChangeSelect}
+                >
+                  {genres && genres.map(genre => <option key={genre.id}> {genre.genre} </option>)}
+                </select>
               </div>
             </ul>
             <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>
@@ -99,8 +109,10 @@ class ModalEdit extends React.Component {
     );
   }
 }
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    genres: state.books.genres,
+  };
 }
 const mapDispatchToProps = {
   sagaBookSave,
