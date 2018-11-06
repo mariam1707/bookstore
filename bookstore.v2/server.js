@@ -5,34 +5,37 @@ const passport = require('passport');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const books = require('./routes/api/books');
 
 const app = express();
 
-//Body parser middleware
-app.use(bodyParser.urlencoded({extended: false}));
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//DBConfig
+// DBConfig
 const db = require('./config/key').mongoURI;
 
-//Connect to MongoDB
+// Connect to MongoDB
 mongoose
-    .connect(db, { useNewUrlParser: true })
-    .then(()=>console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
+// Passport middleware
 
-//Passport middleware 
 app.use(passport.initialize());
 
-//Passport  Config
+// Passport  Config
 require('./config/passport')(passport);
 
-//Use Routes
-app.use('/api/users',users);
-app.use('/api/profile',profile);
-app.use('/api/posts',posts);
+// Use Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/books', books);
 
 const port = process.env.PORT || 5000;
 
