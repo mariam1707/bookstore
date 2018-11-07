@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Menu from '../components/Menu';
+import Menu from './Menu';
 import BooksWrap from './BooksWrap';
 
 const App = () => (
