@@ -4,11 +4,19 @@ import CreateBook from './CreateBook';
 
 const Menu = () => (
   <header>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link className="nav-link" to="/">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <Link className="navbar-brand" to="/">
         BookStore
       </Link>
-      <button className="navbar-toggler" type="button">
+      <button
+        className="navbar-toggler collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExample05"
+        aria-controls="navbarsExample05"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarsExample05">
