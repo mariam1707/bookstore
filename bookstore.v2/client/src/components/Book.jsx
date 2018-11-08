@@ -42,7 +42,7 @@ class Book extends Component {
     return (
       <div className="card-wrap col-md-4 ">
         <div className="card mb-4 box-shadow">
-          <img className="card-img-top" src={book.image} alt="Card image cap" />
+          <img className="card-img-top" src={book.image} alt="Card" />
           <div className="card-body">
             <h4>{book.author}</h4>
             <p className="card-text">{book.title}</p>
