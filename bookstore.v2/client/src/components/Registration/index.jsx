@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { withRouter } from 'react-router-dom';
 
 import Menu from '../../containers/Menu';
 
@@ -40,7 +41,8 @@ class Registration extends Component {
       password,
       password2,
     };
-    this.props.submitRegistrationSaga(newUser);
+    console.log(this.props.history);
+    this.props.submitRegistrationSaga(newUser, this.props.history);
   };
 
   render() {
@@ -137,4 +139,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Registration);
+)(withRouter(Registration));

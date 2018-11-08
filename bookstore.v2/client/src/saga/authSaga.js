@@ -1,9 +1,15 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../utils/setAuthToken';
+import {
+  SET_CURRENT_USER_SAGA,
+  authErrors,
+  SUBMIT_REGISTRATION_SAGA,
+  setCurrentUser,
+} from '../actions/auth';
 
-import { SUBMIT_LOGIN_SAGA, authErrors, SUBMIT_REGISTRATION_SAGA } from '../actions/auth';
-
-export function* makeAuth({ payload }) {
+export function* makeAuth(payload) {
   const opt = {
     url: 'api/users/register',
     method: 'post',
@@ -18,7 +24,7 @@ export function* makeAuth({ payload }) {
   }
 }
 
-export function* getLogin({ payload }) {
+export function* GetUser({ payload }) {
   const opt = {
     url: 'api/users/login',
     method: 'post',
@@ -27,6 +33,11 @@ export function* getLogin({ payload }) {
   try {
     const response = yield call(axios, opt);
     console.log(response);
+    const { token } = response.data;
+    localStorage.setItem('jwtToken', token);
+    setAuthToken(token);
+    const decoded = jwt_decode(token);
+    yield put(setCurrentUser(decoded));
   } catch (error) {
     const message = error.response.data;
     yield put(authErrors(message));
@@ -36,5 +47,5 @@ export function* getLogin({ payload }) {
 export default function*() {
   // yield takeEvery(SUBMIT_LOGIN_SAGA, getLogin);
   yield takeEvery(SUBMIT_REGISTRATION_SAGA, makeAuth);
-  yield takeEvery(SUBMIT_LOGIN_SAGA, getLogin);
+  yield takeEvery(SET_CURRENT_USER_SAGA, GetUser);
 }

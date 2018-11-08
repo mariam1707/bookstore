@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
+
 import 'bootstrap';
 import rootSaga from './saga/sagas';
 

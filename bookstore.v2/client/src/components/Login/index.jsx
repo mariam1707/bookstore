@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import Menu from '../../containers/Menu';
-import { submitLoginSaga } from '../../actions/auth';
+import { setCurrentUserSaga } from '../../actions/auth';
 
 class Login extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -34,7 +34,7 @@ class Login extends Component {
       email,
       password,
     };
-    this.props.submitLoginSaga(user);
+    this.props.setCurrentUserSaga(user);
   };
 
   render() {
@@ -94,7 +94,7 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  submitLoginSaga,
+  setCurrentUserSaga,
 };
 
 export default connect(
