@@ -10,7 +10,7 @@ import {
 
 const initState = {
   books: [],
-  message: '',
+  error: '',
   genres: [],
 };
 export default function(state = initState, action) {
