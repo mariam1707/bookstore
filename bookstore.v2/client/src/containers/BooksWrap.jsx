@@ -101,7 +101,7 @@ class BooksWrap extends Component {
               .filter(this.filterAuthor)
               .map((book, id) => (
                 <Book
-                  key={book.id}
+                  key={book._id}
                   book={book}
                   handleDelete={this.props.sagaBookDelete}
                   arrId={id}

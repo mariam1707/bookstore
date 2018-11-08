@@ -12,7 +12,7 @@ const FiltersView = ({
     <div className="form-group col-md-4">
       <p>Жанры</p>
       <select className="form-control" value={selectedvalue} onChange={handleChangeSelect}>
-        {genres && genres.map(genre => <option key={genre.id}> {genre.genre} </option>)}
+        {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
       </select>
     </div>
     <div className="form-group col-md-4">

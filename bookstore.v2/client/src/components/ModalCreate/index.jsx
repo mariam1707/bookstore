@@ -84,7 +84,7 @@ class ModalEdit extends React.Component {
                   value={this.state.book.genre}
                   onChange={this.handleChangeSelect}
                 >
-                  {genres && genres.map(genre => <option key={genre.id}> {genre.genre} </option>)}
+                  {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
                 </select>
               </div>
             </ul>
