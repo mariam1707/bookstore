@@ -25,27 +25,27 @@ export function* fetchBooks() {
     const response = yield call(axios, options);
     yield put(fetchBooksSuccess(response.data));
   } catch (error) {
-    const message = `${error.name} ${error.message}`;
+    const message = error.response.data;
     yield put(fetchBooksError(message));
   }
 }
 export function* fetchGenres() {
   const options = {
-    url: 'http://localhost:3001/genres',
+    url: 'api/genres',
     method: 'get',
   };
   try {
     const response = yield call(axios, options);
     yield put(fetchGenresSuccess(response.data));
   } catch (error) {
-    const message = `${error.name} ${error.message}`;
+    const message = error.response.data;
     yield put(fetchBooksError(message));
   }
 }
 
 export function* saveBook({ payload }) {
   const options = {
-    url: `http://localhost:3001/books/${payload.id}`,
+    url: `api/books/${payload.id}`,
     method: 'patch',
     data: {
       ...payload,
@@ -57,13 +57,13 @@ export function* saveBook({ payload }) {
       yield put(bookSave(payload));
     }
   } catch (error) {
-    const message = `${error.name} ${error.message}`;
+    const message = error.response.data;
     yield put(fetchBooksError(message));
   }
 }
 export function* deleteBook({ payload }) {
   const options = {
-    url: `http://localhost:3001/books/${payload.id_db}`,
+    url: `api/books/${payload.id_db}`,
     method: 'delete',
   };
   try {
@@ -72,13 +72,13 @@ export function* deleteBook({ payload }) {
       yield put(bookDelete(payload.id_arr));
     }
   } catch (error) {
-    const message = `${error.name} ${error.message}`;
+    const message = error.response.data;
     yield put(fetchBooksError(message));
   }
 }
 export function* addBook({ payload }) {
   const options = {
-    url: 'http://localhost:3001/books/',
+    url: 'api/books/',
     method: 'post',
     data: payload,
   };
@@ -88,7 +88,7 @@ export function* addBook({ payload }) {
       yield put(bookAdd(payload));
     }
   } catch (error) {
-    const message = `${error.name} ${error.message}`;
+    const message = error.response.data;
     yield put(fetchBooksError(message));
   }
 }
@@ -98,5 +98,5 @@ export default function*() {
   yield takeEvery(SAGA_BOOK_SAVE, saveBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
-  // yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
+  yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
 }
