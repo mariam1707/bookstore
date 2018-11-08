@@ -18,7 +18,7 @@ import {
 
 export function* fetchBooks() {
   const options = {
-    url: 'http://localhost:3001/books',
+    url: 'api/books',
     method: 'get',
   };
   try {
@@ -98,5 +98,5 @@ export default function*() {
   yield takeEvery(SAGA_BOOK_SAVE, saveBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
-  yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
+  // yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
 }
