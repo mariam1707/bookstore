@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import classnames from 'classnames';
 import Menu from '../../containers/Menu';
+import { submitLoginSaga } from '../../actions/auth';
 
 class Login extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.errors !== nextProps.errors) {
+      return {
+        ...prevState,
+        errors: nextProps.errors,
+      };
+    }
+    return null;
+  }
+
   state = {
     email: '',
     password: '',
+    errors: {},
   };
 
   handleChange = e =>
@@ -14,15 +27,25 @@ class Login extends Component {
       [e.target.name]: e.target.value,
     });
 
-  render() {
+  handleSubmit = e => {
+    e.preventDefault();
     const { email, password } = this.state;
+    const user = {
+      email,
+      password,
+    };
+    this.props.submitLoginSaga(user);
+  };
+
+  render() {
+    const { email, password, errors } = this.state;
     return (
       <div>
         <Menu />
-        <form action="">
+        <form onSubmit={this.handleSubmit}>
           <div className="container">
-            <div className="login-wrap">
-              <div>
+            <div className="auth-wrap">
+              <div className="auth-input-wrap">
                 <label htmlFor="email">
                   <b>Email</b>
                   <input
@@ -32,11 +55,14 @@ class Login extends Component {
                     id="email"
                     onChange={this.handleChange}
                     value={email}
-                    required
+                    className={classnames('form-control', {
+                      'is-invalid': errors.email,
+                    })}
                   />
+                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </label>
               </div>
-              <div>
+              <div className="auth-input-wrap">
                 <label htmlFor="password">
                   <b>Password</b>
                   <input
@@ -46,8 +72,11 @@ class Login extends Component {
                     id="pspasswordw"
                     value={password}
                     onChange={this.handleChange}
-                    required
+                    className={classnames('form-control', {
+                      'is-invalid': errors.email,
+                    })}
                   />
+                  {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                 </label>
               </div>
               <button type="submit">Login</button>
@@ -59,4 +88,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    errors: state.auth.errors,
+  };
+}
+const mapDispatchToProps = {
+  submitLoginSaga,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
