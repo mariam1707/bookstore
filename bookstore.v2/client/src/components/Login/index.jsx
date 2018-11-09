@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { push } from 'connected-react-router';
 import Menu from '../../containers/Menu';
 import { setCurrentUserSaga } from '../../actions/auth';
 
 class Login extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.errors !== nextProps.errors) {
+    if (prevState.errors !== nextProps.auth.errors) {
       return {
         ...prevState,
-        errors: nextProps.errors,
+        errors: nextProps.auth.errors,
       };
     }
     return null;
@@ -90,11 +91,12 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    errors: state.auth.errors,
+    auth: state.auth,
   };
 }
 const mapDispatchToProps = {
   setCurrentUserSaga,
+  push,
 };
 
 export default connect(

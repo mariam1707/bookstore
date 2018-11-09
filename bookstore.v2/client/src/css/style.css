@@ -132,3 +132,11 @@ img.avatar {
 .invalid-feedback {
   display: block;
 }
+.text-user-menu{
+  margin: auto 0;
+}
+.text-user-menu p{
+  margin: auto 0;
+  color: white;
+}
+

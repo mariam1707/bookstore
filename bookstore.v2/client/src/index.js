@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
 import createSagaMiddleware from 'redux-saga';
-import { syncHistoryWithStore } from 'react-router-redux';
+
 import 'bootstrap';
 import rootSaga from './saga/sagas';
 
@@ -19,21 +21,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css';
 
 const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const history = createBrowserHistory();
+const store = createStore(
+  reducer(history),
+  composeWithDevTools(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
+);
 
 sagaMiddleware.run(rootSaga);
-// const history = syncHistoryWithStore(hashHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
       </Switch>
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

@@ -54,7 +54,8 @@ router.delete('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
         Book.findById(req.params.id)
             .then(book => {
                 book.remove().then(()=> res.json({success: true}));
-            });
+            })
+            .catch(err => res.status(404).json({nobooksfind: 'PROBLEMS WITH DELETE!'}));
     // }
     
     // User.findById(req.user.id)
@@ -79,7 +80,8 @@ router.patch('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
         Book.findById(req.params.id)
             .then(book => {
                 book.update(updatedBook).then(()=> res.json({success: true}));
-            });
+            })
+            .catch(err => res.status(404).json({nobooksfind: 'PROBLEMS HIHIHAHA!'}));
     // }
     
    

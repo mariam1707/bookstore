@@ -43,12 +43,15 @@ export function* fetchGenres() {
   }
 }
 
-export function* saveBook({ payload }) {
+export function* updateBook({ payload }) {
   const options = {
-    url: `api/books/${payload.id}`,
+    url: `api/books/${payload._id}`,
     method: 'patch',
     data: {
-      ...payload,
+      author: payload.author,
+      title: payload.title,
+      price: payload.price,
+      genre: payload.genre,
     },
   };
   try {
@@ -95,7 +98,7 @@ export function* addBook({ payload }) {
 
 export default function*() {
   yield takeEvery(FETCH_BOOKS_REQUEST, fetchBooks);
-  yield takeEvery(SAGA_BOOK_SAVE, saveBook);
+  yield takeEvery(SAGA_BOOK_SAVE, updateBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
   yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
