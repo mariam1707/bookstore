@@ -12,6 +12,7 @@ const User = require('../../models/User');
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const validateRestoreInput = require('../../validation/restore');
 
 // @route   GET api/users/test
 // @desc    Tests post route
@@ -121,6 +122,36 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     name: req.user.name,
     email: req.user.email,
   });
+});
+
+
+// @route   GET api/users/restore
+// @desc    Restore user password
+// @acess   Public
+router.post('/restore', (req,res) => {
+   const { errors, isValid } = validateRestoreInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  } 
+  const { email, newPassword } = req.body;
+  User.findOne({ email }).then(user => {
+    // Check for user
+    if (!user) {
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
+    }    
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newPassword, salt, (err, hash) => {
+        errors.restore = err;
+        if (err) res.json(errors);
+        user.password = hash;
+        user
+          .save()
+          .then(user => res.json(user))
+          .catch(err => res.json(err));
+      });
+    });   
+  })
 });
 
 module.exports = router;
