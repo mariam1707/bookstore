@@ -32,16 +32,18 @@ router.get('/',(req,res) => {
 // @acess   Private
 
 router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
-     // if(req.user.user_type === 'admin'){
+      if(req.user.user_type === 'admin'){
     const newBook = new Book({
         title: req.body.title,
         author: req.body.author,
         price: req.body.price,
         genre: req.body.genre,
     });
-      // }
+    }
 
-    newBook.save().then(book => res.json(book));
+    newBook.save()
+    .then(book => res.json(book))
+    .catch(err => res.status(404).json({noadd: 'cant add book'}));
 });
 
 
@@ -50,13 +52,13 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 // @acess   Private
 
 router.delete('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    // if(req.user.user_type === 'admin'){
+     if(req.user.user_type === 'admin'){
         Book.findById(req.params.id)
             .then(book => {
                 book.remove().then(()=> res.json({success: true}));
             })
             .catch(err => res.status(404).json({nobooksfind: 'PROBLEMS WITH DELETE!'}));
-    // }
+     }
     
     // User.findById(req.user.id)
     // Book.findById(req.params.id)
@@ -70,7 +72,7 @@ router.delete('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
 // @desc    Update book
 // @acess   Private
 router.patch('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    // if(req.user.user_type === 'admin'){
+     if(req.user.user_type === 'admin'){
         const updatedBook = {
             author: req.body.author,
             title: req.body.title,
@@ -81,8 +83,8 @@ router.patch('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
             .then(book => {
                 book.update(updatedBook).then(()=> res.json({success: true}));
             })
-            .catch(err => res.status(404).json({nobooksfind: 'PROBLEMS HIHIHAHA!'}));
-    // }
+            .catch(err => res.status(404).json({nobooksfind: 'problems with update!'}));
+    }
     
    
 });
