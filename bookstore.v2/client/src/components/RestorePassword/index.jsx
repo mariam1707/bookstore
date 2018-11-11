@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
-import Menu from '../../containers/Menu';
-import { setCurrentUserSaga } from '../../actions/auth';
 
-class Login extends Component {
+import Menu from '../../containers/Menu';
+import { setNewPasswordSaga } from '../../actions/auth';
+
+class RestorePassword extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.errors !== nextProps.auth.errors) {
       return {
@@ -18,28 +18,27 @@ class Login extends Component {
 
   state = {
     email: '',
-    password: '',
+    newPassword: '',
     errors: {},
   };
 
   handleChange = e =>
     this.setState({
-      ...this.state,
       [e.target.name]: e.target.value,
     });
 
   handleSubmit = e => {
     e.preventDefault();
-    const { email, password } = this.state;
-    const user = {
+    const { email, newPassword } = this.state;
+    const newUser = {
       email,
-      password,
+      newPassword,
     };
-    this.props.setCurrentUserSaga(user);
+    this.props.setNewPasswordSaga(newUser);
   };
 
   render() {
-    const { email, password, errors } = this.state;
+    const { email, newPassword, errors } = this.state;
     return (
       <div>
         <Menu />
@@ -65,25 +64,24 @@ class Login extends Component {
               </div>
               <div className="auth-input-wrap">
                 <label htmlFor="password">
-                  <b>Password</b>
+                  <b>Enter your new password</b>
                   <input
                     type="password"
                     placeholder="Enter Password"
-                    name="password"
+                    name="newPassword"
                     id="pspasswordw"
-                    value={password}
+                    value={newPassword}
                     onChange={this.handleChange}
                     className={classnames('form-control', {
-                      'is-invalid': errors.email,
+                      'is-invalid': errors.newPassword,
                     })}
                   />
-                  {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                  {errors.newPassword && (
+                    <div className="invalid-feedback">{errors.newPassword}</div>
+                  )}
                 </label>
               </div>
-              <button type="submit">Login</button>
-              <Link className="nav-link" to="/restore">
-                Восстановить пароль
-              </Link>
+              <button type="submit">Restore password</button>
             </div>
           </div>
         </form>
@@ -91,17 +89,16 @@ class Login extends Component {
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     auth: state.auth,
   };
 }
 const mapDispatchToProps = {
-  setCurrentUserSaga,
+  setNewPasswordSaga,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(RestorePassword);

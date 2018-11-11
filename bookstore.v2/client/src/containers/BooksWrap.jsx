@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { fetchBooksRequest, sagaBookDelete, fetchGenresRequest } from '../actions/books';
 import Book from '../components/Book';
-import Pagination from './Pagination';
 import FiltersView from '../components/FiltersView';
 
 class BooksWrap extends Component {
@@ -11,16 +9,14 @@ class BooksWrap extends Component {
     if (prevState.books !== nextProps.books) {
       return {
         ...prevState,
-        books: nextProps.books,
-        currentBooks: nextProps.books,
-        totalBooks: nextProps.books.length,
+        books: Object.values(nextProps.books),
       };
     }
     return null;
   }
 
   state = {
-    books: this.props.books,
+    books: Object.values(this.props.books),
     filterGenres: '',
     selectedvalue: 'None',
     filterTitle: '',
@@ -69,18 +65,17 @@ class BooksWrap extends Component {
       .replace(/\s+/g, '')
       .includes(this.state.filterAuthor.replace(/\s+/g, ''));
 
-  onPageChanged = data => {
-    const { books } = this.state;
-    const { currentPage, totalPages, pageLimit } = data;
-    const offset = (currentPage - 1) * pageLimit;
-    const currentBooks = books.slice(offset, offset + pageLimit);
-    this.setState({ currentPage, currentBooks, totalPages });
-  };
+  // onPageChanged = data => {
+  //   const { books } = this.state;
+  //   const { currentPage, totalPages, pageLimit } = data;
+  //   const offset = (currentPage - 1) * pageLimit;
+  //   const currentBooks = books.slice(offset, offset + pageLimit);
+  //   this.setState({ currentPage, currentBooks, totalPages });
+  // };
 
   render() {
-    const { totalBooks, selectedvalue, filterTitle, filterAuthor, currentBooks } = this.state;
-    if (totalBooks === 0) return null;
-
+    const { selectedvalue, filterTitle, filterAuthor, books } = this.state;
+    // if (totalBooks === 0) return null;
     return (
       <div className="container">
         <div className="row justify-content-sm-around">
@@ -93,28 +88,21 @@ class BooksWrap extends Component {
             selectedvalue={selectedvalue}
           />
         </div>
+
         <div className="row">
-          {currentBooks &&
-            currentBooks
+          {books &&
+            books
               .filter(this.filterGenres)
               .filter(this.filterTitle)
               .filter(this.filterAuthor)
-              .map((book, id) => (
+              .map(book => (
                 <Book
                   key={book._id}
                   book={book}
                   handleDelete={this.props.sagaBookDelete}
-                  arrId={id}
+                  user_type={this.props.user_type}
                 />
               ))}
-        </div>
-        <div className="row justify-content-center">
-          <Pagination
-            totalRecords={totalBooks}
-            pageLimit={6}
-            pageNeighbours={1}
-            onPageChanged={this.onPageChanged}
-          />
         </div>
       </div>
     );
@@ -125,6 +113,7 @@ function mapStateToProps(state) {
   return {
     books: state.books.books,
     genres: state.books.genres,
+    user_type: state.auth.user.user_type,
   };
 }
 const mapDispatchToProps = {

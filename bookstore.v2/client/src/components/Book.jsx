@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ModalEdit from './ModalEdit';
+import isAdmin from '../utils/isAdmin';
 
 class Book extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -30,11 +31,8 @@ class Book extends Component {
   };
 
   handleDelete = () => {
-    const opt = {
-      id_db: this.state.book.id,
-      id_arr: this.props.arrId,
-    };
-    this.props.handleDelete(opt);
+    const { book } = this.state;
+    this.props.handleDelete(book._id);
   };
 
   render() {
@@ -48,22 +46,19 @@ class Book extends Component {
             <p className="card-text">{book.title}</p>
             <p className="card-text">{book.genre}</p>
             <div className="d-flex justify-content-between align-items-center">
-              <div className="btn-group">
-                <button type="button" className="btn btn-primary">
-                  View
-                </button>
-                <button type="button" className="btn btn-primary" onClick={this.handleShow}>
-                  Edit
-                </button>
-                {this.state.showModal ? (
-                  <ModalEdit book={book} handleClose={this.handleClose} />
-                ) : null}
-              </div>
-              <small className="text-muted">
-                <button type="button" className="btn btn-primary" onClick={this.handleDelete}>
-                  Delete
-                </button>
-              </small>
+              {isAdmin(this.props.user_type) && (
+                <div className="btn-group">
+                  <button type="button" className="btn btn-primary" onClick={this.handleShow}>
+                    Edit
+                  </button>
+                  {this.state.showModal ? (
+                    <ModalEdit book={book} handleClose={this.handleClose} />
+                  ) : null}
+                  <button type="button" className="btn btn-primary" onClick={this.handleDelete}>
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

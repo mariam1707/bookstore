@@ -1,7 +1,7 @@
 import {
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_ERROR,
-  BOOK_SAVE,
+  BOOK_UPDATE,
   BOOK_DELETE,
   BOOK_SET_GENRES,
   BOOK_ADD,
@@ -9,7 +9,7 @@ import {
 } from '../actions/books';
 
 const initState = {
-  books: [],
+  books: {},
   error: '',
   genres: [],
 };
@@ -25,19 +25,15 @@ export default function(state = initState, action) {
         ...state,
         error: action.payload,
       };
-    case BOOK_SAVE:
+    case BOOK_UPDATE:
       return {
         ...state,
-        books: [
-          ...state.books.slice(0, action.payload.id),
-          action.payload,
-          ...state.books.slice(action.payload.id + 1),
-        ],
+        books: action.payload,
       };
     case BOOK_DELETE:
       return {
         ...state,
-        books: [...state.books.slice(0, action.payload), ...state.books.slice(action.payload + 1)],
+        books: action.payload,
       };
     case BOOK_SET_GENRES:
       return {

@@ -1,12 +1,12 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
   FETCH_BOOKS_REQUEST,
   fetchBooksSuccess,
   fetchBooksError,
-  SAGA_BOOK_SAVE,
-  bookSave,
+  SAGA_BOOK_UPDATE,
+  bookUpdate,
   SAGA_BOOK_DELETE,
   bookDelete,
   // bookSetGenres,
@@ -23,7 +23,14 @@ export function* fetchBooks() {
   };
   try {
     const response = yield call(axios, options);
-    yield put(fetchBooksSuccess(response.data));
+    const { books } = response.data.reduce(
+      (acc, curr) => {
+        acc.books[curr._id] = curr;
+        return acc;
+      },
+      { books: {} }
+    );
+    yield put(fetchBooksSuccess(books));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -36,6 +43,7 @@ export function* fetchGenres() {
   };
   try {
     const response = yield call(axios, options);
+
     yield put(fetchGenresSuccess(response.data));
   } catch (error) {
     const message = error.response.data;
@@ -55,10 +63,15 @@ export function* updateBook({ payload }) {
     },
   };
   try {
-    const response = yield call(axios, options);
-    if (response) {
-      yield put(bookSave(payload));
-    }
+    yield call(axios, options);
+
+    const {
+      books: { books },
+    } = yield select(state => state);
+    const newBooks = { ...books };
+    newBooks[payload._id] = payload;
+
+    yield put(bookUpdate(newBooks));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -66,14 +79,18 @@ export function* updateBook({ payload }) {
 }
 export function* deleteBook({ payload }) {
   const options = {
-    url: `api/books/${payload.id_db}`,
+    url: `api/books/${payload}`,
     method: 'delete',
   };
   try {
-    const response = yield call(axios, options);
-    if (response) {
-      yield put(bookDelete(payload.id_arr));
-    }
+    yield call(axios, options);
+
+    const {
+      books: { books },
+    } = yield select(state => state);
+    const newBooks = { ...books };
+    delete newBooks[payload];
+    yield put(bookDelete(newBooks));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -98,7 +115,7 @@ export function* addBook({ payload }) {
 
 export default function*() {
   yield takeEvery(FETCH_BOOKS_REQUEST, fetchBooks);
-  yield takeEvery(SAGA_BOOK_SAVE, updateBook);
+  yield takeEvery(SAGA_BOOK_UPDATE, updateBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
   yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);

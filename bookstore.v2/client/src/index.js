@@ -16,6 +16,7 @@ import reducer from './reducers';
 import App from './containers/App';
 import Login from './components/Login';
 import Registration from './components/Registration';
+import RestorePassword from './components/RestorePassword';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css';
@@ -36,6 +37,7 @@ ReactDOM.render(
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
+        <Route path="/restore" component={RestorePassword} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

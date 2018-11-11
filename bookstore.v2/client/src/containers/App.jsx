@@ -7,12 +7,6 @@ import { setCurrentUser } from '../actions/auth';
 import Menu from './Menu';
 import BooksWrap from './BooksWrap';
 
-// if (localStorage.jwtToken) {
-//   setAuthToken(localStorage.jwtToken);
-//   const decoded = jwt_decode(localStorage.jwtToken);
-//   // dispatch setcurrentuser with decoded
-// }
-
 class App extends React.Component {
   componentDidMount() {
     if (localStorage.jwtToken) {

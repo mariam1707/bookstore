@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CreateBook from './CreateBook';
 import { unsetCurrentUserSaga } from '../actions/auth';
+import isAdmin from '../utils/isAdmin';
 
 class Menu extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -69,7 +70,7 @@ class Menu extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <CreateBook />
+          {isAdmin(user.user_type) && <CreateBook />}
           <div className="collapse navbar-collapse" id="navbarsExample05">
             {isAuthenticated ? userLinks : guestLinks}
           </div>

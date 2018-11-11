@@ -10,6 +10,7 @@ class ModalEdit extends React.Component {
       book: {
         image:
           'http://t1.gstatic.com/images?q=tbn:ANd9GcT--GCKQVgeygN8gZsi7JJALb0KtZxGZDDyMYdw481-OKYPthtg',
+        _id: Math.random() * (100 - 0) + 0,
       },
     };
     this.el = document.createElement('div');
