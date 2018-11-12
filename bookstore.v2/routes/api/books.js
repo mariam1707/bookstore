@@ -38,13 +38,13 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
         author: req.body.author,
         price: req.body.price,
         genre: req.body.genre,
-    });
-    }
+        image: req.body.image,
+    });   
 
     newBook.save()
     .then(book => res.json(book))
-    .catch(err => res.status(404).json({noadd: 'cant add book'}));
-});
+    .catch(err => res.status(404).json({noadd: err}));
+}});
 
 
 // @route   DELETE api/books
