@@ -14,6 +14,8 @@ import {
   bookAdd,
   FETCH_GENRES_REQUEST,
   fetchGenresSuccess,
+  SET_DATE_FILTER_SAGA,
+  setDateFilter,
 } from '../actions/books';
 
 export function* fetchBooks() {
@@ -116,10 +118,37 @@ export function* addBook({ payload }) {
   }
 }
 
+export function* setFilterDate({ payload }) {
+  console.log(payload);
+  const opt = {
+    url: 'api/books/filter_date',
+    method: 'get',
+    params: {
+      start: payload.start._d,
+      end: payload.end._d,
+    },
+  };
+  try {
+    const response = yield call(axios, opt);
+    const { books } = response.data.reduce(
+      (acc, curr) => {
+        acc.books[curr._id] = curr;
+        return acc;
+      },
+      { books: {} }
+    );
+    yield put(setDateFilter(books));
+  } catch (error) {
+    const message = error.response.data;
+    yield put(fetchBooksError(message));
+  }
+}
+
 export default function*() {
   yield takeEvery(FETCH_BOOKS_REQUEST, fetchBooks);
   yield takeEvery(SAGA_BOOK_UPDATE, updateBook);
   yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
   yield takeEvery(SAGA_BOOK_ADD, addBook);
   yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
+  yield takeEvery(SET_DATE_FILTER_SAGA, setFilterDate);
 }

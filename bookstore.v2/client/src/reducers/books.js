@@ -6,6 +6,7 @@ import {
   BOOK_SET_GENRES,
   BOOK_ADD,
   FETCH_GENRES_SUCCESS,
+  SET_DATE_FILTER,
 } from '../actions/books';
 
 const initState = {
@@ -49,6 +50,11 @@ export default function(state = initState, action) {
       return {
         ...state,
         genres: [...action.payload],
+      };
+    case SET_DATE_FILTER:
+      return {
+        ...state,
+        books: action.payload,
       };
     default:
       return state;

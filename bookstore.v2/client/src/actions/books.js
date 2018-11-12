@@ -12,6 +12,8 @@ export const SAGA_BOOK_DELETE = 'SAGA_BOOK_DELETE';
 export const BOOK_SET_GENRES = 'BOOK_SET_GENRES';
 export const BOOK_ADD = 'BOOK_ADD';
 export const SAGA_BOOK_ADD = 'SAGA_BOOK_ADD';
+export const SET_DATE_FILTER_SAGA = 'SET_DATE_FILTER_SAGA';
+export const SET_DATE_FILTER = 'SET_DATE_FILTER';
 
 export const fetchBooksRequest = createAction(FETCH_BOOKS_REQUEST);
 export const fetchBooksSuccess = createAction(FETCH_BOOKS_SUCCESS);
@@ -25,3 +27,5 @@ export const bookAdd = createAction(BOOK_ADD);
 export const sagaBookAdd = createAction(SAGA_BOOK_ADD);
 export const fetchGenresRequest = createAction(FETCH_GENRES_REQUEST);
 export const fetchGenresSuccess = createAction(FETCH_GENRES_SUCCESS);
+export const setDateFilterSaga = createAction(SET_DATE_FILTER_SAGA);
+export const setDateFilter = createAction(SET_DATE_FILTER);

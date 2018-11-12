@@ -20,6 +20,7 @@ import RestorePassword from './components/RestorePassword';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const sagaMiddleware = createSagaMiddleware();
 const history = createBrowserHistory();

@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBooksRequest, sagaBookDelete, fetchGenresRequest } from '../actions/books';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import {
+  fetchBooksRequest,
+  sagaBookDelete,
+  fetchGenresRequest,
+  setDateFilterSaga,
+} from '../actions/books';
 import Book from '../components/Book';
 import FiltersView from '../components/FiltersView';
 
@@ -25,6 +32,8 @@ class BooksWrap extends Component {
     currentPage: null,
     totalPages: null,
     totalBooks: this.props.books.length,
+    startDate: moment(),
+    endDate: moment(),
   };
 
   componentDidMount() {
@@ -36,6 +45,18 @@ class BooksWrap extends Component {
     this.setState({
       ...this.state,
       selectedvalue: e.target.value,
+    });
+  };
+
+  handleChangeStartDate = date => {
+    this.setState({
+      startDate: date,
+    });
+  };
+
+  handleChangeEndDate = date => {
+    this.setState({
+      endDate: date,
     });
   };
 
@@ -65,6 +86,19 @@ class BooksWrap extends Component {
       .replace(/\s+/g, '')
       .includes(this.state.filterAuthor.replace(/\s+/g, ''));
 
+  handleDateSubmit = () => {
+    const { startDate, endDate } = this.state;
+    const filterDate = {
+      start: startDate,
+      end: endDate,
+    };
+    this.props.setDateFilterSaga(filterDate);
+  };
+
+  handleDateDelete = () => {
+    this.props.fetchBooksRequest();
+  };
+
   // onPageChanged = data => {
   //   const { books } = this.state;
   //   const { currentPage, totalPages, pageLimit } = data;
@@ -87,8 +121,17 @@ class BooksWrap extends Component {
             handleChangeFilter={this.handleChangeFilter}
             selectedvalue={selectedvalue}
           />
+          <div className="row justify-content-sm-around">
+            <DatePicker selected={this.state.startDate} onChange={this.handleChangeStartDate} />
+            <DatePicker selected={this.state.endDate} onChange={this.handleChangeEndDate} />
+            <button type="button" className="btn btn-primary" onClick={this.handleDateSubmit}>
+              Показать
+            </button>
+            <button type="button" className="btn btn-primary" onClick={this.handleDateDelete}>
+              Сбросить
+            </button>
+          </div>
         </div>
-
         <div className="row">
           {books &&
             books
@@ -120,6 +163,7 @@ const mapDispatchToProps = {
   fetchBooksRequest,
   sagaBookDelete,
   fetchGenresRequest,
+  setDateFilterSaga,
 };
 
 export default connect(

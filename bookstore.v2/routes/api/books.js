@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const moment = require('moment')
 
 
 const Book = require('../../models/Book');
@@ -89,5 +90,22 @@ router.patch('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
    
 });
 
+// @route   GET api/books/filter_date
+// @desc    get filtered by date books
+// @acess   Public
+
+router.get('/filter_date',(req,res)=>{
+    const { start , end } = req.query;    
+    const  strm = moment(start);
+    const endm = moment(end);    
+    Book.find({
+        "date": {
+            $gte: strm.toDate(), 
+            $lt: endm.toDate()
+        }
+    })
+    .then(books => res.json(books))
+    .catch(err => res.status(404).json({noBookWithFilter: err}));
+})
 
 module.exports = router;
