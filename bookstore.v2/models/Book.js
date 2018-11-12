@@ -13,8 +13,7 @@ const BookSchema = new Schema({
         max:255,
         required: true,
         default: null, 
-    },
-    //usual or admin
+    },    
     image: {
         type: String,
         default:"https://cv7.litres.ru/sbc/33231270_cover_185-elektronnaya-kniga-den-braun-proishozhdenie-27624091.jpg"
@@ -31,7 +30,7 @@ const BookSchema = new Schema({
     },  
     date: {
         type: Date,
-        default: Date.now,
+        default: new Date(),
       },     
 
 });
