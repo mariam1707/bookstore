@@ -1,4 +1,5 @@
-module.exports = {
-    mongoURI: 'mongodb://softwase:abrikos365525@ds151513.mlab.com:51513/softwasedb',
-    secretOrKey: 'secret',
+if(process.env.NODE_ENV === 'production'){
+    module.exports = require('./keys_prod');
+} else { 
+    module.exports = require('./keys_dev')
 }
