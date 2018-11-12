@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
-import { setCurrentUser } from '../actions/auth';
+import { setCurrentUser, unsetCurrentUserSaga } from '../actions/auth';
 
 import Menu from './Menu';
 import BooksWrap from './BooksWrap';
@@ -13,6 +13,12 @@ class App extends React.Component {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwtDecode(localStorage.jwtToken);
       this.props.setCurrentUser(decoded);
+
+      const currentTime = Date.now() / 1000;
+      if (decoded.exp < currentTime) {
+        this.props.unsetCurrentUserSaga();
+        window.location.href = '/';
+      }
     }
   }
 
@@ -27,6 +33,7 @@ class App extends React.Component {
 }
 const mapDispatchToProps = {
   setCurrentUser,
+  unsetCurrentUserSaga,
 };
 
 export default connect(
