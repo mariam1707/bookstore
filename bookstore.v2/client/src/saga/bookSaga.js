@@ -64,13 +64,11 @@ export function* updateBook({ payload }) {
   };
   try {
     yield call(axios, options);
-
     const {
       books: { books },
     } = yield select(state => state);
     const newBooks = { ...books };
     newBooks[payload._id] = payload;
-
     yield put(bookUpdate(newBooks));
   } catch (error) {
     const message = error.response.data;
@@ -97,6 +95,7 @@ export function* deleteBook({ payload }) {
   }
 }
 export function* addBook({ payload }) {
+  console.log(payload);
   const options = {
     url: 'api/books/',
     method: 'post',
@@ -104,9 +103,13 @@ export function* addBook({ payload }) {
   };
   try {
     const response = yield call(axios, options);
-    if (response) {
-      yield put(bookAdd(payload));
-    }
+    console.log(response);
+    const {
+      books: { books },
+    } = yield select(state => state);
+    const newBooks = { ...books };
+    newBooks[response.data._id] = response.data;
+    yield put(bookAdd(newBooks));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
