@@ -43,7 +43,7 @@ export default function(state = initState, action) {
     case BOOK_ADD:
       return {
         ...state,
-        books: [...state.books, action.payload],
+        books: action.payload,
       };
     case FETCH_GENRES_SUCCESS:
       return {
