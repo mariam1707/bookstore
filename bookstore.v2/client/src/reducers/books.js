@@ -13,13 +13,15 @@ const initState = {
   books: {},
   error: '',
   genres: [],
+  totalPages: '',
 };
 export default function(state = initState, action) {
   switch (action.type) {
     case FETCH_BOOKS_SUCCESS:
       return {
         ...state,
-        books: action.payload,
+        books: action.payload.books,
+        totalPages: action.payload.totalPages,
       };
     case FETCH_BOOKS_ERROR:
       return {

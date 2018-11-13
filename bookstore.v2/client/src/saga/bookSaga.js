@@ -18,21 +18,30 @@ import {
   setDateFilter,
 } from '../actions/books';
 
-export function* fetchBooks() {
+export function* fetchBooks({ payload }) {
   const options = {
     url: 'api/books',
     method: 'get',
+    params: {
+      pageNo: payload.currentPage,
+      size: 3,
+    },
   };
   try {
     const response = yield call(axios, options);
-    const { books } = response.data.reduce(
+    console.log(response);
+    const { books } = response.data.message.reduce(
       (acc, curr) => {
         acc.books[curr._id] = curr;
         return acc;
       },
       { books: {} }
     );
-    yield put(fetchBooksSuccess(books));
+    const data = {
+      books,
+      totalPages: response.data.pages,
+    };
+    yield put(fetchBooksSuccess(data));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -97,7 +106,6 @@ export function* deleteBook({ payload }) {
   }
 }
 export function* addBook({ payload }) {
-  console.log(payload);
   const options = {
     url: 'api/books/',
     method: 'post',
@@ -105,7 +113,6 @@ export function* addBook({ payload }) {
   };
   try {
     const response = yield call(axios, options);
-    console.log(response);
     const {
       books: { books },
     } = yield select(state => state);
@@ -119,7 +126,6 @@ export function* addBook({ payload }) {
 }
 
 export function* setFilterDate({ payload }) {
-  console.log(payload);
   const opt = {
     url: 'api/books/filter_date',
     method: 'get',

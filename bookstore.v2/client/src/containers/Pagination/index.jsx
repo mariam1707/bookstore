@@ -18,16 +18,14 @@ const range = (from, to, step = 1) => {
 class Pagination extends Component {
   constructor(props) {
     super(props);
-    const { totalRecords = null, pageLimit = 30, pageNeighbours = 0 } = props;
+    const { totalRecords = null, pageLimit = 30, pageNeighbours = 0, totalPages = 1 } = props;
 
     this.pageLimit = typeof pageLimit === 'number' ? pageLimit : 30;
     this.totalRecords = typeof totalRecords === 'number' ? totalRecords : 0;
 
     this.pageNeighbours =
       typeof pageNeighbours === 'number' ? Math.max(0, Math.min(pageNeighbours, 2)) : 0;
-
-    this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
-
+    this.totalPages = totalPages;
     this.state = { currentPage: 1 };
   }
 
@@ -108,7 +106,7 @@ class Pagination extends Component {
   };
 
   render() {
-    if (!this.totalRecords || this.totalPages === 1) return null;
+    if (this.totalPages === 1) return null;
 
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();

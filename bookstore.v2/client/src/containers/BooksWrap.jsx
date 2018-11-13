@@ -10,6 +10,7 @@ import {
 } from '../actions/books';
 import Book from '../components/Book';
 import FiltersView from '../components/FiltersView';
+import Pagination from './Pagination';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -17,6 +18,7 @@ class BooksWrap extends Component {
       return {
         ...prevState,
         books: Object.values(nextProps.books),
+        totalPages: nextProps.totalPages,
       };
     }
     return null;
@@ -30,14 +32,17 @@ class BooksWrap extends Component {
     filterAuthor: '',
     currentBooks: this.props.books,
     currentPage: null,
-    totalPages: null,
+    totalPages: this.props.totalPages,
     totalBooks: this.props.books.length,
     startDate: moment(),
     endDate: moment(),
   };
 
   componentDidMount() {
-    this.props.fetchBooksRequest();
+    const opt = {
+      currentPage: 1,
+    };
+    this.props.fetchBooksRequest(opt);
     this.props.fetchGenresRequest();
   }
 
@@ -96,20 +101,26 @@ class BooksWrap extends Component {
   };
 
   handleDateDelete = () => {
-    this.props.fetchBooksRequest();
+    const opt = {
+      currentPage: 1,
+    };
+    this.props.fetchBooksRequest(opt);
   };
 
-  // onPageChanged = data => {
-  //   const { books } = this.state;
-  //   const { currentPage, totalPages, pageLimit } = data;
-  //   const offset = (currentPage - 1) * pageLimit;
-  //   const currentBooks = books.slice(offset, offset + pageLimit);
-  //   this.setState({ currentPage, currentBooks, totalPages });
-  // };
+  onPageChanged = data => {
+    const { currentPage, totalPages } = data;
+
+    this.setState({ currentPage, totalPages });
+    const opt = {
+      currentPage,
+    };
+    this.props.fetchBooksRequest(opt);
+  };
 
   render() {
-    const { selectedvalue, filterTitle, filterAuthor, books } = this.state;
-    // if (totalBooks === 0) return null;
+    const { selectedvalue, filterTitle, filterAuthor, books, totalPages, currentPage } = this.state;
+    const totalBooks = books.length;
+    if (totalBooks === 0) return null;
     return (
       <div className="container">
         <div className="row justify-content-sm-around">
@@ -130,6 +141,13 @@ class BooksWrap extends Component {
             <button type="button" className="btn btn-primary" onClick={this.handleDateDelete}>
               Сбросить
             </button>
+
+            {currentPage && (
+              <span className="current-page d-inline-block h-100 pl-4 text-secondary">
+                Page <span className="font-weight-bold">{currentPage}</span> /{' '}
+                <span className="font-weight-bold">{totalPages}</span>
+              </span>
+            )}
           </div>
         </div>
         <div className="row">
@@ -147,6 +165,14 @@ class BooksWrap extends Component {
                 />
               ))}
         </div>
+        <div className="d-flex flex-row py-4 align-items-center">
+          <Pagination
+            totalPages={totalPages}
+            pageLimit={3}
+            pageNeighbours={1}
+            onPageChanged={this.onPageChanged}
+          />
+        </div>
       </div>
     );
   }
@@ -155,6 +181,7 @@ class BooksWrap extends Component {
 function mapStateToProps(state) {
   return {
     books: state.books.books,
+    totalPages: state.books.totalPages,
     genres: state.books.genres,
     user_type: state.auth.user.user_type,
   };
