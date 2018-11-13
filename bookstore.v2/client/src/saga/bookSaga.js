@@ -23,13 +23,12 @@ export function* fetchBooks({ payload }) {
     url: 'api/books',
     method: 'get',
     params: {
-      pageNo: payload.currentPage,
-      size: 3,
+      pageNo: payload.currentPage > 0 ? payload.currentPage : 1,
+      size: payload.size || 6,
     },
   };
   try {
     const response = yield call(axios, options);
-    console.log(response);
     const { books } = response.data.message.reduce(
       (acc, curr) => {
         acc.books[curr._id] = curr;

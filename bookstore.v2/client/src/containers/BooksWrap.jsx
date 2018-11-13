@@ -14,13 +14,14 @@ import Pagination from './Pagination';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.books !== nextProps.books) {
+    if (prevState.books !== nextProps.books || prevState.totalPages !== nextProps.totalPages) {
       return {
         ...prevState,
         books: Object.values(nextProps.books),
         totalPages: nextProps.totalPages,
       };
     }
+
     return null;
   }
 
@@ -36,6 +37,7 @@ class BooksWrap extends Component {
     totalBooks: this.props.books.length,
     startDate: moment(),
     endDate: moment(),
+    selectedPerPage: '',
   };
 
   componentDidMount() {
@@ -109,12 +111,29 @@ class BooksWrap extends Component {
 
   onPageChanged = data => {
     const { currentPage, totalPages } = data;
-
+    const { selectedPerPage } = this.state;
     this.setState({ currentPage, totalPages });
     const opt = {
       currentPage,
+      size: selectedPerPage,
     };
     this.props.fetchBooksRequest(opt);
+  };
+
+  handlePerPage = e => {
+    const { value } = e.target;
+    const { selectedPerPage, currentPage } = this.state;
+    if (value !== selectedPerPage) {
+      this.setState({
+        ...this.state,
+        selectedPerPage: value,
+      });
+      const opt = {
+        currentPage,
+        size: value,
+      };
+      this.props.fetchBooksRequest(opt);
+    }
   };
 
   render() {
@@ -141,7 +160,12 @@ class BooksWrap extends Component {
             <button type="button" className="btn btn-primary" onClick={this.handleDateDelete}>
               Сбросить
             </button>
-
+            <select defaultValue="6" onClick={this.handlePerPage}>
+              <option>3</option>
+              <option>6</option>
+              <option>9</option>
+              <option>12</option>
+            </select>
             {currentPage && (
               <span className="current-page d-inline-block h-100 pl-4 text-secondary">
                 Page <span className="font-weight-bold">{currentPage}</span> /{' '}
@@ -166,12 +190,13 @@ class BooksWrap extends Component {
               ))}
         </div>
         <div className="d-flex flex-row py-4 align-items-center">
-          <Pagination
-            totalPages={totalPages}
-            pageLimit={3}
-            pageNeighbours={1}
-            onPageChanged={this.onPageChanged}
-          />
+          {totalPages && (
+            <Pagination
+              totalPages={totalPages}
+              pageNeighbours={1}
+              onPageChanged={this.onPageChanged}
+            />
+          )}
         </div>
       </div>
     );
