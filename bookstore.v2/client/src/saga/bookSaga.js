@@ -11,20 +11,22 @@ import {
   bookDelete,
   // bookSetGenres,
   SAGA_BOOK_ADD,
-  bookAdd,
   FETCH_GENRES_REQUEST,
   fetchGenresSuccess,
   SET_DATE_FILTER_SAGA,
   setDateFilter,
+  fetchBooksRequest,
 } from '../actions/books';
 
 export function* fetchBooks({ payload }) {
+  const { currentPage = 1, size = 6 } = payload;
+
   const options = {
     url: 'api/books',
     method: 'get',
     params: {
-      pageNo: payload.currentPage > 0 ? payload.currentPage : 1,
-      size: payload.size || 6,
+      pageNo: currentPage > 0 ? currentPage : 1,
+      size,
     },
   };
   try {
@@ -111,13 +113,15 @@ export function* addBook({ payload }) {
     data: payload,
   };
   try {
-    const response = yield call(axios, options);
-    const {
-      books: { books },
-    } = yield select(state => state);
-    const newBooks = { ...books };
-    newBooks[response.data._id] = response.data;
-    yield put(bookAdd(newBooks));
+    yield call(axios, options);
+
+    // const {
+    //   books: { books },
+    // } = yield select(state => state);
+    // const newBooks = { ...books };
+    // newBooks[response.data._id] = response.data;
+    // yield put(bookAdd(newBooks));
+    yield put(fetchBooksRequest({}));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
