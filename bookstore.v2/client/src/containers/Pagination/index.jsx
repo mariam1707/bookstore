@@ -3,30 +3,30 @@ import React, { Component, Fragment } from 'react';
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
 
-const range = (from, to, step = 1) => {
-  let i = from;
-  const rangeArr = [];
+class Pagination extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.totalPages !== nextProps.totalPages) {
+      return {
+        ...prevState,
+        totalPages: nextProps.totalPages,
+      };
+    }
 
-  while (i <= to) {
-    rangeArr.push(i);
-    i += step;
+    return null;
   }
 
-  return rangeArr;
-};
-
-class Pagination extends Component {
   constructor(props) {
     super(props);
-    const { totalRecords = null, pageLimit = 30, pageNeighbours = 0, totalPages = 1 } = props;
+    const { totalRecords = null, pageNeighbours = 0 } = props;
 
-    this.pageLimit = typeof pageLimit === 'number' ? pageLimit : 30;
     this.totalRecords = typeof totalRecords === 'number' ? totalRecords : 0;
 
     this.pageNeighbours =
       typeof pageNeighbours === 'number' ? Math.max(0, Math.min(pageNeighbours, 2)) : 0;
-    this.totalPages = totalPages;
-    this.state = { currentPage: 1 };
+    this.state = {
+      currentPage: 1,
+      totalPages: '',
+    };
   }
 
   componentDidMount() {
@@ -36,12 +36,11 @@ class Pagination extends Component {
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
 
-    const currentPage = Math.max(0, Math.min(page, this.totalPages));
+    const currentPage = Math.max(0, Math.min(page, this.state.totalPages));
 
     const paginationData = {
       currentPage,
-      totalPages: this.totalPages,
-      pageLimit: this.pageLimit,
+      totalPages: this.state.totalPages,
       totalRecords: this.totalRecords,
     };
 
@@ -63,54 +62,16 @@ class Pagination extends Component {
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
   };
 
-  fetchPageNumbers = () => {
-    const { currentPage } = this.state;
-
-    const totalNumbers = this.pageNeighbours * 2 + 3;
-    const totalBlocks = totalNumbers + 2;
-
-    if (this.totalPages > totalBlocks) {
-      const startPage = Math.max(2, currentPage - this.pageNeighbours);
-      const endPage = Math.min(this.totalPages - 1, currentPage + this.pageNeighbours);
-
-      let pages = range(startPage, endPage);
-
-      const hasLeftSpill = startPage > 2;
-      const hasRightSpill = this.totalPages - endPage > 1;
-      const spillOffset = totalNumbers - (pages.length + 1);
-
-      switch (true) {
-        case hasLeftSpill && !hasRightSpill: {
-          const extraPages = range(startPage - spillOffset, startPage - 1);
-          pages = [LEFT_PAGE, ...extraPages, ...pages];
-          break;
-        }
-
-        case !hasLeftSpill && hasRightSpill: {
-          const extraPages = range(endPage + 1, endPage + spillOffset);
-          pages = [...pages, ...extraPages, RIGHT_PAGE];
-          break;
-        }
-
-        case hasLeftSpill && hasRightSpill:
-        default: {
-          pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
-          break;
-        }
-      }
-
-      return [1, ...pages, this.totalPages];
-    }
-
-    return range(1, this.totalPages);
-  };
-
   render() {
-    if (this.totalPages === 1) return null;
+    if (this.state.totalPages === 1) return null;
 
-    const { currentPage } = this.state;
-    const pages = this.fetchPageNumbers();
-
+    const { currentPage, totalPages } = this.state;
+    let i = 1;
+    const pages = [];
+    while (i <= totalPages) {
+      pages.push(i);
+      i += 1;
+    }
     return (
       <Fragment>
         <nav aria-label="Countries Pagination">
