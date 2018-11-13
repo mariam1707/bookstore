@@ -30,7 +30,7 @@ class Menu extends Component {
     const userLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item text-user-menu">
-          <p>Добро пожаловать, {user.name}</p>
+          <p>Welcome, {user.name}</p>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/" onClick={this.handleLogout}>
@@ -43,12 +43,12 @@ class Menu extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/login">
-            Логин
+            Log In
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/registration">
-            Регистрация
+            Sign Up
           </Link>
         </li>
       </ul>

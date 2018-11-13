@@ -80,9 +80,9 @@ class Login extends Component {
                   {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                 </label>
               </div>
-              <button type="submit">Login</button>
+              <button type="submit">Log In</button>
               <Link className="nav-link" to="/restore">
-                Восстановить пароль
+                Reset password
               </Link>
             </div>
           </div>

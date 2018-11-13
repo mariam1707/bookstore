@@ -37,12 +37,13 @@ class BooksWrap extends Component {
     totalBooks: this.props.books.length,
     startDate: moment(),
     endDate: moment(),
-    selectedPerPage: '',
+    selectedPerPage: 6,
   };
 
   componentDidMount() {
     const opt = {
       currentPage: 1,
+      size: 6,
     };
     this.props.fetchBooksRequest(opt);
     this.props.fetchGenresRequest();
@@ -103,8 +104,10 @@ class BooksWrap extends Component {
   };
 
   handleDateDelete = () => {
+    const { currentPage, selectedPerPage } = this.state;
     const opt = {
-      currentPage: 1,
+      currentPage,
+      size: selectedPerPage,
     };
     this.props.fetchBooksRequest(opt);
   };
@@ -138,8 +141,7 @@ class BooksWrap extends Component {
 
   render() {
     const { selectedvalue, filterTitle, filterAuthor, books, totalPages, currentPage } = this.state;
-    const totalBooks = books.length;
-    if (totalBooks === 0) return null;
+
     return (
       <div className="container">
         <div className="row justify-content-sm-around">
@@ -151,23 +153,51 @@ class BooksWrap extends Component {
             handleChangeFilter={this.handleChangeFilter}
             selectedvalue={selectedvalue}
           />
-          <div className="row justify-content-sm-around">
-            <DatePicker selected={this.state.startDate} onChange={this.handleChangeStartDate} />
-            <DatePicker selected={this.state.endDate} onChange={this.handleChangeEndDate} />
-            <button type="button" className="btn btn-primary" onClick={this.handleDateSubmit}>
-              Показать
-            </button>
-            <button type="button" className="btn btn-primary" onClick={this.handleDateDelete}>
-              Сбросить
-            </button>
-            <select defaultValue="6" onClick={this.handlePerPage}>
+        </div>
+        <div className=" justify-content-sm-around">
+          <div className=" flex-column align-items-center">
+            <div className="d-flex flex-wrap justify-content-center align-items-center">
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleChangeStartDate}
+                className="form-control"
+              />
+              <DatePicker
+                selected={this.state.endDate}
+                onChange={this.handleChangeEndDate}
+                className="form-control"
+              />
+            </div>
+            <div className="d-flex flex-wrap justify-content-center align-items-center">
+              <button
+                type="button"
+                className="btn btn-primary m-10"
+                onClick={this.handleDateSubmit}
+              >
+                Показать
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary m-10"
+                onClick={this.handleDateDelete}
+              >
+                Сбросить
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="row d-flex justify-content-between">
+          <div className="form-group ">
+            <select defaultValue="6" onClick={this.handlePerPage} className="form-control">
               <option>3</option>
               <option>6</option>
               <option>9</option>
               <option>12</option>
             </select>
+          </div>
+          <div>
             {currentPage && (
-              <span className="current-page d-inline-block h-100 pl-4 text-secondary">
+              <span className="current-page d-inline-block h-100 text-secondary">
                 Page <span className="font-weight-bold">{currentPage}</span> /{' '}
                 <span className="font-weight-bold">{totalPages}</span>
               </span>
@@ -189,14 +219,16 @@ class BooksWrap extends Component {
                 />
               ))}
         </div>
-        <div className="d-flex flex-row py-4 align-items-center">
-          {totalPages && (
-            <Pagination
-              totalPages={totalPages}
-              pageNeighbours={1}
-              onPageChanged={this.onPageChanged}
-            />
-          )}
+        <div className="row d-flex flex-row py-4  justify-content-center align-items-center">
+          <div className="">
+            {totalPages && (
+              <Pagination
+                totalPages={totalPages}
+                pageNeighbours={1}
+                onPageChanged={this.onPageChanged}
+              />
+            )}
+          </div>
         </div>
       </div>
     );

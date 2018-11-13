@@ -41,7 +41,6 @@ class Registration extends Component {
       password,
       password2,
     };
-    console.log(this.props.history);
     this.props.submitRegistrationSaga(newUser, this.props.history);
   };
 
@@ -118,7 +117,7 @@ class Registration extends Component {
                   {errors.password2 && <div className="invalid-feedback">{errors.password2}</div>}
                 </label>
               </div>
-              <button type="submit">Reg</button>
+              <button type="submit">Sign Up</button>
             </div>
           </div>
         </form>
