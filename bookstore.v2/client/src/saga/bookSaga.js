@@ -8,8 +8,6 @@ import {
   SAGA_BOOK_UPDATE,
   bookUpdate,
   SAGA_BOOK_DELETE,
-  bookDelete,
-  // bookSetGenres,
   SAGA_BOOK_ADD,
   FETCH_GENRES_REQUEST,
   fetchGenresSuccess,

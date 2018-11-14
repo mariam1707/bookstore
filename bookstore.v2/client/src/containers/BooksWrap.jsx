@@ -15,7 +15,6 @@ import Pagination from './Pagination';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps, prevState);
     if (
       prevState.books !== nextProps.books ||
       prevState.totalPages !== nextProps.totalPages ||
@@ -197,7 +196,6 @@ class BooksWrap extends Component {
             </select>
           </div>
           <div>
-            {console.log(this.props.pagination.currentPage)}
             {currentPage && (
               <span className="current-page d-inline-block h-100 text-secondary">
                 Page <span className="font-weight-bold">{currentPage}</span> /{' '}
