@@ -71,6 +71,7 @@ export function* updateBook({ payload }) {
       title: payload.title,
       price: payload.price,
       genre: payload.genre,
+      image: payload.image,
     },
   };
   try {

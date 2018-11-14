@@ -7,10 +7,19 @@ import { sagaBookUpdate } from '../../actions/books';
 const modalRoot = document.getElementById('modal-root');
 
 class ModalEdit extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.book !== nextProps.book) {
+      return {
+        ...prevState,
+        book: nextProps.book,
+      }
+    }
+    return null;
+  }
   constructor(props) {
     super(props);
     this.state = {
-      book: this.props.book,
+      book: {},
     };
     this.el = document.createElement('div');
   }
@@ -50,6 +59,13 @@ class ModalEdit extends React.Component {
   render() {
     const { book } = this.state;
     const { genres } = this.props;
+    const newGenres = [];
+    genres.map(genre => {
+      if (genre.genre !== 'None') {
+        newGenres.push(genre);
+      }
+    });
+
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">
@@ -83,6 +99,17 @@ class ModalEdit extends React.Component {
                   name="price"
                   value={book.price}
                   onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <p>Картинка</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="image"
+                  onChange={this.handleChange}
+                  value={this.state.book.image}
+                  placeholder="Can be empty"
                 />
               </div>
               <div className="form-group">
