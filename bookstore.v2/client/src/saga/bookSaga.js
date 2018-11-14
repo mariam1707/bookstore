@@ -17,21 +17,22 @@ import {
   setDateFilter,
   fetchBooksRequest,
 } from '../actions/books';
+import { getPagination } from './selectors';
 
-export function* fetchBooks({ payload }) {
-  const { currentPage = 1, size = 6 } = payload;
+export function* fetchBooks() {
+  const { currentPage, perPage } = yield select(getPagination);
 
   const options = {
     url: 'api/books',
     method: 'get',
     params: {
-      pageNo: currentPage > 0 ? currentPage : 1,
-      size,
+      currentPage,
+      perPage,
     },
   };
   try {
     const response = yield call(axios, options);
-    const { books } = response.data.message.reduce(
+    const { books } = response.data.books.reduce(
       (acc, curr) => {
         acc.books[curr._id] = curr;
         return acc;
@@ -94,13 +95,7 @@ export function* deleteBook({ payload }) {
   };
   try {
     yield call(axios, options);
-
-    const {
-      books: { books },
-    } = yield select(state => state);
-    const newBooks = { ...books };
-    delete newBooks[payload];
-    yield put(bookDelete(newBooks));
+    yield put(fetchBooksRequest());
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -121,7 +116,7 @@ export function* addBook({ payload }) {
     // const newBooks = { ...books };
     // newBooks[response.data._id] = response.data;
     // yield put(bookAdd(newBooks));
-    yield put(fetchBooksRequest({}));
+    yield put(fetchBooksRequest());
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));
@@ -129,24 +124,31 @@ export function* addBook({ payload }) {
 }
 
 export function* setFilterDate({ payload }) {
+  const { currentPage, perPage } = yield select(getPagination);
   const opt = {
     url: 'api/books/filter_date',
     method: 'get',
     params: {
+      currentPage,
+      perPage,
       start: payload.start._d,
       end: payload.end._d,
     },
   };
   try {
     const response = yield call(axios, opt);
-    const { books } = response.data.reduce(
+    const { books } = response.data.books.reduce(
       (acc, curr) => {
         acc.books[curr._id] = curr;
         return acc;
       },
       { books: {} }
     );
-    yield put(setDateFilter(books));
+    const data = {
+      books,
+      totalPages: response.data.pages,
+    };
+    yield put(setDateFilter(data));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));

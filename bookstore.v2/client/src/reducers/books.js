@@ -56,7 +56,8 @@ export default function(state = initState, action) {
     case SET_DATE_FILTER:
       return {
         ...state,
-        books: action.payload,
+        books: action.payload.books,
+        totalPages: action.payload.totalPages,
       };
     default:
       return state;

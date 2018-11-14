@@ -8,17 +8,26 @@ import {
   fetchGenresRequest,
   setDateFilterSaga,
 } from '../actions/books';
+import { setCurrentPage, setPerPage } from '../actions/pagination';
 import Book from '../components/Book';
 import FiltersView from '../components/FiltersView';
 import Pagination from './Pagination';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.books !== nextProps.books || prevState.totalPages !== nextProps.totalPages) {
+    console.log(nextProps, prevState);
+    if (
+      prevState.books !== nextProps.books ||
+      prevState.totalPages !== nextProps.totalPages ||
+      prevState.currentPage !== nextProps.pagination.currentPage ||
+      prevState.selectedPerPage !== nextProps.pagination.perPage
+    ) {
       return {
         ...prevState,
         books: Object.values(nextProps.books),
         totalPages: nextProps.totalPages,
+        selectedPerPage: nextProps.pagination.perPage,
+        currentPage: nextProps.pagination.currentPage,
       };
     }
 
@@ -37,15 +46,11 @@ class BooksWrap extends Component {
     totalBooks: this.props.books.length,
     startDate: moment(),
     endDate: moment(),
-    selectedPerPage: 6,
+    selectedPerPage: null,
   };
 
   componentDidMount() {
-    const opt = {
-      currentPage: 1,
-      size: 6,
-    };
-    this.props.fetchBooksRequest(opt);
+    this.props.fetchBooksRequest();
     this.props.fetchGenresRequest();
   }
 
@@ -104,38 +109,32 @@ class BooksWrap extends Component {
   };
 
   handleDateDelete = () => {
-    const { currentPage, selectedPerPage } = this.state;
-    const opt = {
-      currentPage,
-      size: selectedPerPage,
-    };
-    this.props.fetchBooksRequest(opt);
+    this.setState({
+      startDate: moment(),
+      endDate: moment(),
+    });
+    this.props.fetchBooksRequest();
   };
 
   onPageChanged = data => {
     const { currentPage, totalPages } = data;
-    const { selectedPerPage } = this.state;
     this.setState({ currentPage, totalPages });
-    const opt = {
-      currentPage,
-      size: selectedPerPage,
-    };
-    this.props.fetchBooksRequest(opt);
+
+    this.props.setCurrentPage(currentPage);
+
+    this.props.fetchBooksRequest();
   };
 
   handlePerPage = e => {
     const { value } = e.target;
-    const { selectedPerPage, currentPage } = this.state;
+    const { selectedPerPage } = this.state;
     if (value !== selectedPerPage) {
       this.setState({
         ...this.state,
         selectedPerPage: value,
       });
-      const opt = {
-        currentPage,
-        size: value,
-      };
-      this.props.fetchBooksRequest(opt);
+      this.props.setPerPage(value);
+      this.props.fetchBooksRequest();
     }
   };
 
@@ -161,11 +160,13 @@ class BooksWrap extends Component {
                 selected={this.state.startDate}
                 onChange={this.handleChangeStartDate}
                 className="form-control"
+                dateFormat="DD/MM/YYYY"
               />
               <DatePicker
                 selected={this.state.endDate}
                 onChange={this.handleChangeEndDate}
                 className="form-control"
+                dateFormat="DD/MM/YYYY"
               />
             </div>
             <div className="d-flex flex-wrap justify-content-center align-items-center">
@@ -196,6 +197,7 @@ class BooksWrap extends Component {
             </select>
           </div>
           <div>
+            {console.log(this.props.pagination.currentPage)}
             {currentPage && (
               <span className="current-page d-inline-block h-100 text-secondary">
                 Page <span className="font-weight-bold">{currentPage}</span> /{' '}
@@ -241,6 +243,7 @@ function mapStateToProps(state) {
     totalPages: state.books.totalPages,
     genres: state.books.genres,
     user_type: state.auth.user.user_type,
+    pagination: state.pagination,
   };
 }
 const mapDispatchToProps = {
@@ -248,6 +251,8 @@ const mapDispatchToProps = {
   sagaBookDelete,
   fetchGenresRequest,
   setDateFilterSaga,
+  setCurrentPage,
+  setPerPage,
 };
 
 export default connect(

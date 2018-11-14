@@ -28,15 +28,15 @@ router.get('/test', (req,res) => {
 //         .catch(err => res.status(404).json({nobooksfind: 'No books!'}));
 // });
 router.get('/',(req,res) => {
-    var pageNo = parseInt(req.query.pageNo)
-    var size = parseInt(req.query.size)
-    var query = {}
-    if(pageNo <= 0) {
+    const currentPage = parseInt(req.query.currentPage)
+    const perPage = parseInt(req.query.perPage)
+    const query = {}
+    if(currentPage <= 0) {
           response = {"error" : true,"message" : "invalid page number, should start with 1"};
           return res.json(response)
     }
-    query.skip = size * (pageNo - 1)
-    query.limit = size
+    query.skip = perPage * (currentPage - 1)
+    query.limit = perPage
     // Find some documents
          Book.count({},function(err,totalCount) {
                if(err) {
@@ -47,8 +47,8 @@ router.get('/',(req,res) => {
               if(err) {
                   response = {"error" : true,"message" : "Error fetching data"};
               } else {
-                  var totalPages = Math.ceil(totalCount / size)
-                  response = {"error" : false,"message" : data,"pages": totalPages};
+                  const totalPages = Math.ceil(totalCount / perPage)
+                  response = {"error" : false,"books" : data,"pages": totalPages};
               }
               res.json(response);
            });
@@ -124,17 +124,52 @@ router.patch('/:id',passport.authenticate('jwt',{session:false}),(req,res)=>{
 // @acess   Public
 
 router.get('/filter_date',(req,res)=>{
+   
+    // Find some documents
+         
     const { start , end } = req.query;    
     const  strm = moment(start);
+    const currentPage = parseInt(req.query.currentPage)
+    const perPage = parseInt(req.query.perPage)    
     const endm = moment(end);    
-    Book.find({
+    const query = {}
+    console.log(start,end);
+    query.skip = perPage * (currentPage - 1)
+    query.limit = perPage
+    if(currentPage <= 0) {
+        response = {"error" : true,"message" : "invalid page number, should start with 1"};
+        return res.json(response)
+  }
+  Book.count({    
         "date": {
             $gte: strm.toDate(), 
             $lt: endm.toDate()
-        }
-    })
-    .then(books => res.json(books))
-    .catch(err => res.status(404).json({noBookWithFilter: err}));
+        }       
+  },function(err,totalCount) {
+    if(err) {
+      response = {"error" : true,"message" : "Error fetching data"}
+    }
+Book.find({
+ "date": {
+     $gte: strm.toDate(), 
+     $lt: endm.toDate()
+ }
+},{},query,function(err,data) {
+     // Mongo command to fetch all data from collection.
+   if(err) {
+       response = {"error" : true,"message" : "Error fetching data"};
+   } else {
+       const totalPages = Math.ceil(totalCount / perPage)
+       response = {"error" : false,"books" : data,"pages": totalPages};
+   }
+   res.json(response);
+});
+})
+
+
+    // Book.find()
+    // .then(books => res.json(books))
+    // .catch(err => res.status(404).json({noBookWithFilter: err}));
 })
 
 module.exports = router;
