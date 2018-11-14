@@ -91,6 +91,7 @@ class ModalEdit extends React.Component {
                   className="form-control"
                   name="image"
                   onChange={this.handleChange}
+                  value={this.state.book.image}
                   placeholder="Can be empty"
                 />
               </div>
