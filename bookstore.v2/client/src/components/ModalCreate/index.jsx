@@ -9,7 +9,7 @@ class ModalEdit extends React.Component {
     this.state = {
       book: {
         image:
-          'http://t1.gstatic.com/images?q=tbn:ANd9GcT--GCKQVgeygN8gZsi7JJALb0KtZxGZDDyMYdw481-OKYPthtg',
+          'https://vignette.wikia.nocookie.net/citrus/images/6/60/No_Image_Available.png/revision/latest?cb=20170129011325',
       },
     };
     this.el = document.createElement('div');
@@ -50,6 +50,13 @@ class ModalEdit extends React.Component {
 
   render() {
     const { handleShow, genres } = this.props;
+    const newGenres = [];
+    genres.map(genre => {
+      if (genre.genre !== 'None') {
+        newGenres.push(genre);
+      }
+    });
+
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">
@@ -78,13 +85,24 @@ class ModalEdit extends React.Component {
                 />
               </div>
               <div className="form-group">
+                <p>Картинка</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="image"
+                  onChange={this.handleChange}
+                  placeholder="Can be empty"
+                />
+              </div>
+              <div className="form-group">
                 <p>Жанры</p>
                 <select
                   className="form-control"
                   value={this.state.book.genre}
                   onChange={this.handleChangeSelect}
                 >
-                  {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
+                  {newGenres &&
+                    newGenres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
                 </select>
               </div>
             </ul>
