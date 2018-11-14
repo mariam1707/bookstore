@@ -50,12 +50,6 @@ class ModalEdit extends React.Component {
 
   render() {
     const { handleShow, genres } = this.props;
-    const newGenres = [];
-    genres.map(genre => {
-      if (genre.genre !== 'None') {
-        newGenres.push(genre);
-      }
-    });
 
     return ReactDOM.createPortal(
       <div className="modal">
@@ -102,8 +96,7 @@ class ModalEdit extends React.Component {
                   value={this.state.book.genre}
                   onChange={this.handleChangeSelect}
                 >
-                  {newGenres &&
-                    newGenres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
+                  {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
                 </select>
               </div>
             </ul>

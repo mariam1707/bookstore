@@ -12,10 +12,11 @@ class ModalEdit extends React.Component {
       return {
         ...prevState,
         book: nextProps.book,
-      }
+      };
     }
     return null;
   }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -59,13 +60,6 @@ class ModalEdit extends React.Component {
   render() {
     const { book } = this.state;
     const { genres } = this.props;
-    const newGenres = [];
-    genres.map(genre => {
-      if (genre.genre !== 'None') {
-        newGenres.push(genre);
-      }
-    });
-
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">
