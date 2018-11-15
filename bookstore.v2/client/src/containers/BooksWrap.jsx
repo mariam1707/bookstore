@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import {
   fetchBooksRequest,
@@ -12,6 +11,9 @@ import { setCurrentPage, setPerPage } from '../actions/pagination';
 import Book from '../components/Book';
 import FiltersView from '../components/FiltersView';
 import Pagination from './Pagination';
+import PaginationSelect from '../components/PaginationSelect';
+import PagesView from '../components/PagesView';
+import DatePickerView from '../components/DatePickerView';
 
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -80,7 +82,7 @@ class BooksWrap extends Component {
   };
 
   filterGenres = book => {
-    if (this.state.selectedvalue.toLowerCase() === 'none') {
+    if (this.state.selectedvalue.toLowerCase() === 'all') {
       return book.genre.toLowerCase();
     }
     return book.genre.toLowerCase().includes(this.state.selectedvalue.toLowerCase());
@@ -138,7 +140,16 @@ class BooksWrap extends Component {
   };
 
   render() {
-    const { selectedvalue, filterTitle, filterAuthor, books, totalPages, currentPage } = this.state;
+    const {
+      selectedvalue,
+      filterTitle,
+      filterAuthor,
+      books,
+      totalPages,
+      currentPage,
+      startDate,
+      endDate,
+    } = this.state;
 
     return (
       <div className="container">
@@ -154,55 +165,20 @@ class BooksWrap extends Component {
         </div>
         <div className=" justify-content-sm-around">
           <div className=" flex-column align-items-center">
-            <div className="d-flex flex-wrap justify-content-center align-items-center">
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleChangeStartDate}
-                className="form-control"
-                dateFormat="DD/MM/YYYY"
-              />
-              <DatePicker
-                selected={this.state.endDate}
-                onChange={this.handleChangeEndDate}
-                className="form-control"
-                dateFormat="DD/MM/YYYY"
-              />
-            </div>
-            <div className="d-flex flex-wrap justify-content-center align-items-center">
-              <button
-                type="button"
-                className="btn btn-primary m-10"
-                onClick={this.handleDateSubmit}
-              >
-                Показать
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary m-10"
-                onClick={this.handleDateDelete}
-              >
-                Сбросить
-              </button>
-            </div>
+            <DatePickerView
+              startDate={startDate}
+              endDate={endDate}
+              handleChangeStartDate={this.handleChangeStartDate}
+              handleChangeEndDate={this.handleChangeEndDate}
+              handleDateSubmit={this.handleDateSubmit}
+              handleDateDelete={this.handleDateDelete}
+            />
           </div>
         </div>
+
         <div className="row d-flex justify-content-between">
-          <div className="form-group ">
-            <select defaultValue="6" onClick={this.handlePerPage} className="form-control">
-              <option>3</option>
-              <option>6</option>
-              <option>9</option>
-              <option>12</option>
-            </select>
-          </div>
-          <div>
-            {currentPage && (
-              <span className="current-page d-inline-block h-100 text-secondary">
-                Page <span className="font-weight-bold">{currentPage}</span> /{' '}
-                <span className="font-weight-bold">{totalPages}</span>
-              </span>
-            )}
-          </div>
+          <PaginationSelect handlePerPage={this.handlePerPage} />
+          <PagesView currentPage={currentPage} totalPages={totalPages} />
         </div>
         <div className="row">
           {books &&
@@ -220,15 +196,13 @@ class BooksWrap extends Component {
               ))}
         </div>
         <div className="row d-flex flex-row py-4  justify-content-center align-items-center">
-          <div className="">
-            {totalPages && (
-              <Pagination
-                totalPages={totalPages}
-                pageNeighbours={1}
-                onPageChanged={this.onPageChanged}
-              />
-            )}
-          </div>
+          {totalPages && (
+            <Pagination
+              totalPages={totalPages}
+              pageNeighbours={1}
+              onPageChanged={this.onPageChanged}
+            />
+          )}
         </div>
       </div>
     );
