@@ -38,7 +38,7 @@ class BooksWrap extends Component {
   state = {
     books: Object.values(this.props.books),
     filterGenres: '',
-    selectedvalue: 'None',
+    selectedvalue: 'All',
     filterTitle: '',
     filterAuthor: '',
     currentBooks: this.props.books,
