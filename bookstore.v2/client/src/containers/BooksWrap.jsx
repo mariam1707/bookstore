@@ -153,7 +153,7 @@ class BooksWrap extends Component {
 
     return (
       <div className="container">
-        <div className="row justify-content-sm-around">
+        <div className="d-flex flex-wrap justify-content-sm-around">
           <FiltersView
             genres={this.props.genres}
             handleChangeSelect={this.handleChangeSelect}
@@ -176,11 +176,11 @@ class BooksWrap extends Component {
           </div>
         </div>
 
-        <div className="row d-flex justify-content-between">
+        <div className="d-flex flex-wrap d-flex justify-content-between">
           <PaginationSelect handlePerPage={this.handlePerPage} />
           <PagesView currentPage={currentPage} totalPages={totalPages} />
         </div>
-        <div className="row">
+        <div className="d-flex flex-wrap">
           {books &&
             books
               .filter(this.filterGenres)
@@ -195,7 +195,7 @@ class BooksWrap extends Component {
                 />
               ))}
         </div>
-        <div className="row d-flex flex-row py-4  justify-content-center align-items-center">
+        <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
           {totalPages && (
             <Pagination
               totalPages={totalPages}
