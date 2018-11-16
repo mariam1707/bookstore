@@ -70,7 +70,14 @@ class Menu extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          {isAdmin(user.user_type) && <CreateBook />}
+          {isAdmin(user.user_type) && (
+            <>
+              <Link className="btn btn-light" to="/create-book">
+                Create a book
+              </Link>
+              <CreateBook />
+            </>
+          )}
           <div className="collapse navbar-collapse" id="navbarsExample05">
             {isAuthenticated ? userLinks : guestLinks}
           </div>
