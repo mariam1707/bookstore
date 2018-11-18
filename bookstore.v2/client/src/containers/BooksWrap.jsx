@@ -164,7 +164,7 @@ class BooksWrap extends Component {
           />
         </div>
         <div className=" justify-content-sm-around">
-          <div className=" flex-column align-items-center">
+          <div className=" flex-column align-items-center datepicker-border">
             <DatePickerView
               startDate={startDate}
               endDate={endDate}
