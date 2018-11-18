@@ -45,7 +45,7 @@ class BooksWrap extends Component {
     currentPage: null,
     totalPages: this.props.totalPages,
     totalBooks: this.props.books.length,
-    startDate: moment(),
+    startDate: moment('2018-09-04'),
     endDate: moment(),
     selectedPerPage: null,
   };
@@ -111,7 +111,7 @@ class BooksWrap extends Component {
 
   handleDateDelete = () => {
     this.setState({
-      startDate: moment(),
+      startDate: moment('2018-09-04'),
       endDate: moment(),
     });
     this.props.fetchBooksRequest();
