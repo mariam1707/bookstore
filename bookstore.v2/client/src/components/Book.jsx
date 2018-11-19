@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
+
 import ModalEdit from './ModalEdit';
 import isAdmin from '../utils/isAdmin';
 
@@ -45,6 +47,9 @@ class Book extends Component {
             <h4>{book.author}</h4>
             <p className="card-text">{book.title}</p>
             <p className="card-text">{book.genre}</p>
+            <p>
+              Дата добавления: <Moment format="DD/MM/YYYY">{book.date}</Moment>
+            </p>
             <div className="d-flex justify-content-between align-items-center">
               {isAdmin(this.props.user_type) && (
                 <div className="btn-group">
