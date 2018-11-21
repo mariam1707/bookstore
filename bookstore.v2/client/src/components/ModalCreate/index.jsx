@@ -10,6 +10,7 @@ class ModalEdit extends React.Component {
       book: {
         image:
           'https://vignette.wikia.nocookie.net/citrus/images/6/60/No_Image_Available.png/revision/latest?cb=20170129011325',
+        genre: 'Tragedy',
       },
     };
     this.el = document.createElement('div');
