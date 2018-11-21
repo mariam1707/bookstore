@@ -7,20 +7,10 @@ import { sagaBookUpdate } from '../../actions/books';
 const modalRoot = document.getElementById('modal-root');
 
 class ModalEdit extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.book !== nextProps.book) {
-      return {
-        ...prevState,
-        book: nextProps.book,
-      };
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
-      book: {},
+      book: this.props.book,
     };
     this.el = document.createElement('div');
   }
@@ -34,6 +24,7 @@ class ModalEdit extends React.Component {
   }
 
   handleChange = e => {
+    console.log(e.target.name, e.target.value);
     this.setState({
       ...this.state,
       book: {
@@ -60,6 +51,7 @@ class ModalEdit extends React.Component {
   render() {
     const { book } = this.state;
     const { genres } = this.props;
+    console.log(this.state);
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">
