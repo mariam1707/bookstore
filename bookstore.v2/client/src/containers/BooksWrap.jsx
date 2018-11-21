@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { equals } from 'ramda';
+
 import {
   fetchBooksRequest,
   sagaBookDelete,
@@ -18,10 +20,10 @@ import DatePickerView from '../components/DatePickerView';
 class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
-      prevState.books !== nextProps.books ||
-      prevState.totalPages !== nextProps.totalPages ||
-      prevState.currentPage !== nextProps.pagination.currentPage ||
-      prevState.selectedPerPage !== nextProps.pagination.perPage
+      !equals(prevState.books, nextProps.books) ||
+      !equals(prevState.totalPages, nextProps.totalPages) ||
+      !equals(prevState.currentPage, nextProps.pagination.currentPage) ||
+      !equals(prevState.selectedPerPage, nextProps.pagination.perPage)
     ) {
       return {
         ...prevState,
