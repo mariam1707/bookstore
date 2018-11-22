@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateBookView = ({ handleChange, book, handleChangeSelect, handleSaveClose, genres }) => (
+const CreateBookView = ({ handleChange, book, handleChangeSelect, handleSave, genres }) => (
   <div className="container">
     <div className="card">
       <div className="card-body">
@@ -35,7 +35,7 @@ const CreateBookView = ({ handleChange, book, handleChangeSelect, handleSaveClos
             </select>
           </div>
         </ul>
-        <button type="button" className="btn btn-primary" onClick={handleSaveClose}>
+        <button type="button" className="btn btn-primary" onClick={handleSave}>
           Save
         </button>
       </div>
