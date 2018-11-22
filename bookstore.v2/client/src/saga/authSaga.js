@@ -35,6 +35,7 @@ export function* GetUser({ payload }) {
     method: 'post',
     data: payload,
   };
+
   try {
     const response = yield call(axios, opt);
     const { token } = response.data;
