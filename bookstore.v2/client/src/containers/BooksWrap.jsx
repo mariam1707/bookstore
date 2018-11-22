@@ -23,14 +23,19 @@ class BooksWrap extends Component {
       !equals(prevState.books, nextProps.books) ||
       !equals(prevState.totalPages, nextProps.totalPages) ||
       !equals(prevState.currentPage, nextProps.pagination.currentPage) ||
-      !equals(prevState.selectedPerPage, nextProps.pagination.perPage)
+      !equals(prevState.perPage, nextProps.pagination.perPage)
     ) {
+      const {
+        totalPages,
+        pagination: { perPage, currentPage },
+      } = nextProps;
+
       return {
         ...prevState,
         books: Object.values(nextProps.books),
-        totalPages: nextProps.totalPages,
-        selectedPerPage: nextProps.pagination.perPage,
-        currentPage: nextProps.pagination.currentPage,
+        totalPages,
+        perPage,
+        currentPage,
       };
     }
 
@@ -49,7 +54,8 @@ class BooksWrap extends Component {
     totalBooks: this.props.books.length,
     startDate: moment('2018-09-04'),
     endDate: moment(),
-    selectedPerPage: null,
+    perPage: null,
+    options: [3, 6, 9, 12],
   };
 
   componentDidMount() {
@@ -130,11 +136,11 @@ class BooksWrap extends Component {
 
   handlePerPage = e => {
     const { value } = e.target;
-    const { selectedPerPage } = this.state;
-    if (value !== selectedPerPage) {
+    const { perPage } = this.state;
+    if (value !== perPage) {
       this.setState({
         ...this.state,
-        selectedPerPage: value,
+        perPage: value,
       });
       this.props.setPerPage(value);
       this.props.fetchBooksRequest();
@@ -151,6 +157,7 @@ class BooksWrap extends Component {
       currentPage,
       startDate,
       endDate,
+      options,
     } = this.state;
 
     return (
@@ -177,9 +184,8 @@ class BooksWrap extends Component {
             />
           </div>
         </div>
-
         <div className="d-flex flex-wrap d-flex justify-content-between">
-          <PaginationSelect handlePerPage={this.handlePerPage} />
+          <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
           <PagesView currentPage={currentPage} totalPages={totalPages} />
         </div>
         <div className="d-flex flex-wrap">
