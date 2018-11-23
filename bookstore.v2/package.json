@@ -1,7 +1,7 @@
 {
-  "name": "socialnetwork",
+  "name": "bookstore",
   "version": "1.0.0",
-  "description": "social network for developers",
+  "description": "simple bookstore",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
