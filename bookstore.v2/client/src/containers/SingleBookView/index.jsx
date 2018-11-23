@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import jwtDecode from 'jwt-decode';
+import setAuthToken from '../../utils/setAuthToken';
+import { setCurrentUser, unsetCurrentUserSaga } from '../../actions/auth';
+
 import Menu from '../Menu';
 import { sagaBookAdd } from '../../actions/books';
 import CreateBookView from '../../components/CreateBookView';
@@ -13,6 +17,20 @@ class SingleBookView extends Component {
       genre: 'Tragedy',
     },
   };
+
+  componentDidMount() {
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
+      const decoded = jwtDecode(localStorage.jwtToken);
+      this.props.setCurrentUser(decoded);
+
+      const currentTime = Date.now() / 1000;
+      if (decoded.exp < currentTime) {
+        this.props.unsetCurrentUserSaga();
+        window.location.href = '/';
+      }
+    }
+  }
 
   handleChange = e =>
     this.setState({
@@ -66,6 +84,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   sagaBookAdd,
+  setCurrentUser,
+  unsetCurrentUserSaga,
 };
 
 export default connect(
