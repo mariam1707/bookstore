@@ -1,12 +1,9 @@
 import React from 'react';
 
-const PaginationSelect = ({ handlePerPage }) => (
+const PaginationSelect = ({ handlePerPage, options = [] }) => (
   <div className="form-group ">
     <select defaultValue="6" onClick={handlePerPage} className="form-control">
-      <option>3</option>
-      <option>6</option>
-      <option>9</option>
-      <option>12</option>
+      {options && options.map((option, index) => <option key={index}>{option}</option>)}
     </select>
   </div>
 );

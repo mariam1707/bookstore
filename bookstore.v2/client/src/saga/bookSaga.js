@@ -2,18 +2,18 @@ import { takeEvery, call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import {
-  FETCH_BOOKS_REQUEST,
+  fetchBooksRequest,
   fetchBooksSuccess,
   fetchBooksError,
-  SAGA_BOOK_UPDATE,
   bookUpdate,
+  fetchGenresSuccess,
+  setDateFilter,
+  FETCH_BOOKS_REQUEST,
+  SAGA_BOOK_UPDATE,
   SAGA_BOOK_DELETE,
   SAGA_BOOK_ADD,
   FETCH_GENRES_REQUEST,
-  fetchGenresSuccess,
   SET_DATE_FILTER_SAGA,
-  setDateFilter,
-  fetchBooksRequest,
 } from '../actions/books';
 import { getPagination } from './selectors';
 
@@ -28,6 +28,7 @@ export function* fetchBooks() {
       perPage,
     },
   };
+
   try {
     const response = yield call(axios, options);
     const { books } = response.data.books.reduce(
@@ -37,10 +38,12 @@ export function* fetchBooks() {
       },
       { books: {} }
     );
+
     const data = {
       books,
       totalPages: response.data.pages,
     };
+
     yield put(fetchBooksSuccess(data));
   } catch (error) {
     const message = error.response.data;
@@ -52,6 +55,7 @@ export function* fetchGenres() {
     url: 'api/genres',
     method: 'get',
   };
+
   try {
     const response = yield call(axios, options);
 
@@ -74,11 +78,14 @@ export function* updateBook({ payload }) {
       image: payload.image,
     },
   };
+
   try {
     yield call(axios, options);
+
     const {
       books: { books },
     } = yield select(state => state);
+
     const newBooks = { ...books };
     newBooks[payload._id] = payload;
     yield put(bookUpdate(newBooks));
@@ -92,6 +99,7 @@ export function* deleteBook({ payload }) {
     url: `api/books/${payload}`,
     method: 'delete',
   };
+
   try {
     yield call(axios, options);
     yield put(fetchBooksRequest());
@@ -106,15 +114,9 @@ export function* addBook({ payload }) {
     method: 'post',
     data: payload,
   };
+
   try {
     yield call(axios, options);
-
-    // const {
-    //   books: { books },
-    // } = yield select(state => state);
-    // const newBooks = { ...books };
-    // newBooks[response.data._id] = response.data;
-    // yield put(bookAdd(newBooks));
     yield put(fetchBooksRequest());
   } catch (error) {
     const message = error.response.data;
@@ -124,6 +126,7 @@ export function* addBook({ payload }) {
 
 export function* setFilterDate({ payload }) {
   const { currentPage, perPage } = yield select(getPagination);
+
   const opt = {
     url: 'api/books/filter_date',
     method: 'get',
@@ -134,8 +137,10 @@ export function* setFilterDate({ payload }) {
       end: payload.end._d,
     },
   };
+
   try {
     const response = yield call(axios, opt);
+
     const { books } = response.data.books.reduce(
       (acc, curr) => {
         acc.books[curr._id] = curr;
@@ -143,6 +148,7 @@ export function* setFilterDate({ payload }) {
       },
       { books: {} }
     );
+
     const data = {
       books,
       totalPages: response.data.pages,
