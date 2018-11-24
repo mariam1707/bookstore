@@ -51,7 +51,7 @@ class Login extends Component {
                   <b>Email</b>
                   <input
                     type="text"
-                    placeholder="Enter Username"
+                    placeholder="Enter your email"
                     name="email"
                     id="email"
                     onChange={this.handleChange}

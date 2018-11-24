@@ -77,7 +77,7 @@ class Registration extends Component {
                     className={classnames('form-control', {
                       'is-invalid': errors.name,
                     })}
-                    placeholder="Enter Username"
+                    placeholder="Enter your full name"
                     name="name"
                     onChange={this.handleChange}
                     value={name}
