@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CreateBook from './CreateBook';
+
 import { unsetCurrentUserSaga } from '../actions/auth';
 import isAdmin from '../utils/isAdmin';
 
@@ -75,7 +75,6 @@ class Menu extends Component {
               <Link className="btn btn-light" to="/create-book">
                 Create a book
               </Link>
-              <CreateBook />
             </>
           )}
           <div className="collapse navbar-collapse" id="navbarsExample05">
