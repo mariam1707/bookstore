@@ -17,7 +17,7 @@ import App from './containers/App';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import RestorePassword from './components/RestorePassword';
-import SingleBookView from './containers/SingleBookView';
+import SingleBookCreateView from './containers/SingleBookCreateView';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css';
@@ -40,7 +40,7 @@ ReactDOM.render(
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
         <Route path="/restore" component={RestorePassword} />
-        <Route path="/create-book" component={SingleBookView} />
+        <Route path="/create-book" component={SingleBookCreateView} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

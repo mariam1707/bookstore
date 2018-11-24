@@ -54,7 +54,6 @@ class SingleBookView extends Component {
     const { sagaBookAdd } = this.props;
     const { book } = this.state;
     sagaBookAdd(book);
-    console.log(sagaBookAdd(book));
   };
 
   render() {
