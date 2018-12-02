@@ -20,7 +20,7 @@ import RestorePassword from './components/RestorePassword';
 import SingleBookCreateView from './containers/SingleBookCreateView';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/style.css';
+import './css/style.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const sagaMiddleware = createSagaMiddleware();
