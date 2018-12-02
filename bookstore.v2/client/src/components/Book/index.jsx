@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import Moment from 'react-moment';
 
-import ModalEdit from './ModalEdit';
-import isAdmin from '../utils/isAdmin';
+import ModalEdit from '../ModalEdit';
+import isAdmin from '../../utils/isAdmin';
+import type { PropsType, StateType } from './types';
 
-class Book extends Component {
+class Book extends React.Component<PropsType, StateType> {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.book !== nextProps.book) {
       return {
