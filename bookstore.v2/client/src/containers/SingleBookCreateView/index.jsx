@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import { connect } from 'react-redux';
+import setDisplayName from 'recompose/setDisplayName';
+import compose from 'recompose/compose';
 
 import jwtDecode from 'jwt-decode';
 import setAuthToken from '../../utils/setAuthToken';
@@ -8,8 +12,29 @@ import { setCurrentUser, unsetCurrentUserSaga } from '../../actions/auth';
 import Menu from '../Menu';
 import { sagaBookAdd } from '../../actions/books';
 import CreateBookView from '../../components/CreateBookView';
+import type { PropsType, StateType } from './types';
 
-class SingleBookView extends Component {
+declare var localStorage: Object;
+
+const mapStateToProps = state => ({
+  books: state.books.books,
+  genres: state.books.genres,
+});
+
+const mapDispatchToProps = {
+  sagaBookAdd,
+  setCurrentUser,
+  unsetCurrentUserSaga,
+};
+export default
+@compose(
+  setDisplayName('SingleBookView'),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)
+class extends React.Component<PropsType, StateType> {
   state = {
     book: {
       image:
@@ -18,7 +43,7 @@ class SingleBookView extends Component {
     },
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwtDecode(localStorage.jwtToken);
@@ -32,7 +57,7 @@ class SingleBookView extends Component {
     }
   }
 
-  handleChange = e =>
+  handleChange = (e: SyntheticInputEvent<>) => {
     this.setState({
       ...this.state,
       book: {
@@ -40,8 +65,9 @@ class SingleBookView extends Component {
         [e.target.name]: e.target.value,
       },
     });
+  };
 
-  handleChangeSelect = e =>
+  handleChangeSelect = (e: SyntheticInputEvent<>) =>
     this.setState({
       ...this.state,
       book: {
@@ -75,19 +101,3 @@ class SingleBookView extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  books: state.books.books,
-  genres: state.books.genres,
-});
-
-const mapDispatchToProps = {
-  sagaBookAdd,
-  setCurrentUser,
-  unsetCurrentUserSaga,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleBookView);

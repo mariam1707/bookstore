@@ -1,9 +1,31 @@
+// @flow
+
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import setDisplayName from 'recompose/setDisplayName';
+import compose from 'recompose/compose';
+
 import { sagaBookAdd } from '../../actions/books';
 import ModalCreate from '../../components/ModalCreate';
+import type { PropsType, StateType } from './types';
 
-class CreateBook extends Component {
+function mapStateToProps(state) {
+  return {
+    genres: state.books.genres,
+  };
+}
+const mapDispatchToProps = {
+  sagaBookAdd,
+};
+export default
+@compose(
+  setDisplayName('CreateBook'),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)
+class extends Component<PropsType, StateType> {
   state = {
     showModal: false,
   };
@@ -15,34 +37,16 @@ class CreateBook extends Component {
 
   render() {
     const { showModal } = this.state;
-    const { sagaBookAdd } = this.props;
+    const { sagaBookAdd, genres } = this.props;
     return (
       <Fragment>
         <button type="button" className="btn btn-light" onClick={this.handleShow}>
           CreateBook
         </button>
         {showModal && (
-          <ModalCreate
-            handleShow={this.handleShow}
-            handleSave={sagaBookAdd}
-            genres={this.props.genres}
-          />
+          <ModalCreate handleShow={this.handleShow} handleSave={sagaBookAdd} genres={genres} />
         )}
       </Fragment>
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    genres: state.books.genres,
-  };
-}
-const mapDispatchToProps = {
-  sagaBookAdd,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateBook);

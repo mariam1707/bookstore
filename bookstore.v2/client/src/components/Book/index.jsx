@@ -7,7 +7,7 @@ import isAdmin from '../../utils/isAdmin';
 import type { PropsType, StateType } from './types';
 
 class Book extends React.Component<PropsType, StateType> {
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (prevState.book !== nextProps.book) {
       return {
         book: nextProps.book,

@@ -1,12 +1,33 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import compose from 'recompose/compose';
+import setDisplayName from 'recompose/setDisplayName';
 
-import { unsetCurrentUserSaga } from '../actions/auth';
-import isAdmin from '../utils/isAdmin';
+import { unsetCurrentUserSaga } from '../../actions/auth';
+import isAdmin from '../../utils/isAdmin';
+import type { StateType, PropsType } from './types';
 
-class Menu extends Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+const mapDispatchToProps = {
+  unsetCurrentUserSaga,
+};
+
+export default
+@compose(
+  setDisplayName('Menu'),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)
+class extends React.Component<PropsType, StateType> {
+  static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (prevState.auth !== nextProps.auth) {
       return {
         ...prevState,
@@ -16,11 +37,7 @@ class Menu extends Component {
     return null;
   }
 
-  state = {
-    auth: {},
-  };
-
-  handleLogout = e => {
+  handleLogout = (e: SyntheticEvent<any>) => {
     e.preventDefault();
     this.props.unsetCurrentUserSaga();
   };
@@ -85,15 +102,3 @@ class Menu extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    auth: state.auth,
-  };
-}
-const mapDispatchToProps = {
-  unsetCurrentUserSaga,
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Menu);

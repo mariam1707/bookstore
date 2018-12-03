@@ -1,5 +1,8 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import SetDisplayName from 'recompose/setDisplayName';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
 import { setCurrentUser, unsetCurrentUserSaga } from '../actions/auth';
@@ -7,7 +10,26 @@ import { setCurrentUser, unsetCurrentUserSaga } from '../actions/auth';
 import Menu from './Menu';
 import BooksWrap from './BooksWrap';
 
-class App extends React.Component {
+declare var localStorage: Object;
+
+type PropsType = {
+  setCurrentUser: Function,
+  unsetCurrentUserSaga: Function,
+};
+
+const mapDispatchToProps = {
+  setCurrentUser,
+  unsetCurrentUserSaga,
+};
+export default
+@compose(
+  SetDisplayName('App'),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)
+class extends React.Component<PropsType, null> {
   componentDidMount() {
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
@@ -31,12 +53,3 @@ class App extends React.Component {
     );
   }
 }
-const mapDispatchToProps = {
-  setCurrentUser,
-  unsetCurrentUserSaga,
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);

@@ -2,23 +2,54 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { equals } from 'ramda';
+import compose from 'recompose/compose';
+import SetDisplayName from 'recompose/setDisplayName';
 
+import setDisplayName from 'recompose/setDisplayName';
 import {
   fetchBooksRequest,
   sagaBookDelete,
   fetchGenresRequest,
   setDateFilterSaga,
-} from '../actions/books';
-import { setCurrentPage, setPerPage } from '../actions/pagination';
-import Book from '../components/Book';
-import FiltersView from '../components/FiltersView';
-import Pagination from './Pagination';
-import PaginationSelect from '../components/PaginationSelect';
-import PagesView from '../components/PagesView';
-import DatePickerView from '../components/DatePickerView';
+} from '../../actions/books';
+import { setCurrentPage, setPerPage } from '../../actions/pagination';
+import Book from '../../components/Book';
+import FiltersView from '../../components/FiltersView';
+import Pagination from '../Pagination';
+import PaginationSelect from '../../components/PaginationSelect';
+import PagesView from '../../components/PagesView';
+import DatePickerView from '../../components/DatePickerView';
 
-class BooksWrap extends Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
+function mapStateToProps(state) {
+  return {
+    books: state.books.books,
+    totalPages: state.books.totalPages,
+    genres: state.books.genres,
+    user_type: state.auth.user.user_type,
+    pagination: state.pagination,
+  };
+}
+const mapDispatchToProps = {
+  fetchBooksRequest,
+  sagaBookDelete,
+  fetchGenresRequest,
+  setDateFilterSaga,
+  setCurrentPage,
+  setPerPage,
+};
+
+export default
+@compose(
+  setDisplayName('BooksWrap'),
+  compose(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )
+  )
+)
+class extends Component {
+  static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (
       !equals(prevState.books, nextProps.books) ||
       !equals(prevState.totalPages, nextProps.totalPages) ||
@@ -58,7 +89,7 @@ class BooksWrap extends Component {
     options: [3, 6, 9, 12],
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.props.fetchBooksRequest();
     this.props.fetchGenresRequest();
   }
@@ -82,7 +113,7 @@ class BooksWrap extends Component {
     });
   };
 
-  handleChangeFilter = e => {
+  handleChangeFilter = (e: SyntheticInputEvent) => {
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value.toLowerCase(),
@@ -216,26 +247,3 @@ class BooksWrap extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    books: state.books.books,
-    totalPages: state.books.totalPages,
-    genres: state.books.genres,
-    user_type: state.auth.user.user_type,
-    pagination: state.pagination,
-  };
-}
-const mapDispatchToProps = {
-  fetchBooksRequest,
-  sagaBookDelete,
-  fetchGenresRequest,
-  setDateFilterSaga,
-  setCurrentPage,
-  setPerPage,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BooksWrap);
