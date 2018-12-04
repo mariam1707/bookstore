@@ -30,7 +30,7 @@ export default
   )
 )
 class extends React.Component<PropsType, null> {
-  componentDidMount() {
+  componentDidMount(): void {
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwtDecode(localStorage.jwtToken);
@@ -47,7 +47,7 @@ class extends React.Component<PropsType, null> {
   render() {
     return (
       <React.Fragment>
-        <Menu />
+        <Menu unsetCurrentUserSaga = {this.props.unsetCurrentUserSaga}/>
         <BooksWrap />
       </React.Fragment>
     );

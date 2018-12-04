@@ -14,16 +14,13 @@ function mapStateToProps(state) {
     auth: state.auth,
   };
 }
-const mapDispatchToProps = {
-  unsetCurrentUserSaga,
-};
 
 export default
 @compose(
   setDisplayName('Menu'),
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    null,
   )
 )
 class extends React.Component<PropsType, StateType> {

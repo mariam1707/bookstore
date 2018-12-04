@@ -87,7 +87,7 @@ class extends React.Component<PropsType, StateType> {
     const { genres } = this.props;
     return (
       <>
-        <Menu />
+        <Menu unsetCurrentUserSaga = {this.props.unsetCurrentUserSaga}/>
         <div className="container">
           <CreateBookView
             book={book}
