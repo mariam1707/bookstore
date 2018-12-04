@@ -190,7 +190,7 @@ class extends Component {
       endDate,
       options,
     } = this.state;
-
+    console.log(startDate);
     return (
       <div className="container">
         <div className="d-flex flex-wrap justify-content-sm-around">

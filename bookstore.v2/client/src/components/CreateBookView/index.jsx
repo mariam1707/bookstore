@@ -2,7 +2,13 @@
 import React from 'react';
 import type { PropsType } from './types';
 
-const CreateBookView = ({ handleChange, book, handleChangeSelect, handleSave, genres }: PropsType) => (
+const CreateBookView = ({
+  handleChange,
+  book,
+  handleChangeSelect,
+  handleSave,
+  genres,
+}: PropsType) => (
   <div className="container">
     <div className="card">
       <div className="card-body">
