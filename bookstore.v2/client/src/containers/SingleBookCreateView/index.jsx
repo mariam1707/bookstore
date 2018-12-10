@@ -26,15 +26,8 @@ const mapDispatchToProps = {
   setCurrentUser,
   unsetCurrentUserSaga,
 };
-export default
-@compose(
-  setDisplayName('SingleBookView'),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)
-class extends React.Component<PropsType, StateType> {
+
+class SingleBookCreateView extends React.Component<PropsType, StateType> {
   state = {
     book: {
       image:
@@ -87,7 +80,7 @@ class extends React.Component<PropsType, StateType> {
     const { genres } = this.props;
     return (
       <>
-        <Menu unsetCurrentUserSaga = {this.props.unsetCurrentUserSaga}/>
+        <Menu unsetCurrentUserSaga={this.props.unsetCurrentUserSaga} />
         <div className="container">
           <CreateBookView
             book={book}
@@ -101,3 +94,8 @@ class extends React.Component<PropsType, StateType> {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleBookCreateView);

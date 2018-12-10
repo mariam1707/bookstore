@@ -38,17 +38,7 @@ const mapDispatchToProps = {
   setPerPage,
 };
 
-export default
-@compose(
-  setDisplayName('BooksWrap'),
-  compose(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )
-  )
-)
-class extends Component {
+class BooksWrap extends Component {
   static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (
       !equals(prevState.books, nextProps.books) ||
@@ -190,7 +180,6 @@ class extends Component {
       endDate,
       options,
     } = this.state;
-    console.log(startDate);
     return (
       <div className="container">
         <div className="d-flex flex-wrap justify-content-sm-around">
@@ -247,3 +236,8 @@ class extends Component {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BooksWrap);

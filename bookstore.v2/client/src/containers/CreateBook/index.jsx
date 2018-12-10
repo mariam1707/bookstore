@@ -17,15 +17,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   sagaBookAdd,
 };
-export default
-@compose(
-  setDisplayName('CreateBook'),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)
-class extends Component<PropsType, StateType> {
+
+class CreateBook extends Component<PropsType, StateType> {
   state = {
     showModal: false,
   };
@@ -50,3 +43,8 @@ class extends Component<PropsType, StateType> {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateBook);

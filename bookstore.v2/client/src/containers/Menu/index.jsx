@@ -2,10 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import compose from 'recompose/compose';
-import setDisplayName from 'recompose/setDisplayName';
 
-import { unsetCurrentUserSaga } from '../../actions/auth';
 import isAdmin from '../../utils/isAdmin';
 import type { StateType, PropsType } from './types';
 
@@ -15,32 +12,14 @@ function mapStateToProps(state) {
   };
 }
 
-export default
-@compose(
-  setDisplayName('Menu'),
-  connect(
-    mapStateToProps,
-    null,
-  )
-)
-class extends React.Component<PropsType, StateType> {
-  static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
-    if (prevState.auth !== nextProps.auth) {
-      return {
-        ...prevState,
-        auth: nextProps.auth,
-      };
-    }
-    return null;
-  }
-
+class Menu extends React.Component<PropsType, StateType> {
   handleLogout = (e: SyntheticEvent<any>) => {
     e.preventDefault();
     this.props.unsetCurrentUserSaga();
   };
 
   render() {
-    const { user, isAuthenticated } = this.state.auth;
+    const { user, isAuthenticated } = this.props.auth;
     const userLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item text-user-menu">
@@ -99,3 +78,8 @@ class extends React.Component<PropsType, StateType> {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  null
+)(Menu);
