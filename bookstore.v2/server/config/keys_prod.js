@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI: process.env.MONGO_URI,
-    secretOrKey: process.env.SECRET_OR_KEY,
-}
+    mongoURI: 'mongodb://softwase:abrikos365525@ds151513.mlab.com:51513/softwasedb',
+    secretOrKey: 'secret',
+};
