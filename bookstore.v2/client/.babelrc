@@ -2,5 +2,19 @@
     "presets": [
         "flow",
         "@babel/preset-flow"
+    ],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {
+                    "containers": "./containers",
+                    "components": "./components"
+                }
+            }
+        ],
     ]
 }

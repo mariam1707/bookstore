@@ -71,10 +71,25 @@ export function* RestorePass({ payload }) {
   }
 }
 
+export function* setUser() {
+  if (localStorage.jwtToken) {
+    setAuthToken(localStorage.jwtToken);
+    const decoded = jwtDecode(localStorage.jwtToken);
+    yield put(setCurrentUser(decoded));
+
+    // const currentTime = Date.now() / 1000;
+    // if (decoded.exp < currentTime) {
+    //   yield put(unsetCurrentUserSaga);
+    //   window.location.href = '/';
+    // }
+  }
+}
+
 export default function*() {
   // yield takeEvery(SUBMIT_LOGIN_SAGA, getLogin);
   yield takeEvery(SUBMIT_REGISTRATION_SAGA, makeAuth);
   yield takeEvery(SET_CURRENT_USER_SAGA, GetUser);
   yield takeEvery(UNSET_CURRENT_USER_SAGA, LogoutUser);
   yield takeEvery(SET_NEW_PASSWORD_SAGA, RestorePass);
+  yield takeEvery('READY', setUser);
 }

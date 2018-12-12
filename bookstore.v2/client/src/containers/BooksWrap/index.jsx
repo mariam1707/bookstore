@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { equals } from 'ramda';
-import compose from 'recompose/compose';
-import SetDisplayName from 'recompose/setDisplayName';
-
-import setDisplayName from 'recompose/setDisplayName';
 import {
   fetchBooksRequest,
   sagaBookDelete,

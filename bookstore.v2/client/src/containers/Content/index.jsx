@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import Menu from './Menu';
-import BooksWrap from './BooksWrap';
-import { unsetCurrentUserSaga } from '../actions/auth';
+import Menu from '../Menu';
+import BooksWrap from '../BooksWrap';
+import { unsetCurrentUserSaga } from '../../actions/auth';
 
 const App = ({ unsetCurrentUserSaga }: Function) => (
   <React.Fragment>
@@ -14,4 +14,7 @@ const App = ({ unsetCurrentUserSaga }: Function) => (
 const mapDispatchToProps = {
   unsetCurrentUserSaga,
 };
-export default connect(mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

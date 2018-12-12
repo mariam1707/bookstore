@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EntryPoint from './containers/EntryPoint';
+import App from './containers/App';
 
-ReactDOM.render(<EntryPoint />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
