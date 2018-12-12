@@ -17,8 +17,6 @@ type Genres = {
 export type PropsType = {
   sagaBookAdd: Function,
   genres: Array<Genres>,
-  setCurrentUser: Function,
-  unsetCurrentUserSaga: Function,
   books: Array<Book>,
 };
 export type StateType = {

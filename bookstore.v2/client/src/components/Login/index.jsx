@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import Menu from '../../containers/Menu';
-import { setCurrentUserSaga } from '../../actions/auth';
+import Menu from 'containers/Menu';
 
 class Login extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -97,11 +96,8 @@ function mapStateToProps(state) {
     auth: state.auth,
   };
 }
-const mapDispatchToProps = {
-  setCurrentUserSaga,
-};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Login);

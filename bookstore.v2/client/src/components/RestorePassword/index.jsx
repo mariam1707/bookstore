@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import Menu from '../../containers/Menu';
-import { setNewPasswordSaga } from '../../actions/auth';
+import Menu from 'containers/Menu';
+import { setNewPasswordAction } from 'actions/auth';
 
 class RestorePassword extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -34,7 +34,7 @@ class RestorePassword extends Component {
       email,
       newPassword,
     };
-    this.props.setNewPasswordSaga(newUser);
+    this.props.setNewPasswordAction(newUser);
   };
 
   render() {
@@ -95,7 +95,7 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  setNewPasswordSaga,
+  setNewPasswordAction,
 };
 
 export default connect(

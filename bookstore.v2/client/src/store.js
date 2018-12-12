@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'connected-react-router';
 
 import createSagaMiddleware from 'redux-saga';
-import history from './history';
+import history from './helpers/history';
 
 import reducer from './reducers';
 import rootSaga from './saga/sagas';

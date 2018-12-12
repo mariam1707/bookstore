@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import Menu from '../../containers/Menu';
 
-import { submitRegistrationSaga } from '../../actions/auth';
+import { submitRegistrationAction } from '../../actions/auth';
 
 class Registration extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -41,7 +41,7 @@ class Registration extends Component {
       password,
       password2,
     };
-    this.props.submitRegistrationSaga(newUser, this.props.history);
+    this.props.submitRegistrationAction(newUser, this.props.history);
   };
 
   render() {
@@ -132,7 +132,7 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  submitRegistrationSaga,
+  submitRegistrationAction,
 };
 
 export default connect(

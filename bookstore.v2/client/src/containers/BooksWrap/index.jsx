@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { equals } from 'ramda';
+import Book from 'components/Book';
+import FiltersView from 'components/FiltersView';
+import PaginationSelect from 'components/PaginationSelect';
+import PagesView from 'components/PagesView';
 import {
   fetchBooksRequest,
   sagaBookDelete,
@@ -9,11 +13,7 @@ import {
   setDateFilterSaga,
 } from '../../actions/books';
 import { setCurrentPage, setPerPage } from '../../actions/pagination';
-import Book from '../../components/Book';
-import FiltersView from '../../components/FiltersView';
 import Pagination from '../Pagination';
-import PaginationSelect from '../../components/PaginationSelect';
-import PagesView from '../../components/PagesView';
 import DatePickerView from '../../components/DatePickerView';
 
 function mapStateToProps(state) {

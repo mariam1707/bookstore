@@ -12,7 +12,7 @@ import Registration from '../../components/Registration';
 import RestorePassword from '../../components/RestorePassword';
 import SingleBookCreateView from '../SingleBookCreateView';
 
-import history from '../../history';
+import history from '../../helpers/history';
 import store from '../../store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

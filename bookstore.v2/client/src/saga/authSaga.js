@@ -4,12 +4,12 @@ import jwtDecode from 'jwt-decode';
 import { push } from 'connected-react-router';
 import setAuthToken from '../utils/setAuthToken';
 import {
-  SET_CURRENT_USER_SAGA,
-  authErrors,
-  SUBMIT_REGISTRATION_SAGA,
-  setCurrentUser,
-  UNSET_CURRENT_USER_SAGA,
-  SET_NEW_PASSWORD_SAGA,
+  SET_CURRENT_USER_WATCHER,
+  authErrorsAction,
+  SUBMIT_REGISTRATION,
+  setCurrentUserAction,
+  UNSET_CURRENT_USER,
+  SET_NEW_PASSWORD,
 } from '../actions/auth';
 
 export function* makeAuth({ payload }) {
@@ -25,7 +25,7 @@ export function* makeAuth({ payload }) {
     }
   } catch (error) {
     const message = error.response.data;
-    yield put(authErrors(message));
+    yield put(authErrorsAction(message));
   }
 }
 
@@ -42,18 +42,18 @@ export function* GetUser({ payload }) {
     localStorage.setItem('jwtToken', token);
     setAuthToken(token);
     const decoded = jwtDecode(token);
-    yield put(setCurrentUser(decoded));
+    yield put(setCurrentUserAction(decoded));
     yield put(push('/'));
   } catch (error) {
     const message = error.response.data;
-    yield put(authErrors(message));
+    yield put(authErrorsAction(message));
   }
 }
 
 export function* LogoutUser() {
   localStorage.removeItem('jwtToken');
   setAuthToken(false);
-  yield put(setCurrentUser({}));
+  yield put(setCurrentUserAction({}));
 }
 
 export function* RestorePass({ payload }) {
@@ -67,7 +67,7 @@ export function* RestorePass({ payload }) {
     yield put(push('/login'));
   } catch (error) {
     const message = error.response.data;
-    yield put(authErrors(message));
+    yield put(authErrorsAction(message));
   }
 }
 
@@ -75,7 +75,7 @@ export function* setUser() {
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwtDecode(localStorage.jwtToken);
-    yield put(setCurrentUser(decoded));
+    yield put(setCurrentUserAction(decoded));
 
     // const currentTime = Date.now() / 1000;
     // if (decoded.exp < currentTime) {
@@ -87,9 +87,9 @@ export function* setUser() {
 
 export default function*() {
   // yield takeEvery(SUBMIT_LOGIN_SAGA, getLogin);
-  yield takeEvery(SUBMIT_REGISTRATION_SAGA, makeAuth);
-  yield takeEvery(SET_CURRENT_USER_SAGA, GetUser);
-  yield takeEvery(UNSET_CURRENT_USER_SAGA, LogoutUser);
-  yield takeEvery(SET_NEW_PASSWORD_SAGA, RestorePass);
+  yield takeEvery(SUBMIT_REGISTRATION, makeAuth);
+  yield takeEvery(SET_CURRENT_USER_WATCHER, GetUser);
+  yield takeEvery(UNSET_CURRENT_USER, LogoutUser);
+  yield takeEvery(SET_NEW_PASSWORD, RestorePass);
   yield takeEvery('READY', setUser);
 }
