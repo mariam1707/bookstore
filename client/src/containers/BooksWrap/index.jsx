@@ -171,7 +171,7 @@ class BooksWrap extends Component {
       filterAuthor,
       books,
       totalPages,
-      currentPage,
+      // currentPage,
       startDate,
       endDate,
       options,
@@ -202,7 +202,7 @@ class BooksWrap extends Component {
         </div>
         <div className="d-flex flex-wrap d-flex justify-content-between">
           <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
-          <Pages currentPage={currentPage} totalPages={totalPages} />
+          <Pages />
         </div>
         <div className="d-flex flex-wrap">
           {books &&
