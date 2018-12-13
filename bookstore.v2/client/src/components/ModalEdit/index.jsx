@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import { sagaBookUpdate } from '../../actions/books';
+import { bookUpdateWatcher } from '../../actions/books';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -45,7 +45,7 @@ class ModalEdit extends React.Component {
 
   handleSubmit = () => {
     this.props.handleClose();
-    this.props.sagaBookUpdate(this.state.book);
+    this.props.bookUpdateWatcher(this.state.book);
   };
 
   render() {
@@ -128,7 +128,7 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  sagaBookUpdate,
+  bookUpdateWatcher,
 };
 
 export default connect(

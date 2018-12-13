@@ -4,7 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import Menu from 'containers/Menu';
-import { sagaBookAdd } from 'actions/books';
+import { bookDeleteWatcher } from 'actions/books';
 import CreateBookView from 'components/CreateBookView';
 import type { PropsType, StateType } from './types';
 
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  sagaBookAdd,
+  bookDeleteWatcher,
 };
 
 class SingleBookCreateView extends React.Component<PropsType, StateType> {
@@ -46,9 +46,9 @@ class SingleBookCreateView extends React.Component<PropsType, StateType> {
     });
 
   handleSave = () => {
-    const { sagaBookAdd } = this.props;
+    const { bookDeleteWatcher } = this.props;
     const { book } = this.state;
-    sagaBookAdd(book);
+    bookDeleteWatcher(book);
   };
 
   render() {

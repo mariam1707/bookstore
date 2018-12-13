@@ -6,11 +6,11 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import 'bootstrap';
 
-import Content from '../Content';
-import Login from '../../components/Login';
-import Registration from '../../components/Registration';
-import RestorePassword from '../../components/RestorePassword';
-import SingleBookCreateView from '../SingleBookCreateView';
+import Login from 'containers/Login';
+import Registration from 'components/Registration';
+import RestorePassword from 'containers/RestorePassword';
+import Content from 'containers/Content';
+import SingleBookCreateView from 'containers/SingleBookCreateView';
 
 import history from '../../helpers/history';
 import store from '../../store';

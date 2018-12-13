@@ -52,58 +52,58 @@ export const fetchBooksError: ActionType<
 > = createAction(FETCH_BOOKS_ERROR);
 
 export const BOOK_UPDATE: $PropertyType<BookUpdateType, 'type'> = 'BOOK_UPDATE';
-export const BookUpdate: ActionType<
+export const bookUpdate: ActionType<
   $PropertyType<BookUpdateType, 'type'>,
   $PropertyType<BookUpdateType, 'payload'>
 > = createAction(BOOK_UPDATE);
 
 export const BOOK_UPDATE_WATCHER: $PropertyType<BookUpdateWatcherType, 'type'> =
   'BOOK_UPDATE_WATCHER';
-export const BookUpdateWatcher: ActionType<
+export const bookUpdateWatcher: ActionType<
   $PropertyType<BookUpdateWatcherType, 'type'>,
   $PropertyType<BookUpdateWatcherType, 'payload'>
 > = createAction(BOOK_UPDATE_WATCHER);
 
 export const BOOK_DELETE: $PropertyType<BookDeleteType, 'type'> = 'BOOK_DELETE';
-export const BookDelete: ActionType<
+export const bookDelete: ActionType<
   $PropertyType<BookDeleteType, 'type'>,
   $PropertyType<BookDeleteType, 'payload'>
 > = createAction(BOOK_DELETE);
 
 export const BOOK_DELETE_WATCHER: $PropertyType<BookDeleteWatcherType, 'type'> =
   'BOOK_DELETE_WATCHER';
-export const BookDeleteWatcher: ActionType<
+export const bookDeleteWatcher: ActionType<
   $PropertyType<BookDeleteWatcherType, 'type'>,
   $PropertyType<BookDeleteWatcherType, 'payload'>
 > = createAction(BOOK_DELETE_WATCHER);
 
 export const BOOK_SET_GENRES: $PropertyType<BookSetGenresType, 'type'> = 'BOOK_SET_GENRES';
-export const BookSetGenres: ActionType<
+export const bookSetGenres: ActionType<
   $PropertyType<BookSetGenresType, 'type'>,
   $PropertyType<BookSetGenresType, 'payload'>
 > = createAction(BOOK_SET_GENRES);
 
 export const BOOK_ADD: $PropertyType<BookAddType, 'type'> = 'BOOK_ADD';
-export const BookAdd: ActionType<
+export const bookAdd: ActionType<
   $PropertyType<BookAddType, 'type'>,
   $PropertyType<BookAddType, 'payload'>
 > = createAction(BOOK_ADD);
 
 export const BOOK_ADD_WATCHER: $PropertyType<BookAddWatcherType, 'type'> = 'BOOK_ADD_WATCHER';
-export const BookAddWatcher: ActionType<
+export const bookAddWatcher: ActionType<
   $PropertyType<BookAddWatcherType, 'type'>,
   $PropertyType<BookAddWatcherType, 'payload'>
 > = createAction(BOOK_ADD_WATCHER);
 
 export const SET_DATE_FILTER_WATCHER: $PropertyType<SetDateFilterWatcherType, 'type'> =
   'SET_DATE_FILTER_WATCHER';
-export const SetDateFilterWatcher: ActionType<
+export const setDateFilterWatcher: ActionType<
   $PropertyType<SetDateFilterWatcherType, 'type'>,
   $PropertyType<SetDateFilterWatcherType, 'payload'>
 > = createAction(SET_DATE_FILTER_WATCHER);
 
 export const SET_DATE_FILTER: $PropertyType<SetDateFilterType, 'type'> = 'SET_DATE_FILTER';
-export const SetDateFilter: ActionType<
+export const setDateFilter: ActionType<
   $PropertyType<SetDateFilterType, 'type'>,
   $PropertyType<SetDateFilterType, 'payload'>
 > = createAction(SET_DATE_FILTER);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PagesView = ({ currentPage, totalPages }) => (
+const Pages = ({ currentPage, totalPages }) => (
   <div>
     {currentPage && (
       <span className="current-page d-inline-block h-100 text-secondary">
@@ -10,4 +10,4 @@ const PagesView = ({ currentPage, totalPages }) => (
     )}
   </div>
 );
-export default PagesView;
+export default Pages;

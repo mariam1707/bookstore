@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { equals } from 'ramda';
-import Book from 'components/Book';
+import Book from 'containers/Book';
 import FiltersView from 'components/FiltersView';
 import PaginationSelect from 'components/PaginationSelect';
-import PagesView from 'components/PagesView';
+import Pages from 'components/Pages';
 import {
   fetchBooksRequest,
-  sagaBookDelete,
+  bookDeleteWatcher,
   fetchGenresRequest,
-  setDateFilterSaga,
+  setDateFilterWatcher,
 } from '../../actions/books';
 import { setCurrentPage, setPerPage } from '../../actions/pagination';
 import Pagination from '../Pagination';
@@ -27,9 +27,9 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
   fetchBooksRequest,
-  sagaBookDelete,
+  bookDeleteWatcher,
   fetchGenresRequest,
-  setDateFilterSaga,
+  setDateFilterWatcher,
   setCurrentPage,
   setPerPage,
 };
@@ -131,7 +131,7 @@ class BooksWrap extends Component {
       start: startDate,
       end: endDate,
     };
-    this.props.setDateFilterSaga(filterDate);
+    this.props.setDateFilterWatcher(filterDate);
   };
 
   handleDateDelete = () => {
@@ -202,7 +202,7 @@ class BooksWrap extends Component {
         </div>
         <div className="d-flex flex-wrap d-flex justify-content-between">
           <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
-          <PagesView currentPage={currentPage} totalPages={totalPages} />
+          <Pages currentPage={currentPage} totalPages={totalPages} />
         </div>
         <div className="d-flex flex-wrap">
           {books &&
@@ -214,8 +214,8 @@ class BooksWrap extends Component {
                 <Book
                   key={book._id}
                   book={book}
-                  handleDelete={this.props.sagaBookDelete}
-                  user_type={this.props.user_type}
+                  handleDelete={this.props.bookDeleteWatcher}
+                  userType={this.props.user_type}
                 />
               ))}
         </div>
