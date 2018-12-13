@@ -1,31 +1,109 @@
 import { createAction } from 'redux-actions';
+import type { ActionType } from 'types/action';
+import type {
+  FetchBooksRequestType,
+  FetchGenresRequestType,
+  FetchBooksSuccessType,
+  FetchGenresSuccessType,
+  FetchBooksErrorType,
+  BookUpdateType,
+  BookUpdateWatcherType,
+  BookDeleteType,
+  BookDeleteWatcherType,
+  BookSetGenresType,
+  BookAddType,
+  BookAddWatcherType,
+  SetDateFilterWatcherType,
+  SetDateFilterType,
+} from 'types/books/action';
 
-export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST';
-export const FETCH_GENRES_REQUEST = 'FETCH_GENRES_REQUEST';
-export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
-export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS';
-export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR';
-export const BOOK_UPDATE = 'BOOK_UPDATE';
-export const SAGA_BOOK_UPDATE = 'SAGA_BOOK_UPDATE';
-export const BOOK_DELETE = 'BOOK_DELETE';
-export const SAGA_BOOK_DELETE = 'SAGA_BOOK_DELETE';
-export const BOOK_SET_GENRES = 'BOOK_SET_GENRES';
-export const BOOK_ADD = 'BOOK_ADD';
-export const SAGA_BOOK_ADD = 'SAGA_BOOK_ADD';
-export const SET_DATE_FILTER_SAGA = 'SET_DATE_FILTER_SAGA';
-export const SET_DATE_FILTER = 'SET_DATE_FILTER';
+export const FETCH_BOOKS_REQUEST: $PropertyType<FetchBooksRequestType, 'type'> =
+  'FETCH_BOOKS_REQUEST';
+export const fetchBooksRequest: ActionType<
+  $PropertyType<FetchBooksRequestType, 'type'>,
+  $PropertyType<FetchBooksRequestType, 'payload'>
+> = createAction(FETCH_BOOKS_REQUEST);
 
-export const fetchBooksRequest = createAction(FETCH_BOOKS_REQUEST);
-export const fetchBooksSuccess = createAction(FETCH_BOOKS_SUCCESS);
-export const fetchBooksError = createAction(FETCH_BOOKS_ERROR);
-export const bookUpdate = createAction(BOOK_UPDATE);
-export const sagaBookUpdate = createAction(SAGA_BOOK_UPDATE);
-export const bookDelete = createAction(BOOK_DELETE);
-export const sagaBookDelete = createAction(SAGA_BOOK_DELETE);
-export const bookSetGenres = createAction(BOOK_SET_GENRES);
-export const bookAdd = createAction(BOOK_ADD);
-export const sagaBookAdd = createAction(SAGA_BOOK_ADD);
-export const fetchGenresRequest = createAction(FETCH_GENRES_REQUEST);
-export const fetchGenresSuccess = createAction(FETCH_GENRES_SUCCESS);
-export const setDateFilterSaga = createAction(SET_DATE_FILTER_SAGA);
-export const setDateFilter = createAction(SET_DATE_FILTER);
+export const FETCH_GENRES_REQUEST: $PropertyType<FetchGenresRequestType, 'type'> =
+  'FETCH_GENRES_REQUEST';
+export const fetchGenresRequest: ActionType<
+  $PropertyType<FetchGenresRequestType, 'type'>,
+  $PropertyType<FetchGenresRequestType, 'payload'>
+> = createAction(FETCH_GENRES_REQUEST);
+
+export const FETCH_BOOKS_SUCCESS: $PropertyType<FetchBooksSuccessType, 'type'> =
+  'FETCH_BOOKS_SUCCESS';
+export const fetchBooksSuccess: ActionType<
+  $PropertyType<FetchBooksSuccessType, 'type'>,
+  $PropertyType<FetchBooksSuccessType, 'payload'>
+> = createAction(FETCH_BOOKS_SUCCESS);
+
+export const FETCH_GENRES_SUCCESS: $PropertyType<FetchGenresSuccessType, 'type'> =
+  'FETCH_GENRES_SUCCESS';
+export const fetchGenresSuccess: ActionType<
+  $PropertyType<FetchGenresSuccessType, 'type'>,
+  $PropertyType<FetchGenresSuccessType, 'payload'>
+> = createAction(FETCH_GENRES_SUCCESS);
+
+export const FETCH_BOOKS_ERROR: $PropertyType<FetchBooksErrorType, 'type'> = 'FETCH_BOOKS_ERROR';
+export const fetchBooksError: ActionType<
+  $PropertyType<FetchBooksErrorType, 'type'>,
+  $PropertyType<FetchBooksErrorType, 'payload'>
+> = createAction(FETCH_BOOKS_ERROR);
+
+export const BOOK_UPDATE: $PropertyType<BookUpdateType, 'type'> = 'BOOK_UPDATE';
+export const BookUpdate: ActionType<
+  $PropertyType<BookUpdateType, 'type'>,
+  $PropertyType<BookUpdateType, 'payload'>
+> = createAction(BOOK_UPDATE);
+
+export const BOOK_UPDATE_WATCHER: $PropertyType<BookUpdateWatcherType, 'type'> =
+  'BOOK_UPDATE_WATCHER';
+export const BookUpdateWatcher: ActionType<
+  $PropertyType<BookUpdateWatcherType, 'type'>,
+  $PropertyType<BookUpdateWatcherType, 'payload'>
+> = createAction(BOOK_UPDATE_WATCHER);
+
+export const BOOK_DELETE: $PropertyType<BookDeleteType, 'type'> = 'BOOK_DELETE';
+export const BookDelete: ActionType<
+  $PropertyType<BookDeleteType, 'type'>,
+  $PropertyType<BookDeleteType, 'payload'>
+> = createAction(BOOK_DELETE);
+
+export const BOOK_DELETE_WATCHER: $PropertyType<BookDeleteWatcherType, 'type'> =
+  'BOOK_DELETE_WATCHER';
+export const BookDeleteWatcher: ActionType<
+  $PropertyType<BookDeleteWatcherType, 'type'>,
+  $PropertyType<BookDeleteWatcherType, 'payload'>
+> = createAction(BOOK_DELETE_WATCHER);
+
+export const BOOK_SET_GENRES: $PropertyType<BookSetGenresType, 'type'> = 'BOOK_SET_GENRES';
+export const BookSetGenres: ActionType<
+  $PropertyType<BookSetGenresType, 'type'>,
+  $PropertyType<BookSetGenresType, 'payload'>
+> = createAction(BOOK_SET_GENRES);
+
+export const BOOK_ADD: $PropertyType<BookAddType, 'type'> = 'BOOK_ADD';
+export const BookAdd: ActionType<
+  $PropertyType<BookAddType, 'type'>,
+  $PropertyType<BookAddType, 'payload'>
+> = createAction(BOOK_ADD);
+
+export const BOOK_ADD_WATCHER: $PropertyType<BookAddWatcherType, 'type'> = 'BOOK_ADD_WATCHER';
+export const BookAddWatcher: ActionType<
+  $PropertyType<BookAddWatcherType, 'type'>,
+  $PropertyType<BookAddWatcherType, 'payload'>
+> = createAction(BOOK_ADD_WATCHER);
+
+export const SET_DATE_FILTER_WATCHER: $PropertyType<SetDateFilterWatcherType, 'type'> =
+  'SET_DATE_FILTER_WATCHER';
+export const SetDateFilterWatcher: ActionType<
+  $PropertyType<SetDateFilterWatcherType, 'type'>,
+  $PropertyType<SetDateFilterWatcherType, 'payload'>
+> = createAction(SET_DATE_FILTER_WATCHER);
+
+export const SET_DATE_FILTER: $PropertyType<SetDateFilterType, 'type'> = 'SET_DATE_FILTER';
+export const SetDateFilter: ActionType<
+  $PropertyType<SetDateFilterType, 'type'>,
+  $PropertyType<SetDateFilterType, 'payload'>
+> = createAction(SET_DATE_FILTER);

@@ -9,12 +9,12 @@ import {
   fetchGenresSuccess,
   setDateFilter,
   FETCH_BOOKS_REQUEST,
-  SAGA_BOOK_UPDATE,
-  SAGA_BOOK_DELETE,
-  SAGA_BOOK_ADD,
+  BOOK_UPDATE_WATCHER,
+  BOOK_DELETE_WATCHER,
+  BOOK_ADD_WATCHER,
   FETCH_GENRES_REQUEST,
-  SET_DATE_FILTER_SAGA,
-} from '../actions/books';
+  SET_DATE_FILTER_WATCHER,
+} from 'actions/books';
 import { getPagination } from './selectors';
 
 export function* fetchBooks() {
@@ -162,9 +162,9 @@ export function* setFilterDate({ payload }) {
 
 export default function*() {
   yield takeEvery(FETCH_BOOKS_REQUEST, fetchBooks);
-  yield takeEvery(SAGA_BOOK_UPDATE, updateBook);
-  yield takeEvery(SAGA_BOOK_DELETE, deleteBook);
-  yield takeEvery(SAGA_BOOK_ADD, addBook);
+  yield takeEvery(BOOK_UPDATE_WATCHER, updateBook);
+  yield takeEvery(BOOK_DELETE_WATCHER, deleteBook);
+  yield takeEvery(BOOK_ADD_WATCHER, addBook);
   yield takeEvery(FETCH_GENRES_REQUEST, fetchGenres);
-  yield takeEvery(SET_DATE_FILTER_SAGA, setFilterDate);
+  yield takeEvery(SET_DATE_FILTER_WATCHER, setFilterDate);
 }
