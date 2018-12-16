@@ -6,6 +6,7 @@ import Book from 'containers/Book';
 import FiltersView from 'components/FiltersView';
 import PaginationSelect from 'components/PaginationSelect';
 import Pages from 'components/Pages';
+import Menu from 'containers/Menu';
 import {
   fetchBooksRequest,
   bookDeleteWatcher,
@@ -177,58 +178,61 @@ class BooksWrap extends Component {
       options,
     } = this.state;
     return (
-      <div className="container">
-        <div className="d-flex flex-wrap justify-content-sm-around">
-          <FiltersView
-            genres={this.props.genres}
-            handleChangeSelect={this.handleChangeSelect}
-            filterTitle={filterTitle}
-            filterAuthor={filterAuthor}
-            handleChangeFilter={this.handleChangeFilter}
-            selectedvalue={selectedvalue}
-          />
-        </div>
-        <div className=" justify-content-sm-around">
-          <div className=" flex-column align-items-center datepicker-border">
-            <DatePickerView
-              startDate={startDate}
-              endDate={endDate}
-              handleChangeStartDate={this.handleChangeStartDate}
-              handleChangeEndDate={this.handleChangeEndDate}
-              handleDateSubmit={this.handleDateSubmit}
-              handleDateDelete={this.handleDateDelete}
+      <>
+        <Menu />
+        <div className="container">
+          <div className="d-flex flex-wrap justify-content-sm-around">
+            <FiltersView
+              genres={this.props.genres}
+              handleChangeSelect={this.handleChangeSelect}
+              filterTitle={filterTitle}
+              filterAuthor={filterAuthor}
+              handleChangeFilter={this.handleChangeFilter}
+              selectedvalue={selectedvalue}
             />
           </div>
+          <div className=" justify-content-sm-around">
+            <div className=" flex-column align-items-center datepicker-border">
+              <DatePickerView
+                startDate={startDate}
+                endDate={endDate}
+                handleChangeStartDate={this.handleChangeStartDate}
+                handleChangeEndDate={this.handleChangeEndDate}
+                handleDateSubmit={this.handleDateSubmit}
+                handleDateDelete={this.handleDateDelete}
+              />
+            </div>
+          </div>
+          <div className="d-flex flex-wrap d-flex justify-content-between">
+            <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
+            <Pages />
+          </div>
+          <div className="d-flex flex-wrap">
+            {books &&
+              books
+                .filter(this.filterGenres)
+                .filter(this.filterTitle)
+                .filter(this.filterAuthor)
+                .map(book => (
+                  <Book
+                    key={book._id}
+                    book={book}
+                    handleDelete={this.props.bookDeleteWatcher}
+                    userType={this.props.user_type}
+                  />
+                ))}
+          </div>
+          <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
+            {totalPages && (
+              <Pagination
+                totalPages={totalPages}
+                pageNeighbours={1}
+                onPageChanged={this.onPageChanged}
+              />
+            )}
+          </div>
         </div>
-        <div className="d-flex flex-wrap d-flex justify-content-between">
-          <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
-          <Pages />
-        </div>
-        <div className="d-flex flex-wrap">
-          {books &&
-            books
-              .filter(this.filterGenres)
-              .filter(this.filterTitle)
-              .filter(this.filterAuthor)
-              .map(book => (
-                <Book
-                  key={book._id}
-                  book={book}
-                  handleDelete={this.props.bookDeleteWatcher}
-                  userType={this.props.user_type}
-                />
-              ))}
-        </div>
-        <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
-          {totalPages && (
-            <Pagination
-              totalPages={totalPages}
-              pageNeighbours={1}
-              onPageChanged={this.onPageChanged}
-            />
-          )}
-        </div>
-      </div>
+      </>
     );
   }
 }

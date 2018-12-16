@@ -3,29 +3,34 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import Menu from 'components/Menu';
-
-import type { StateType, PropsType } from './types';
+import { UnsetCurrentUserAction } from 'actions/auth';
+import { localeChangeAction } from 'actions/locale';
+import type { PropsType } from './types';
 
 function mapStateToProps(state) {
   return {
     auth: state.auth,
   };
 }
-
-class MenuContainer extends React.Component<PropsType, StateType> {
-  handleLogout = (e: SyntheticEvent<any>) => {
-    e.preventDefault();
-    this.props.unsetCurrentUserSaga();
-  };
-
-  render() {
-    const { user, isAuthenticated } = this.props.auth;
-
-    return <Menu user={user} isAuthenticated={isAuthenticated} handleLogout={this.handleLogout} />;
-  }
-}
+const mapDispatchToProps = {
+  UnsetCurrentUserAction,
+  localeChangeAction,
+};
 
 export default connect(
   mapStateToProps,
-  null
-)(MenuContainer);
+  mapDispatchToProps
+)(
+  ({
+    auth: { user, isAuthenticated },
+    UnsetCurrentUserAction,
+    localeChangeAction,
+  }: PropsType): React.Node => (
+    <Menu
+      user={user}
+      isAuthenticated={isAuthenticated}
+      handleLogout={UnsetCurrentUserAction}
+      localeChangeAction={localeChangeAction}
+    />
+  )
+);

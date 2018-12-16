@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import isAdmin from 'utils/isAdmin';
+import { FormattedMessage } from 'react-intl';
+import { EN, RU } from 'constants/locale';
+import messages from './messages';
 
-const Menu = ({ user, handleLogout, isAuthenticated }) => {
+const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
   const userLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item text-user-menu">
         <p>Welcome, {user.name}</p>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/" onClick={handleLogout}>
-          Logout
+        <Link className="nav-link" to="/" onClick={() => handleLogout()}>
+          <FormattedMessage {...messages.logOut} />
         </Link>
       </li>
     </ul>
@@ -55,6 +58,14 @@ const Menu = ({ user, handleLogout, isAuthenticated }) => {
         )}
         <div className="collapse navbar-collapse" id="navbarsExample05">
           {isAuthenticated ? userLinks : guestLinks}
+        </div>
+        <div>
+          <button type="button" className="btn btn-light" onClick={() => localeChangeAction(EN)}>
+            English
+          </button>
+          <button type="button" className="btn btn-light" onClick={() => localeChangeAction(RU)}>
+            Русский
+          </button>
         </div>
       </nav>
     </header>

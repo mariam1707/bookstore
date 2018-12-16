@@ -42,7 +42,7 @@
         "no-unused-expressions": 0,
         "no-underscore-dangle": 0,
         "jsx-a11y/label-has-for": 0,
-        "import/no-unresolved": 0
+        "import/no-unresolved": 0,
     },
     "plugins": [
         "prettier"

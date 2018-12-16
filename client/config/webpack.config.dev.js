@@ -239,6 +239,8 @@ module.exports = {
                       utils: './src/utils',
                       helpers: './src/helpers',
                       types: './src/types',
+                      constants: './src/constants',
+                      locales: './src/locales',
                     },
                   },
                 ],

@@ -1,0 +1,6 @@
+{
+    "components.login.greeting": "Привет, мир!",
+    "components.menu.logIn": "Авторизация",
+    "components.menu.logOut": "Выход",
+    "components.menu.signUp": "Регистрация"
+}

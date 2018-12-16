@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const Login = ({ email, password, errors, handleChange, handleSubmit }) => (
   <form onSubmit={handleSubmit}>
@@ -44,6 +46,7 @@ const Login = ({ email, password, errors, handleChange, handleSubmit }) => (
         <Link className="nav-link" to="/restore">
           Reset password
         </Link>
+        <FormattedMessage {...messages.greeting} />
       </div>
     </div>
   </form>

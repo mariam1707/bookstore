@@ -1,0 +1,6 @@
+{
+    "app.components.login.greeting": "hello wo11rld!",
+    "components.menu.logIn": "Log In",
+    "components.menu.logOut": "Log Out",
+    "components.menu.signUp": "Sign Up"
+}

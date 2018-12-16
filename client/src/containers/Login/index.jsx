@@ -6,15 +6,15 @@ import Login from 'components/Login';
 import { setCurrentUserWatcherAction } from 'actions/auth';
 
 class LoginContainer extends Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.errors !== nextProps.auth.errors) {
-      return {
-        ...prevState,
-        errors: nextProps.auth.errors,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (prevState.errors !== nextProps.auth.errors) {
+  //     return {
+  //       ...prevState,
+  //       errors: nextProps.auth.errors,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   state = {
     email: '',
