@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
 
+import { FormattedMessage } from 'react-intl';
 import Menu from '../../containers/Menu';
-
 import { submitRegistrationAction } from '../../actions/auth';
+import messages from './messages';
 
 class Registration extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -69,6 +70,7 @@ class Registration extends Component {
                   {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </label>
               </div>
+              <FormattedMessage {...messages.test} />
               <div className="auth-input-wrap">
                 <label htmlFor="name">
                   <b>Name</b>

@@ -25,12 +25,15 @@ export default connect(
     auth: { user, isAuthenticated },
     UnsetCurrentUserAction,
     localeChangeAction,
+    children,
   }: PropsType): React.Node => (
     <Menu
       user={user}
       isAuthenticated={isAuthenticated}
       handleLogout={UnsetCurrentUserAction}
       localeChangeAction={localeChangeAction}
-    />
+    >
+      {children}
+    </Menu>
   )
 );

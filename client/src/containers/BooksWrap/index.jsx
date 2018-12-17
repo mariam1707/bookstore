@@ -7,6 +7,7 @@ import FiltersView from 'components/FiltersView';
 import PaginationSelect from 'components/PaginationSelect';
 import Pages from 'components/Pages';
 import Menu from 'containers/Menu';
+import { FormattedMessage } from 'react-intl';
 import {
   fetchBooksRequest,
   bookDeleteWatcher,
@@ -16,6 +17,8 @@ import {
 import { setCurrentPage, setPerPage } from '../../actions/pagination';
 import Pagination from '../Pagination';
 import DatePickerView from '../../components/DatePickerView';
+
+import messages from './messages';
 
 function mapStateToProps(state) {
   return {
@@ -203,6 +206,7 @@ class BooksWrap extends Component {
               />
             </div>
           </div>
+          <FormattedMessage {...messages.test} />
           <div className="d-flex flex-wrap d-flex justify-content-between">
             <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
             <Pages />

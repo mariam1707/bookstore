@@ -22,12 +22,12 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
         <Link className="nav-link" to="/login">
-          Log In
+          <FormattedMessage {...messages.logIn} />
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/registration">
-          Sign Up
+          <FormattedMessage {...messages.signUp} />
         </Link>
       </li>
     </ul>
@@ -60,6 +60,7 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
           {isAuthenticated ? userLinks : guestLinks}
         </div>
         <div>
+          <FormattedMessage {...messages.test} />
           <button type="button" className="btn btn-light" onClick={() => localeChangeAction(EN)}>
             English
           </button>

@@ -2,5 +2,8 @@
     "app.components.login.greeting": "hello wo11rld!",
     "components.menu.logIn": "Log In",
     "components.menu.logOut": "Log Out",
-    "components.menu.signUp": "Sign Up"
+    "components.menu.signUp": "Sign Up",
+    "components.menu.test": "test",
+    "components.registration.test": "test",
+    "components.bookswrap.test": "test"
 }

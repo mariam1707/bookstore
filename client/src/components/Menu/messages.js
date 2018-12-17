@@ -14,4 +14,8 @@ export default defineMessages({
     id: 'components.menu.signUp',
     defaultMessage: 'Sign Up',
   },
+  test: {
+    id: 'components.menu.test',
+    defaultMessage: 'asdas',
+  },
 });
