@@ -1,5 +1,5 @@
 {
-    "components.login.greeting": "Привет, мир!",
+    "app.components.login.greeting": "привет!!!",
     "components.menu.logIn": "Авторизация",
     "components.menu.logOut": "Выход",
     "components.menu.signUp": "Регистрация"
