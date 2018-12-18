@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { equals } from 'ramda';
-import Book from 'containers/Book';
-import FiltersView from 'components/FiltersView';
-import PaginationSelect from 'components/PaginationSelect';
-import Pages from 'components/Pages';
-// import { FormattedMessage } from 'react-intl';
 
+// import { FormattedMessage } from 'react-intl';
+import BooksWrap from 'components/BooksWrap';
 import {
   fetchBooksRequest,
   bookDeleteWatcher,
@@ -15,8 +12,6 @@ import {
   setDateFilterWatcher,
 } from '../../actions/books';
 import { setCurrentPage, setPerPage } from '../../actions/pagination';
-import Pagination from '../Pagination';
-import DatePickerView from '../../components/DatePickerView';
 
 // import messages from './messages';
 
@@ -25,7 +20,7 @@ function mapStateToProps(state) {
     books: state.books.books,
     totalPages: state.books.totalPages,
     genres: state.books.genres,
-    user_type: state.auth.user.user_type,
+    userType: state.auth.user.user_type,
     pagination: state.pagination,
   };
 }
@@ -38,7 +33,7 @@ const mapDispatchToProps = {
   setPerPage,
 };
 
-class BooksWrap extends Component {
+class BooksWrapContainer extends Component {
   static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (
       !equals(prevState.books, nextProps.books) ||
@@ -66,7 +61,7 @@ class BooksWrap extends Component {
   state = {
     books: Object.values(this.props.books),
     filterGenres: '',
-    selectedvalue: 'All',
+    selectedValue: 'All',
     filterTitle: '',
     filterAuthor: '',
     currentBooks: this.props.books,
@@ -87,7 +82,7 @@ class BooksWrap extends Component {
   handleChangeSelect = e => {
     this.setState({
       ...this.state,
-      selectedvalue: e.target.value,
+      selectedValue: e.target.value,
     });
   };
 
@@ -111,10 +106,10 @@ class BooksWrap extends Component {
   };
 
   filterGenres = book => {
-    if (this.state.selectedvalue.toLowerCase() === 'all') {
+    if (this.state.selectedValue.toLowerCase() === 'all') {
       return book.genre.toLowerCase();
     }
-    return book.genre.toLowerCase().includes(this.state.selectedvalue.toLowerCase());
+    return book.genre.toLowerCase().includes(this.state.selectedValue.toLowerCase());
   };
 
   filterTitle = book =>
@@ -170,7 +165,7 @@ class BooksWrap extends Component {
 
   render() {
     const {
-      selectedvalue,
+      selectedValue,
       filterTitle,
       filterAuthor,
       books,
@@ -180,61 +175,32 @@ class BooksWrap extends Component {
       endDate,
       options,
     } = this.state;
+    const { bookDeleteWatcher, userType, genres } = this.props;
     return (
-      <>
-        <div className="container">
-          <div className="d-flex flex-wrap justify-content-sm-around">
-            <FiltersView
-              genres={this.props.genres}
-              handleChangeSelect={this.handleChangeSelect}
-              filterTitle={filterTitle}
-              filterAuthor={filterAuthor}
-              handleChangeFilter={this.handleChangeFilter}
-              selectedvalue={selectedvalue}
-            />
-          </div>
-          <div className=" justify-content-sm-around">
-            <div className=" flex-column align-items-center datepicker-border">
-              <DatePickerView
-                startDate={startDate}
-                endDate={endDate}
-                handleChangeStartDate={this.handleChangeStartDate}
-                handleChangeEndDate={this.handleChangeEndDate}
-                handleDateSubmit={this.handleDateSubmit}
-                handleDateDelete={this.handleDateDelete}
-              />
-            </div>
-          </div>
-          <div className="d-flex flex-wrap d-flex justify-content-between">
-            <PaginationSelect handlePerPage={this.handlePerPage} options={options} />
-            <Pages />
-          </div>
-          <div className="d-flex flex-wrap">
-            {books &&
-              books
-                .filter(this.filterGenres)
-                .filter(this.filterTitle)
-                .filter(this.filterAuthor)
-                .map(book => (
-                  <Book
-                    key={book._id}
-                    book={book}
-                    handleDelete={this.props.bookDeleteWatcher}
-                    userType={this.props.user_type}
-                  />
-                ))}
-          </div>
-          <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
-            {totalPages && (
-              <Pagination
-                totalPages={totalPages}
-                pageNeighbours={1}
-                onPageChanged={this.onPageChanged}
-              />
-            )}
-          </div>
-        </div>
-      </>
+      <BooksWrap
+        selectedValue={selectedValue}
+        filterTitle={filterTitle}
+        filterAuthor={filterAuthor}
+        books={books}
+        totalPages={totalPages}
+        startDate={startDate}
+        endDate={endDate}
+        options={options}
+        handleChangeSelect={this.handleChangeSelect}
+        handleChangeStartDate={this.handleChangeStartDate}
+        handleChangeEndDate={this.handleChangeEndDate}
+        handleChangeFilter={this.handleChangeFilter}
+        handlefilterGenres={this.filterGenres}
+        handlefilterTitle={this.filterTitle}
+        handlefilterAuthor={this.filterAuthor}
+        handleDateSubmit={this.handleDateSubmit}
+        handleDateDelete={this.handleDateDelete}
+        onPageChanged={this.onPageChanged}
+        handlePerPage={this.handlePerPage}
+        bookDeleteWatcher={bookDeleteWatcher}
+        userType={userType}
+        genres={genres}
+      />
     );
   }
 }
@@ -242,4 +208,4 @@ class BooksWrap extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BooksWrap);
+)(BooksWrapContainer);
