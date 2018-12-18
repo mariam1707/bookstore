@@ -4,15 +4,15 @@ import DatePickerView from 'components/DatePickerView';
 import Book from 'containers/Book';
 import FiltersView from 'components/FiltersView';
 import PaginationSelect from 'components/PaginationSelect';
-import Pages from 'components/Pages';
-import Pagination from 'containers/Pagination';
+// import Pages from 'components/Pages';
+// import Pagination from 'containers/Pagination';
 
 const BooksWrap = ({
   selectedValue,
   filterTitle,
   filterAuthor,
   books,
-  totalPages,
+  // totalPages,
   startDate,
   endDate,
   options,
@@ -25,7 +25,7 @@ const BooksWrap = ({
   handlefilterAuthor,
   handleDateSubmit,
   handleDateDelete,
-  onPageChanged,
+  // onPageChanged,
   handlePerPage,
   bookDeleteWatcher,
   userType,
@@ -57,7 +57,7 @@ const BooksWrap = ({
       </div>
       <div className="d-flex flex-wrap d-flex justify-content-between">
         <PaginationSelect handlePerPage={handlePerPage} options={options} />
-        <Pages />
+        {/* <Pages /> */}
       </div>
       <div className="d-flex flex-wrap">
         {books &&
@@ -75,9 +75,9 @@ const BooksWrap = ({
             ))}
       </div>
       <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
-        {totalPages && (
-          <Pagination totalPages={totalPages} pageNeighbours={1} onPageChanged={onPageChanged} />
-        )}
+        {/* {totalPages && (
+           <Pagination totalPages={totalPages} pageNeighbours={1} onPageChanged={onPageChanged} />
+        )} */}
       </div>
     </div>
   </>

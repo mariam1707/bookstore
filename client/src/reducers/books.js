@@ -20,8 +20,7 @@ export default function(state = initState, action) {
     case FETCH_BOOKS_SUCCESS:
       return {
         ...state,
-        books: action.payload.books,
-        totalPages: action.payload.totalPages,
+        books: action.payload,
       };
     case FETCH_BOOKS_ERROR:
       return {

@@ -22,38 +22,38 @@ router.get('/test', (req,res) => {
 // @desc    Get books
 // @acess   Private
 
-// router.get('/',(req,res) => {
-//     Book.find()
-//         .then(books => res.json(books))
-//         .catch(err => res.status(404).json({nobooksfind: 'No books!'}));
-// });
 router.get('/',(req,res) => {
-    const currentPage = parseInt(req.query.currentPage)
-    const perPage = parseInt(req.query.perPage)
-    const query = {}
-    if(currentPage <= 0) {
-          response = {"error" : true,"message" : "invalid page number, should start with 1"};
-          return res.json(response)
-    }
-    query.skip = perPage * (currentPage - 1)
-    query.limit = perPage
-    // Find some documents
-         Book.count({},function(err,totalCount) {
-               if(err) {
-                 response = {"error" : true,"message" : "Error fetching data"}
-               }
-           Book.find({},{},query,function(err,data) {
-                // Mongo command to fetch all data from collection.
-              if(err) {
-                  response = {"error" : true,"message" : "Error fetching data"};
-              } else {
-                  const totalPages = Math.ceil(totalCount / perPage)
-                  response = {"error" : false,"books" : data,"pages": totalPages};
-              }
-              res.json(response);
-           });
-         })
-  })
+    Book.find()
+        .then(books => res.json({"books": books}))
+        .catch(err => res.status(404).json({nobooksfind: 'No books!'}));
+});
+// router.get('/',(req,res) => {
+//     const currentPage = parseInt(req.query.currentPage)
+//     const perPage = parseInt(req.query.perPage)
+//     const query = {}
+//     if(currentPage <= 0) {
+//           response = {"error" : true,"message" : "invalid page number, should start with 1"};
+//           return res.json(response)
+//     }
+//     query.skip = perPage * (currentPage - 1)
+//     query.limit = perPage
+//     // Find some documents
+//          Book.count({},function(err,totalCount) {
+//                if(err) {
+//                  response = {"error" : true,"message" : "Error fetching data"}
+//                }
+//            Book.find({},{},query,function(err,data) {
+//                 // Mongo command to fetch all data from collection.
+//               if(err) {
+//                   response = {"error" : true,"message" : "Error fetching data"};
+//               } else {
+//                   const totalPages = Math.ceil(totalCount / perPage)
+//                   response = {"error" : false,"books" : data,"pages": totalPages};
+//               }
+//               res.json(response);
+//            });
+//          })
+//   })
 
 
 

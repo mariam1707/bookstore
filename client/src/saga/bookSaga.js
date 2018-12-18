@@ -18,15 +18,9 @@ import {
 import { getPagination } from './selectors';
 
 export function* fetchBooks() {
-  const { currentPage, perPage } = yield select(getPagination);
-
   const options = {
     url: 'api/books',
     method: 'get',
-    params: {
-      currentPage,
-      perPage,
-    },
   };
 
   try {
@@ -38,13 +32,8 @@ export function* fetchBooks() {
       },
       { books: {} }
     );
-
-    const data = {
-      books,
-      totalPages: response.data.pages,
-    };
-
-    yield put(fetchBooksSuccess(data));
+    console.log(books);
+    yield put(fetchBooksSuccess(books));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));

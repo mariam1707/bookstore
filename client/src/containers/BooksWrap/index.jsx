@@ -11,7 +11,7 @@ import {
   fetchGenresRequest,
   setDateFilterWatcher,
 } from '../../actions/books';
-import { setCurrentPage, setPerPage } from '../../actions/pagination';
+// import { setCurrentPage, setPerPage } from '../../actions/pagination';
 
 // import messages from './messages';
 
@@ -29,8 +29,8 @@ const mapDispatchToProps = {
   bookDeleteWatcher,
   fetchGenresRequest,
   setDateFilterWatcher,
-  setCurrentPage,
-  setPerPage,
+  // setCurrentPage,
+  // setPerPage,
 };
 
 class BooksWrapContainer extends Component {
@@ -141,11 +141,11 @@ class BooksWrapContainer extends Component {
     this.props.fetchBooksRequest();
   };
 
-  onPageChanged = data => {
-    const { currentPage, totalPages } = data;
-    this.setState({ currentPage, totalPages });
+  onPageChanged = () => {
+    // const { currentPage, totalPages } = data;
+    // this.setState({ currentPage, totalPages });
 
-    this.props.setCurrentPage(currentPage);
+    // this.props.setCurrentPage(currentPage);
 
     this.props.fetchBooksRequest();
   };
@@ -169,7 +169,7 @@ class BooksWrapContainer extends Component {
       filterTitle,
       filterAuthor,
       books,
-      totalPages,
+      // totalPages,
       // currentPage,
       startDate,
       endDate,
@@ -182,7 +182,7 @@ class BooksWrapContainer extends Component {
         filterTitle={filterTitle}
         filterAuthor={filterAuthor}
         books={books}
-        totalPages={totalPages}
+        // totalPages={totalPages}
         startDate={startDate}
         endDate={endDate}
         options={options}
