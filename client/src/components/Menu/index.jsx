@@ -9,7 +9,9 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
   const userLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item text-user-menu">
-        <p>Welcome, {user.name}</p>
+        <p>
+          <FormattedMessage {...messages.welcome} />, {user.name}
+        </p>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/" onClick={() => handleLogout()}>
@@ -36,7 +38,7 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
     <header>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <Link className="navbar-brand" to="/">
-          BookStore
+          <FormattedMessage {...messages.header} />
         </Link>
         <button
           className="navbar-toggler collapsed"
@@ -52,7 +54,7 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
         {isAdmin(user.user_type) && (
           <>
             <Link className="btn btn-light" to="/create-book">
-              Create a book
+              <FormattedMessage {...messages.createbook} />
             </Link>
           </>
         )}
@@ -60,7 +62,6 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
           {isAuthenticated ? userLinks : guestLinks}
         </div>
         <div>
-          <FormattedMessage {...messages.test} />
           <button type="button" className="btn btn-light" onClick={() => localeChangeAction(EN)}>
             English
           </button>

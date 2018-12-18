@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
+// import { connectRouter } from 'connected-react-router';
+import { routerReducer as routing } from 'react-router-redux';
 import books from './books';
 import auth from './auth';
 import pagination from './pagination';
 import locale from './locale';
 
-export default history =>
+export default () =>
   combineReducers({
-    router: connectRouter(history),
+    routing,
+    // router: connectRouter(history),
     books,
     auth,
     pagination,

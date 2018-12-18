@@ -5,4 +5,8 @@ export default defineMessages({
     id: 'components.bookswrap.test',
     defaultMessage: '333333',
   },
+  genres: {
+    id: 'bookswrap.genres',
+    defaultMessage: 'Genres',
+  },
 });

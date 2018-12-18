@@ -3,7 +3,17 @@
     "components.menu.logIn": "Авторизация",
     "components.menu.logOut": "Выход",
     "components.menu.signUp": "Регистрация",
+    "menu.header": "Книжный магазин",
+    "menu.welcome": "Добро пожаловать",
+    "menu.createbook": "Добавить книгу",
+    "bookswrap.genres": "Жанры",
+    "bookswrap.booksName": "Название книги",
+    "bookswrap.authorName": "Имя автора",
+    "bookswrap.datefilter.showButton": "Показать",
+    "bookswrap.datefilter.cancelButton": "Сбросить",
+    "bookswrap.pages.page": "Страница",
     "components.menu.test": "тест",
     "components.registration.test": "тест",
-    "components.bookswrap.test": "тест"
+    "components.bookswrap.test": "тест",
+    "app.components.nested.test": "ТЕСТИК"
 }

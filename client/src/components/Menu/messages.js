@@ -14,6 +14,18 @@ export default defineMessages({
     id: 'components.menu.signUp',
     defaultMessage: 'Sign Up',
   },
+  header: {
+    id: 'menu.header',
+    defaultMessage: 'BookStore',
+  },
+  welcome: {
+    id: 'menu.welcome',
+    defaultMessage: 'Welcome',
+  },
+  createbook: {
+    id: 'menu.createbook',
+    defaultMessage: 'Create a book',
+  },
   test: {
     id: 'components.menu.test',
     defaultMessage: 'asdas',

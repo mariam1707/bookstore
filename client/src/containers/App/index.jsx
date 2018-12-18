@@ -12,8 +12,9 @@ import 'bootstrap';
 // // // import Content from 'containers/Content';
 // import BooksWrap from 'containers/BooksWrap';
 // import SingleBookCreateView from 'containers/SingleBookCreateView';
+import Router from 'components/Router';
 import LanguageProvider from 'components/LanguageProvider';
-// import history from '../../helpers/history';
+import history from 'helpers/history';
 import store from '../../store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +23,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const App = () => (
   <Provider store={store}>
-    <LanguageProvider />
+    <LanguageProvider>
+      <Router history={history} />
+    </LanguageProvider>
   </Provider>
 );
 

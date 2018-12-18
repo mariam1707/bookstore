@@ -9,7 +9,7 @@ import routes from './routes';
 type PropsType = {
   history: Object,
 };
-
+console.log('routes', routes);
 export default setDisplayName<{}>('RouterComponent')(
   ({ history }: PropsType): React.Node => <Router history={history}>{renderRoutes(routes)}</Router>
 );

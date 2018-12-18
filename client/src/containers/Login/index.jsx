@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Menu from 'containers/Menu';
 import Login from 'components/Login';
 import { setCurrentUserWatcherAction } from 'actions/auth';
 
@@ -43,7 +42,6 @@ class LoginContainer extends Component {
     const { email, password, errors } = this.state;
     return (
       <div>
-        <Menu />
         <Login
           email={email}
           password={password}

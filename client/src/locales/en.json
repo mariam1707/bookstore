@@ -3,7 +3,17 @@
     "components.menu.logIn": "Log In",
     "components.menu.logOut": "Log Out",
     "components.menu.signUp": "Sign Up",
+    "menu.header": "BookStore",
+    "menu.welcome": "Welcome",
+    "menu.createbook": "Create a book",
+    "bookswrap.genres": "Genres",
+    "bookswrap.booksName": "Book title",
+    "bookswrap.authorName": "Author name",
+    "bookswrap.datefilter.showButton": "Show",
+    "bookswrap.datefilter.resetButton": "Reset",
+    "bookswrap.pages.page": "Page",
     "components.menu.test": "test",
     "components.registration.test": "test",
-    "components.bookswrap.test": "test"
+    "components.bookswrap.test": "test",
+    "app.components.nested.test": "TEST"
 }

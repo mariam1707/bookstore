@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
 
 import { FormattedMessage } from 'react-intl';
-import Menu from '../../containers/Menu';
+
 import { submitRegistrationAction } from '../../actions/auth';
 import messages from './messages';
 
@@ -50,7 +50,6 @@ class Registration extends Component {
 
     return (
       <div>
-        <Menu />
         <form onSubmit={this.handleSubmit}>
           <div className="container">
             <div className="auth-wrap">

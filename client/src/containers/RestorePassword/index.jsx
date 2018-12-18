@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Menu from 'containers/Menu';
 import RestorePassword from 'components/RestorePassword';
 import { setNewPasswordAction } from 'actions/auth';
 
@@ -41,7 +40,6 @@ class RestorePasswordContainer extends Component {
     const { email, newPassword, errors } = this.state;
     return (
       <div>
-        <Menu />
         <RestorePassword
           email={email}
           newPassword={newPassword}
