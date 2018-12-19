@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { equals } from 'ramda';
+// import { equals } from 'ramda';
 
 // import { FormattedMessage } from 'react-intl';
 import BooksWrap from 'components/BooksWrap';
@@ -35,23 +35,11 @@ const mapDispatchToProps = {
 
 class BooksWrapContainer extends Component {
   static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
-    if (
-      !equals(prevState.books, nextProps.books) ||
-      !equals(prevState.totalPages, nextProps.totalPages) ||
-      !equals(prevState.currentPage, nextProps.pagination.currentPage) ||
-      !equals(prevState.perPage, nextProps.pagination.perPage)
-    ) {
-      const {
-        totalPages,
-        pagination: { perPage, currentPage },
-      } = nextProps;
-
+    if (prevState.books !== nextProps.books) {
+      console.log('aaaa');
       return {
         ...prevState,
         books: Object.values(nextProps.books),
-        totalPages,
-        perPage,
-        currentPage,
       };
     }
 
@@ -64,9 +52,9 @@ class BooksWrapContainer extends Component {
     selectedValue: 'All',
     filterTitle: '',
     filterAuthor: '',
-    currentBooks: this.props.books,
+    currentBooks: [],
     currentPage: null,
-    totalPages: this.props.totalPages,
+    totalPages: null,
     totalBooks: this.props.books.length,
     startDate: moment('2018-09-04'),
     endDate: moment(),
@@ -141,14 +129,23 @@ class BooksWrapContainer extends Component {
     this.props.fetchBooksRequest();
   };
 
-  onPageChanged = () => {
-    // const { currentPage, totalPages } = data;
-    // this.setState({ currentPage, totalPages });
-
-    // this.props.setCurrentPage(currentPage);
-
-    this.props.fetchBooksRequest();
+  onPageChanged = data => {
+    const { books } = this.state;
+    const { currentPage, totalPages, pageLimit } = data;
+    console.log('oncha', books, data);
+    const offset = (currentPage - 1) * pageLimit;
+    const currentBooks = books.slice(offset, offset + pageLimit);
+    // console.log(currentBooks);
+    this.setState({ currentPage, currentBooks, totalPages });
   };
+  // onPageChanged = () => {
+  //   // const { currentPage, totalPages } = data;
+  //   // this.setState({ currentPage, totalPages });
+
+  //   // this.props.setCurrentPage(currentPage);
+
+  //   this.props.fetchBooksRequest();
+  // };
 
   handlePerPage = e => {
     const { value } = e.target;
@@ -174,33 +171,42 @@ class BooksWrapContainer extends Component {
       startDate,
       endDate,
       options,
+      currentBooks,
+      // totalBooks,
     } = this.state;
     const { bookDeleteWatcher, userType, genres } = this.props;
+    if (books.length === 0) return null;
     return (
-      <BooksWrap
-        selectedValue={selectedValue}
-        filterTitle={filterTitle}
-        filterAuthor={filterAuthor}
-        books={books}
-        // totalPages={totalPages}
-        startDate={startDate}
-        endDate={endDate}
-        options={options}
-        handleChangeSelect={this.handleChangeSelect}
-        handleChangeStartDate={this.handleChangeStartDate}
-        handleChangeEndDate={this.handleChangeEndDate}
-        handleChangeFilter={this.handleChangeFilter}
-        handlefilterGenres={this.filterGenres}
-        handlefilterTitle={this.filterTitle}
-        handlefilterAuthor={this.filterAuthor}
-        handleDateSubmit={this.handleDateSubmit}
-        handleDateDelete={this.handleDateDelete}
-        onPageChanged={this.onPageChanged}
-        handlePerPage={this.handlePerPage}
-        bookDeleteWatcher={bookDeleteWatcher}
-        userType={userType}
-        genres={genres}
-      />
+      <>
+        {books && (
+          <BooksWrap
+            selectedValue={selectedValue}
+            filterTitle={filterTitle}
+            filterAuthor={filterAuthor}
+            books={books}
+            // totalPages={totalPages}
+            startDate={startDate}
+            endDate={endDate}
+            options={options}
+            handleChangeSelect={this.handleChangeSelect}
+            handleChangeStartDate={this.handleChangeStartDate}
+            handleChangeEndDate={this.handleChangeEndDate}
+            handleChangeFilter={this.handleChangeFilter}
+            handlefilterGenres={this.filterGenres}
+            handlefilterTitle={this.filterTitle}
+            handlefilterAuthor={this.filterAuthor}
+            handleDateSubmit={this.handleDateSubmit}
+            handleDateDelete={this.handleDateDelete}
+            onPageChanged={this.onPageChanged}
+            handlePerPage={this.handlePerPage}
+            bookDeleteWatcher={bookDeleteWatcher}
+            userType={userType}
+            genres={genres}
+            currentBooks={currentBooks}
+            totalBooks={books.length}
+          />
+        )}
+      </>
     );
   }
 }

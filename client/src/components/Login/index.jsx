@@ -27,7 +27,9 @@ const Login = ({ email, password, errors, handleChange, handleSubmit }) => (
         </div>
         <div className="auth-input-wrap">
           <label htmlFor="password">
-            <b>Password</b>
+            <b>
+              <FormattedMessage {...messages.password} />
+            </b>
             <input
               type="password"
               placeholder="Enter Password"
@@ -42,11 +44,12 @@ const Login = ({ email, password, errors, handleChange, handleSubmit }) => (
             {errors.password && <div className="invalid-feedback">{errors.password}</div>}
           </label>
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit">
+          <FormattedMessage {...messages.logIn} />
+        </button>
         <Link className="nav-link" to="/restore">
-          Reset password
+          <FormattedMessage {...messages.restorePassword} />
         </Link>
-        <FormattedMessage {...messages.greeting} />
       </div>
     </div>
   </form>

@@ -1,5 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const DatePickerView = ({
   startDate,
@@ -26,10 +28,10 @@ const DatePickerView = ({
     </div>
     <div className="d-flex flex-wrap justify-content-center align-items-center">
       <button type="button" className="btn btn-primary m-10" onClick={handleDateSubmit}>
-        Показать
+        <FormattedMessage {...messages.show} />
       </button>
       <button type="button" className="btn btn-primary m-10" onClick={handleDateDelete}>
-        Сбросить
+        <FormattedMessage {...messages.reset} />
       </button>
     </div>
   </>

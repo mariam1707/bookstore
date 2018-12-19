@@ -69,10 +69,11 @@ class Registration extends Component {
                   {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </label>
               </div>
-              <FormattedMessage {...messages.test} />
               <div className="auth-input-wrap">
                 <label htmlFor="name">
-                  <b>Name</b>
+                  <b>
+                    <FormattedMessage {...messages.name} />
+                  </b>
                   <input
                     type="text"
                     className={classnames('form-control', {
@@ -88,7 +89,9 @@ class Registration extends Component {
               </div>
               <div className="auth-input-wrap">
                 <label htmlFor="password">
-                  <b>Password</b>
+                  <b>
+                    <FormattedMessage {...messages.password} />
+                  </b>
                   <input
                     type="password"
                     className={classnames('form-control', {
@@ -104,7 +107,9 @@ class Registration extends Component {
               </div>
               <div className="auth-input-wrap">
                 <label htmlFor="password2">
-                  <b>Confirm your password</b>
+                  <b>
+                    <FormattedMessage {...messages.passwordConfirm} />
+                  </b>
                   <input
                     type="password"
                     className={classnames('form-control', {
@@ -118,7 +123,9 @@ class Registration extends Component {
                   {errors.password2 && <div className="invalid-feedback">{errors.password2}</div>}
                 </label>
               </div>
-              <button type="submit">Sign Up</button>
+              <button type="submit">
+                <FormattedMessage {...messages.signUp} />
+              </button>
             </div>
           </div>
         </form>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const FiltersView = ({
   genres,
@@ -10,14 +12,18 @@ const FiltersView = ({
 }) => (
   <React.Fragment>
     <div className="form-group col-md-4">
-      <p>Жанры</p>
+      <p>
+        <FormattedMessage {...messages.genres} />
+      </p>
       <select className="form-control" value={selectedvalue} onChange={handleChangeSelect}>
         <option>All</option>
         {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
       </select>
     </div>
     <div className="form-group col-md-4">
-      <p>Фильтр по названию книги</p>
+      <p>
+        <FormattedMessage {...messages.bookTitle} />
+      </p>
       <input
         type="text"
         className="form-control"
@@ -27,7 +33,9 @@ const FiltersView = ({
       />
     </div>
     <div className="form-group col-md-4">
-      <p>Фильтр по названию автора</p>
+      <p>
+        <FormattedMessage {...messages.authorName} />
+      </p>
       <input
         type="text"
         className="form-control"

@@ -46,7 +46,7 @@ class BookContainer extends React.Component<PropsType, StateType> {
         handleDelete={this.handleDelete}
         handleShow={this.handleShow}
         book={book}
-        user_type={userType}
+        userType={userType}
         showModal={showModal}
       />
     );

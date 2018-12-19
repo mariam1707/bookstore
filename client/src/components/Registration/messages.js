@@ -1,8 +1,20 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  test: {
-    id: 'components.registration.test',
-    defaultMessage: '333333',
+  name: {
+    id: 'registration.name',
+    defaultMessage: 'Full name',
+  },
+  password: {
+    id: 'registration.password',
+    defaultMessage: 'Password',
+  },
+  passwordConfirm: {
+    id: 'registration.passwordConfirm',
+    defaultMessage: 'Confirm your password',
+  },
+  signUp: {
+    id: 'registration.signUp',
+    defaultMessage: 'Sign Up',
   },
 });
