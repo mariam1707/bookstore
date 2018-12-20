@@ -24,6 +24,7 @@ class PaginationContainer extends Component {
         ...prevState,
         books: nextProps.books,
         currentBooks,
+        pageLimit: nextProps.pageLimit,
       };
     }
     return null;

@@ -58,7 +58,7 @@ class BooksWrapContainer extends Component {
     totalBooks: this.props.books.length,
     startDate: moment('2018-09-04'),
     endDate: moment(),
-    perPage: 3,
+    perPage: 6,
     options: [3, 6, 9, 12],
   };
 
