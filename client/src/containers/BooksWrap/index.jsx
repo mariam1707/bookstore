@@ -58,7 +58,7 @@ class BooksWrapContainer extends Component {
     totalBooks: this.props.books.length,
     startDate: moment('2018-09-04'),
     endDate: moment(),
-    perPage: null,
+    perPage: 3,
     options: [3, 6, 9, 12],
   };
 
@@ -155,8 +155,6 @@ class BooksWrapContainer extends Component {
         ...this.state,
         perPage: value,
       });
-      this.props.setPerPage(value);
-      this.props.fetchBooksRequest();
     }
   };
 
@@ -173,7 +171,9 @@ class BooksWrapContainer extends Component {
       options,
       currentBooks,
       // totalBooks,
+      perPage,
     } = this.state;
+    console.log(perPage);
     const { bookDeleteWatcher, userType, genres } = this.props;
     if (books.length === 0) return null;
     return (
@@ -202,6 +202,7 @@ class BooksWrapContainer extends Component {
         genres={genres}
         currentBooks={currentBooks}
         totalBooks={books.length}
+        perPage={perPage}
       />
     );
   }

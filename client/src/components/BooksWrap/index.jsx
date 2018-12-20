@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DatePickerView from 'components/DatePickerView';
-import Book from 'containers/Book';
+// import Book from 'containers/Book';
 import FiltersView from 'components/FiltersView';
 import PaginationSelect from 'components/PaginationSelect';
 // import Pages from 'components/Pages';
@@ -25,46 +25,43 @@ const BooksWrap = ({
   handlefilterAuthor,
   handleDateSubmit,
   handleDateDelete,
-  onPageChanged,
+  // onPageChanged,
   handlePerPage,
   bookDeleteWatcher,
   userType,
   genres,
-  totalBooks,
-  currentBooks,
-}) => {
-  if (totalBooks === 0) return null;
-
-  return (
-    <>
-      <div className="container">
-        <div className="d-flex flex-wrap justify-content-sm-around">
-          <FiltersView
-            genres={genres}
-            handleChangeSelect={handleChangeSelect}
-            filterTitle={filterTitle}
-            filterAuthor={filterAuthor}
-            handleChangeFilter={handleChangeFilter}
-            selectedValue={selectedValue}
+  // currentBooks,
+  perPage,
+}) => (
+  <>
+    <div className="container">
+      <div className="d-flex flex-wrap justify-content-sm-around">
+        <FiltersView
+          genres={genres}
+          handleChangeSelect={handleChangeSelect}
+          filterTitle={filterTitle}
+          filterAuthor={filterAuthor}
+          handleChangeFilter={handleChangeFilter}
+          selectedValue={selectedValue}
+        />
+      </div>
+      <div className=" justify-content-sm-around">
+        <div className=" flex-column align-items-center datepicker-border">
+          <DatePickerView
+            startDate={startDate}
+            endDate={endDate}
+            handleChangeStartDate={handleChangeStartDate}
+            handleChangeEndDate={handleChangeEndDate}
+            handleDateSubmit={handleDateSubmit}
+            handleDateDelete={handleDateDelete}
           />
         </div>
-        <div className=" justify-content-sm-around">
-          <div className=" flex-column align-items-center datepicker-border">
-            <DatePickerView
-              startDate={startDate}
-              endDate={endDate}
-              handleChangeStartDate={handleChangeStartDate}
-              handleChangeEndDate={handleChangeEndDate}
-              handleDateSubmit={handleDateSubmit}
-              handleDateDelete={handleDateDelete}
-            />
-          </div>
-        </div>
-        <div className="d-flex flex-wrap d-flex justify-content-between">
-          <PaginationSelect handlePerPage={handlePerPage} options={options} />
-          {/* <Pages /> */}
-        </div>
-        <div className="d-flex flex-wrap">
+      </div>
+      <div className="d-flex flex-wrap d-flex justify-content-between">
+        <PaginationSelect handlePerPage={handlePerPage} options={options} />
+        {/* <Pages /> */}
+      </div>
+      {/* <div className="d-flex flex-wrap">
           {currentBooks &&
             currentBooks
               .filter(handlefilterGenres)
@@ -78,19 +75,23 @@ const BooksWrap = ({
                   userType={userType}
                 />
               ))}
-        </div>
-        <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
-          {console.log('component', books)}
-          <Pagination
-            totalRecords={totalBooks}
-            pageNeighbours={1}
-            onPageChanged={onPageChanged}
-            pageLimit={3}
-          />
-        </div>
+        </div> */}
+      <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
+        {console.log('component', books)}
+        <Pagination
+          pageNeighbours={1}
+          // onPageChanged={onPageChanged}
+          pageLimit={perPage || 3}
+          books={books
+            .filter(handlefilterGenres)
+            .filter(handlefilterTitle)
+            .filter(handlefilterAuthor)}
+          handleDelete={bookDeleteWatcher}
+          userType={userType}
+        />
       </div>
-    </>
-  );
-};
+    </div>
+  </>
+);
 
 export default BooksWrap;
