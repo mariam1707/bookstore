@@ -16,15 +16,13 @@ const range = (from, to, step = 1) => {
 
 class PaginationContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (!equals(prevState.books, nextProps.books) || prevState.pageLimit !== nextProps.pageLimit) {
-      // console.log();
+    if (!equals(prevState.books, nextProps.books)) {
       const currentBooks = nextProps.books.slice(0, 0 + nextProps.pageLimit);
-      console.log('GDSFP', currentBooks);
+
       return {
         ...prevState,
         books: nextProps.books,
         currentBooks,
-        pageLimit: nextProps.pageLimit,
       };
     }
     return null;
@@ -34,7 +32,8 @@ class PaginationContainer extends Component {
     currentPage: 1,
     currentBooks: [],
     books: this.props.books,
-    pageLimit: this.props.pageLimit,
+    pageLimit: 6,
+    options: [3, 6, 9, 12],
     // books: this.props.books,
     // totalPages: '',
   };
@@ -49,46 +48,57 @@ class PaginationContainer extends Component {
     // const { books } = this.state;
     const { currentPage } = data;
     const { pageLimit } = this.state;
-    const offset = (currentPage - 1) * pageLimit;
-    // console.log('onPageChanged', offset, currentPage, pageLimit);
-    const currentBooks = books.slice(offset, offset + pageLimit);
+    const offset = (currentPage - 1) * +pageLimit;
 
-    console.log('onPageChanged', currentBooks, books);
+    const currentBooks = books.slice(offset, offset + +pageLimit);
+
     this.setState({ currentPage, currentBooks });
   };
 
   gotoPage = page => {
     const totalRecords = this.props.books.length;
-    const { pageLimit } = this.props;
-    const totalPages = Math.ceil(totalRecords / pageLimit);
+    const { pageLimit } = this.state;
+    const totalPages = Math.ceil(totalRecords / +pageLimit);
     const currentPage = Math.max(0, Math.min(page, totalPages));
-    console.log('totalRecords', totalRecords, pageLimit);
+
     const paginationData = {
       currentPage,
-      totalPages,
-      pageLimit,
-      totalRecords,
     };
-    console.log('paginationData', paginationData);
 
     this.setState({ currentPage }, () => this.onPageChanged(paginationData));
   };
 
+  handlePageLimit = e => {
+    const { value } = e.target;
+    const { pageLimit, currentPage } = this.state;
+    if (value !== pageLimit) {
+      this.setState({
+        ...this.state,
+        pageLimit: value,
+      });
+    }
+    this.gotoPage(currentPage);
+  };
+
   render() {
-    const { currentPage, currentBooks } = this.state;
-    const totalPages = Math.ceil(this.props.books.length / this.props.pageLimit);
+    const { currentPage, currentBooks, options, pageLimit } = this.state;
+    const totalPages = Math.ceil(this.props.books.length / pageLimit);
     let pages = [];
     if (totalPages >= 2) {
       pages = range(1, totalPages);
     }
-    // const { books, handleDelete, userType } = this.props;
-    // this.gotoPage(1);
+    // if (currentPage > totalPages) {
+    //   this.gotoPage(1);
+    // }
     return (
       <Pagination
         pages={pages}
         currentPage={currentPage}
+        totalPages={totalPages}
         gotoPage={this.gotoPage}
         currentBooks={currentBooks}
+        handlePageLimit={this.handlePageLimit}
+        options={options}
       />
     );
   }

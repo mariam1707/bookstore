@@ -32,7 +32,7 @@ export function* fetchBooks() {
       },
       { books: {} }
     );
-    console.log(books);
+
     yield put(fetchBooksSuccess(books));
   } catch (error) {
     const message = error.response.data;

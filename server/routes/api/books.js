@@ -133,7 +133,7 @@ router.get('/filter_date',(req,res)=>{
     const perPage = parseInt(req.query.perPage)    
     const endm = moment(end);    
     const query = {}
-    console.log(start,end);
+   
     query.skip = perPage * (currentPage - 1)
     query.limit = perPage
     if(currentPage <= 0) {

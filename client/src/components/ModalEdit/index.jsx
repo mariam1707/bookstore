@@ -24,7 +24,6 @@ class ModalEdit extends React.Component {
   }
 
   handleChange = e => {
-    console.log(e.target.name, e.target.value);
     this.setState({
       ...this.state,
       book: {
@@ -51,7 +50,7 @@ class ModalEdit extends React.Component {
   render() {
     const { book } = this.state;
     const { genres } = this.props;
-    console.log(this.state);
+
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="card">

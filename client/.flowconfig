@@ -8,5 +8,13 @@
 
 [options]
 esproposal.decorators=ignore
+module.name_mapper='^components' -> '<PROJECT_ROOT>/src/components'
+module.name_mapper='^containers' -> '<PROJECT_ROOT>/src/containers'
+module.name_mapper='^actions' -> '<PROJECT_ROOT>/src/actions'
+module.name_mapper='^types' -> '<PROJECT_ROOT>/src/types'
+module.name_mapper='^locales' -> '<PROJECT_ROOT>/src/locales'
+
+
+
 
 [strict]

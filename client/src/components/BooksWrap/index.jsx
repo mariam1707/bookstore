@@ -1,10 +1,7 @@
 import React from 'react';
 
-import DatePickerView from 'components/DatePickerView';
-// import Book from 'containers/Book';
 import FiltersView from 'components/FiltersView';
-import PaginationSelect from 'components/PaginationSelect';
-// import Pages from 'components/Pages';
+
 import Pagination from 'containers/Pagination';
 
 const BooksWrap = ({
@@ -12,25 +9,14 @@ const BooksWrap = ({
   filterTitle,
   filterAuthor,
   books,
-  // totalPages,
-  startDate,
-  endDate,
-  options,
   handleChangeSelect,
-  handleChangeStartDate,
-  handleChangeEndDate,
   handleChangeFilter,
   handlefilterGenres,
   handlefilterTitle,
   handlefilterAuthor,
-  handleDateSubmit,
-  handleDateDelete,
-  // onPageChanged,
-  handlePerPage,
   bookDeleteWatcher,
   userType,
   genres,
-  // currentBooks,
   perPage,
 }) => (
   <>
@@ -45,43 +31,10 @@ const BooksWrap = ({
           selectedValue={selectedValue}
         />
       </div>
-      <div className=" justify-content-sm-around">
-        <div className=" flex-column align-items-center datepicker-border">
-          <DatePickerView
-            startDate={startDate}
-            endDate={endDate}
-            handleChangeStartDate={handleChangeStartDate}
-            handleChangeEndDate={handleChangeEndDate}
-            handleDateSubmit={handleDateSubmit}
-            handleDateDelete={handleDateDelete}
-          />
-        </div>
-      </div>
-      <div className="d-flex flex-wrap d-flex justify-content-between">
-        <PaginationSelect handlePerPage={handlePerPage} options={options} />
-        {/* <Pages /> */}
-      </div>
-      {/* <div className="d-flex flex-wrap">
-          {currentBooks &&
-            currentBooks
-              .filter(handlefilterGenres)
-              .filter(handlefilterTitle)
-              .filter(handlefilterAuthor)
-              .map(book => (
-                <Book
-                  key={book._id}
-                  book={book}
-                  handleDelete={bookDeleteWatcher}
-                  userType={userType}
-                />
-              ))}
-        </div> */}
-      <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
-        {console.log('component', books)}
+
+      <div>
         <Pagination
-          pageNeighbours={1}
-          // onPageChanged={onPageChanged}
-          pageLimit={perPage || 3}
+          pageLimit={perPage}
           books={books
             .filter(handlefilterGenres)
             .filter(handlefilterTitle)

@@ -36,7 +36,6 @@ const mapDispatchToProps = {
 class BooksWrapContainer extends Component {
   static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (prevState.books !== nextProps.books) {
-      console.log('aaaa');
       return {
         ...prevState,
         books: Object.values(nextProps.books),
@@ -59,7 +58,6 @@ class BooksWrapContainer extends Component {
     startDate: moment('2018-09-04'),
     endDate: moment(),
     perPage: 6,
-    options: [3, 6, 9, 12],
   };
 
   componentDidMount(): void {
@@ -132,10 +130,10 @@ class BooksWrapContainer extends Component {
   onPageChanged = data => {
     const { books } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
-    console.log('onPageChanged', books, data);
+
     const offset = (currentPage - 1) * pageLimit;
     const currentBooks = books.slice(offset, offset + pageLimit);
-    // console.log(currentBooks);
+
     this.setState({ currentPage, currentBooks, totalPages });
   };
   // onPageChanged = () => {
@@ -147,17 +145,6 @@ class BooksWrapContainer extends Component {
   //   this.props.fetchBooksRequest();
   // };
 
-  handlePerPage = e => {
-    const { value } = e.target;
-    const { perPage } = this.state;
-    if (value !== perPage) {
-      this.setState({
-        ...this.state,
-        perPage: value,
-      });
-    }
-  };
-
   render() {
     const {
       selectedValue,
@@ -168,12 +155,11 @@ class BooksWrapContainer extends Component {
       // currentPage,
       startDate,
       endDate,
-      options,
       currentBooks,
       // totalBooks,
       perPage,
     } = this.state;
-    console.log(perPage);
+
     const { bookDeleteWatcher, userType, genres } = this.props;
     if (books.length === 0) return null;
     return (
@@ -182,10 +168,8 @@ class BooksWrapContainer extends Component {
         filterTitle={filterTitle}
         filterAuthor={filterAuthor}
         books={books}
-        // totalPages={totalPages}
         startDate={startDate}
         endDate={endDate}
-        options={options}
         handleChangeSelect={this.handleChangeSelect}
         handleChangeStartDate={this.handleChangeStartDate}
         handleChangeEndDate={this.handleChangeEndDate}
@@ -196,7 +180,6 @@ class BooksWrapContainer extends Component {
         handleDateSubmit={this.handleDateSubmit}
         handleDateDelete={this.handleDateDelete}
         onPageChanged={this.onPageChanged}
-        handlePerPage={this.handlePerPage}
         bookDeleteWatcher={bookDeleteWatcher}
         userType={userType}
         genres={genres}
