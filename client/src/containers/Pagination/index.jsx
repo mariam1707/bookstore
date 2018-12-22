@@ -83,6 +83,7 @@ export default compose(setDisplayName('PaginationContainer'))(
 
     render() {
       const { currentPage, currentBooks, options, pageLimit } = this.state;
+      const { userType } = this.props;
       const totalPages = Math.ceil(this.props.books.length / pageLimit);
       let pages = [];
       if (totalPages >= 2) {
@@ -97,6 +98,7 @@ export default compose(setDisplayName('PaginationContainer'))(
           currentBooks={currentBooks}
           handlePageLimit={this.handlePageLimit}
           options={options}
+          userType={userType}
         />
       );
     }

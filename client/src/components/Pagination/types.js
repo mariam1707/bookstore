@@ -9,4 +9,5 @@ export type PropsType = {
   currentBooks: Array<Book>,
   handlePageLimit: Function,
   options: Array<number>,
+  userType: ?string,
 };
