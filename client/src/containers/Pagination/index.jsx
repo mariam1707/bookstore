@@ -22,7 +22,8 @@ export default compose(setDisplayName('PaginationContainer'))(
   class extends React.Component<PropsType, StateType> {
     static getDerivedStateFromProps(nextProps, prevState) {
       if (!equals(prevState.books, nextProps.books)) {
-        const currentBooks = nextProps.books.slice(0, 0 + nextProps.pageLimit);
+        const currentBooks = nextProps.books.slice(0, 0 + prevState.pageLimit);
+        console.log('GDSFP', currentBooks);
         return {
           ...prevState,
           books: nextProps.books,
@@ -53,7 +54,7 @@ export default compose(setDisplayName('PaginationContainer'))(
       const offset = (currentPage - 1) * +pageLimit;
 
       const currentBooks = books.slice(offset, offset + +pageLimit);
-
+      console.log('onPageChanged', currentBooks, books, offset);
       this.setState({ currentPage, currentBooks });
     };
 
