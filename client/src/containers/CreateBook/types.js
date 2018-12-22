@@ -1,9 +1,10 @@
 // @flow
+import type { Genres } from 'helpers/types';
 
 export type StateType = {
   showModal: boolean,
 };
 export type PropsType = {
-  sagaBookAdd: Function,
-  genres: Array<string>,
+  bookAddWatcher: Function,
+  genres: Array<Genres>,
 };

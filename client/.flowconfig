@@ -13,7 +13,14 @@ module.name_mapper='^containers' -> '<PROJECT_ROOT>/src/containers'
 module.name_mapper='^actions' -> '<PROJECT_ROOT>/src/actions'
 module.name_mapper='^types' -> '<PROJECT_ROOT>/src/types'
 module.name_mapper='^locales' -> '<PROJECT_ROOT>/src/locales'
-
+module.name_mapper='^constants' -> '<PROJECT_ROOT>/src/constants'
+module.name_mapper='^css' -> '<PROJECT_ROOT>/src/css'
+module.name_mapper='^reducers' -> '<PROJECT_ROOT>/src/reducers'
+module.name_mapper='^saga' -> '<PROJECT_ROOT>/src/saga'
+module.name_mapper='^utils' -> '<PROJECT_ROOT>/src/utils'
+module.name_mapper='^helpers' -> '<PROJECT_ROOT>/src/helpers'
+module.name_mapper='.*\(.scss\)' -> 'empty/object'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/libdefs/SCSSFlowStub.js'
 
 
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import Menu from 'components/Menu';
-import { UnsetCurrentUserAction } from 'actions/auth';
+import { unsetCurrentUserAction } from 'actions/auth';
 import { localeChangeAction } from 'actions/locale';
 import type { PropsType } from './types';
 
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  UnsetCurrentUserAction,
+  unsetCurrentUserAction,
   localeChangeAction,
 };
 
@@ -24,13 +24,13 @@ export default injectIntl(
   )(
     ({
       auth: { user, isAuthenticated },
-      UnsetCurrentUserAction,
+      unsetCurrentUserAction,
       localeChangeAction,
     }: PropsType): React.Node => (
       <Menu
         user={user}
         isAuthenticated={isAuthenticated}
-        handleLogout={UnsetCurrentUserAction}
+        handleLogout={unsetCurrentUserAction}
         localeChangeAction={localeChangeAction}
       />
     )

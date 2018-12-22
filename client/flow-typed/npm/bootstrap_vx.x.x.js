@@ -26,6 +26,10 @@ declare module 'bootstrap/dist/js/bootstrap.bundle' {
   declare module.exports: any;
 }
 
+declare module 'bootstrap/dist/css/bootstrap.min.css' {
+  declare module.exports: any;
+}
+
 declare module 'bootstrap/dist/js/bootstrap.bundle.min' {
   declare module.exports: any;
 }

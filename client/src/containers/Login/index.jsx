@@ -1,20 +1,12 @@
+// flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Login from 'components/Login';
 import { setCurrentUserWatcherAction } from 'actions/auth';
+import type { PropsType, StateType } from './types';
 
-class LoginContainer extends Component {
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (prevState.errors !== nextProps.auth.errors) {
-  //     return {
-  //       ...prevState,
-  //       errors: nextProps.auth.errors,
-  //     };
-  //   }
-  //   return null;
-  // }
-
+class LoginContainer extends Component<PropsType, StateType> {
   state = {
     email: '',
     password: '',

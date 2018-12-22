@@ -13,3 +13,12 @@ export type Genres = {
   _id: string,
   genre: string,
 };
+
+export type User = {
+  id: string,
+  name: string,
+  avatar: string,
+  user_type: string,
+  iat: Number,
+  exp: Number,
+};

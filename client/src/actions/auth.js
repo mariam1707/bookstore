@@ -36,7 +36,7 @@ export const authErrorsAction: ActionType<
 > = createAction(AUTH_ERRORS);
 
 export const UNSET_CURRENT_USER: $PropertyType<UnsetCurrentUserType, 'type'> = 'UNSET_CURRENT_USER';
-export const UnsetCurrentUserAction: ActionType<
+export const unsetCurrentUserAction: ActionType<
   $PropertyType<UnsetCurrentUserType, 'type'>,
   $PropertyType<UnsetCurrentUserType, 'payload'>
 > = createAction(UNSET_CURRENT_USER);

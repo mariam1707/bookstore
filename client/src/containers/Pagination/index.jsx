@@ -1,3 +1,4 @@
+// flow
 import React, { Component } from 'react';
 import Pagination from 'components/Pagination';
 import { equals } from 'ramda';
@@ -18,7 +19,6 @@ class PaginationContainer extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!equals(prevState.books, nextProps.books)) {
       const currentBooks = nextProps.books.slice(0, 0 + nextProps.pageLimit);
-
       return {
         ...prevState,
         books: nextProps.books,
@@ -34,8 +34,6 @@ class PaginationContainer extends Component {
     books: this.props.books,
     pageLimit: 6,
     options: [3, 6, 9, 12],
-    // books: this.props.books,
-    // totalPages: '',
   };
 
   componentDidMount() {

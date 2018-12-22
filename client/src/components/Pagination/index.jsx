@@ -1,3 +1,4 @@
+// flow
 import React from 'react';
 import Book from 'containers/Book';
 import Pages from 'components/Pages';

@@ -15,7 +15,7 @@ type Genres = {
   genre: string,
 };
 export type PropsType = {
-  sagaBookAdd: Function,
+  bookAddWatcher: Function,
   genres: Array<Genres>,
   books: Array<Book>,
 };

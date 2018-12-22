@@ -4,8 +4,9 @@ import Moment from 'react-moment';
 
 import ModalEdit from 'components/ModalEdit';
 import isAdmin from 'utils/isAdmin';
+import type { PropsType } from './types';
 
-const Book = ({ book, handleClose, handleDelete, handleShow, userType, showModal }) => (
+const Book = ({ book, handleClose, handleDelete, handleShow, userType, showModal }: PropsType) => (
   <div className="card-wrap col-md-4 ">
     <div className="card mb-4 box-shadow">
       <img className="card-img-top" src={book.image} alt="Card" />
