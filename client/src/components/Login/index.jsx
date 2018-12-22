@@ -4,8 +4,9 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import type { PropsType } from './types';
 
-const Login = ({ email, password, errors, handleChange, handleSubmit }) => (
+const Login = ({ email, password, errors, handleChange, handleSubmit }: PropsType) => (
   <form onSubmit={handleSubmit}>
     <div className="container">
       <div className="auth-wrap">

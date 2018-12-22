@@ -1,5 +1,5 @@
 import Login from 'containers/Login';
-import Registration from 'components/Registration';
+import Registration from 'containers/Registration';
 import RestorePassword from 'containers/RestorePassword';
 import BooksWrap from 'containers/BooksWrap';
 import SingleBookCreateView from 'containers/SingleBookCreateView';

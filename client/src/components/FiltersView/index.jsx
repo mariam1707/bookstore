@@ -2,6 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import type { PropsType } from './types';
 
 const FiltersView = ({
   genres,
@@ -10,7 +11,7 @@ const FiltersView = ({
   filterAuthor,
   handleChangeFilter,
   selectedvalue,
-}) => (
+}: PropsType) => (
   <React.Fragment>
     <div className="form-group col-md-4">
       <p>

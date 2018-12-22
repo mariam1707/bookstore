@@ -5,8 +5,9 @@ import isAdmin from 'utils/isAdmin';
 import { FormattedMessage } from 'react-intl';
 import { EN, RU } from 'constants/locale';
 import messages from './messages';
+import type { PropsType } from './types';
 
-const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }) => {
+const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }: PropsType) => {
   const userLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item text-user-menu">

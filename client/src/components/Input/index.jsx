@@ -1,7 +1,8 @@
 // flow
 import React from 'react';
+import type { PropsType } from './types';
 
-const Input = ({ name, text, onHandleChange }) => (
+const Input = ({ name, text, onHandleChange }: PropsType) => (
   <div className="input-group mb-3">
     <div className="input-group-prepend">
       <span className="input-group-text" id="basic-addon1">

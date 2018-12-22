@@ -1,8 +1,9 @@
 // flow
 import React from 'react';
 import classnames from 'classnames';
+import type { PropsType } from './types';
 
-const RestorePassword = ({ email, newPassword, handleChange, handleSubmit, errors }) => (
+const RestorePassword = ({ email, newPassword, handleChange, handleSubmit, errors }: PropsType) => (
   <form onSubmit={handleSubmit}>
     <div className="container">
       <div className="auth-wrap">

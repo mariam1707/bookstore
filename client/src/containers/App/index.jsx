@@ -10,7 +10,6 @@ import store from '../../store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'css/style.scss';
-// import 'react-datepicker/dist/react-datepicker.css';
 
 const App = () => (
   <Provider store={store}>

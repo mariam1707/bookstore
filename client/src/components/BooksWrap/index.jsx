@@ -2,8 +2,8 @@
 import React from 'react';
 
 import FiltersView from 'components/FiltersView';
-
 import Pagination from 'containers/Pagination';
+import type { PropsType } from './types';
 
 const BooksWrap = ({
   selectedValue,
@@ -18,8 +18,7 @@ const BooksWrap = ({
   bookDeleteWatcher,
   userType,
   genres,
-  perPage,
-}) => (
+}: PropsType) => (
   <>
     <div className="container">
       <div className="d-flex flex-wrap justify-content-sm-around">
@@ -35,7 +34,6 @@ const BooksWrap = ({
 
       <div>
         <Pagination
-          pageLimit={perPage}
           books={books
             .filter(handlefilterGenres)
             .filter(handlefilterTitle)

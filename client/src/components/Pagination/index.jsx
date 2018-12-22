@@ -3,6 +3,7 @@ import React from 'react';
 import Book from 'containers/Book';
 import Pages from 'components/Pages';
 import PaginationSelect from 'components/PaginationSelect';
+import type { PropsType } from './types';
 
 const Pagination = ({
   pages,
@@ -12,7 +13,7 @@ const Pagination = ({
   currentBooks,
   handlePageLimit,
   options,
-}) => (
+}: PropsType) => (
   <>
     <div className="d-flex flex-wrap d-flex justify-content-between">
       <PaginationSelect handlePerPage={handlePageLimit} options={options} />
