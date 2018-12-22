@@ -312,6 +312,7 @@ module.exports = {
                       helpers: './src/helpers',
                       types: './src/types',
                       constants: './src/constants',
+                      locales: './src/locales',
                     },
                   },
                 ],
