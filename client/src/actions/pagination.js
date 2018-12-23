@@ -1,3 +1,4 @@
+// @flow
 import { createAction } from 'redux-actions';
 import type { ActionType } from 'types/action';
 import type { setCurrentPageType, setPerPageType } from 'types/pagination/action';

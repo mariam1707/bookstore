@@ -1,4 +1,4 @@
-// flow
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { equals } from 'ramda';
@@ -6,12 +6,13 @@ import compose from 'recompose/compose';
 import setDisplayName from 'recompose/setDisplayName';
 
 import BooksWrap from 'components/BooksWrap';
+
 import {
   fetchBooksRequest,
   bookDeleteWatcher,
   fetchGenresRequest,
   setDateFilterWatcher,
-} from '../../actions/books';
+} from 'actions/books';
 
 import type { PropsType, StateType } from './types';
 
