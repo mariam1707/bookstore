@@ -16,7 +16,7 @@ const Pagination = ({
   userType,
 }: PropsType) => (
   <>
-    <div className="d-flex flex-wrap d-flex justify-content-between">
+    <div className="container d-flex flex-wrap justify-content-between">
       <PaginationSelect handlePerPage={handlePageLimit} options={options} />
       <Pages currentPage={currentPage} totalPages={totalPages} />
     </div>

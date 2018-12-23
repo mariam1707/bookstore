@@ -46,8 +46,8 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }: Props
           className="navbar-toggler collapsed"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarsExample05"
-          aria-controls="navbarsExample05"
+          data-target="#menuDropDown"
+          aria-controls="menuDropDown"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
@@ -60,7 +60,7 @@ const Menu = ({ user, handleLogout, isAuthenticated, localeChangeAction }: Props
             </Link>
           </>
         )}
-        <div className="collapse navbar-collapse" id="navbarsExample05">
+        <div className="collapse navbar-collapse" id="menuDropDown">
           {isAuthenticated ? userLinks : guestLinks}
         </div>
         <div>

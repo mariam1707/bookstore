@@ -61,7 +61,6 @@ export default compose(setDisplayName('PaginationContainer'))(
       const { pageLimit } = this.state;
       const totalPages = Math.ceil(totalRecords / +pageLimit);
       const currentPage = Math.max(0, Math.min(page, totalPages));
-
       const paginationData = {
         currentPage,
       };

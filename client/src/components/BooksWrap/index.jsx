@@ -32,7 +32,7 @@ const BooksWrap = ({
         />
       </div>
 
-      <div>
+      <>
         <Pagination
           books={books
             .filter(handlefilterGenres)
@@ -41,7 +41,7 @@ const BooksWrap = ({
           handleDelete={bookDeleteWatcher}
           userType={userType}
         />
-      </div>
+      </>
     </div>
   </>
 );
