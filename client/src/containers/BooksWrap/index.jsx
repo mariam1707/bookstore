@@ -44,7 +44,7 @@ export default compose(
     }
 
     state = {
-      books: Object.values(this.props.books),
+      books: [],
       selectedValue: 'All',
       filterTitleValue: '',
       filterAuthorValue: '',
@@ -62,7 +62,7 @@ export default compose(
       });
     };
 
-    handleChangeFilter = (e: SyntheticInputEvent) => {
+    handleChangeFilter = (e: SyntheticInputEvent<>) => {
       this.setState({
         ...this.state,
         [e.target.name]: e.target.value.toLowerCase(),

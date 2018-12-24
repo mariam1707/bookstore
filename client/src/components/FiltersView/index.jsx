@@ -10,14 +10,14 @@ const FiltersView = ({
   filterTitleValue,
   filterAuthorValue,
   handleChangeFilter,
-  selectedvalue,
+  selectedValue,
 }: PropsType) => (
   <React.Fragment>
     <div className="form-group col-md-4">
       <p>
         <FormattedMessage {...messages.genres} />
       </p>
-      <select className="form-control" value={selectedvalue} onChange={handleChangeSelect}>
+      <select className="form-control" value={selectedValue} onChange={handleChangeSelect}>
         <option>All</option>
         {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
       </select>

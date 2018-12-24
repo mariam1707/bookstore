@@ -1,11 +1,11 @@
 // @flow
-import type { Genre } from 'helpers/types';
+import type { Genres } from 'helpers/types';
 
 export type PropsType = {
-  genres: Array<Genre>,
+  genres: Array<Genres>,
   handleChangeSelect: Function,
-  filterTitleValue: Function,
-  filterAuthorValue: Function,
+  filterTitleValue: string,
+  filterAuthorValue: string,
   handleChangeFilter: Function,
-  selectedvalue: ?string,
+  selectedValue: string,
 };

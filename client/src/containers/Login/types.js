@@ -1,5 +1,5 @@
 // @flow
-import { User } from 'helpers/types';
+import type { User } from 'helpers/types';
 
 export type PropsType = {
   auth: {

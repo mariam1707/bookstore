@@ -2,7 +2,7 @@
 import React from 'react';
 import type { PropsType } from './types';
 
-export default ({ totalPages, currentPage }: PropsType): React.Node => (
+export default ({ totalPages, currentPage }: PropsType) => (
   <div>
     {currentPage && (
       <span className="current-page d-inline-block h-100 text-secondary">

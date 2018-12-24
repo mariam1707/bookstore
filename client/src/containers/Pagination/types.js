@@ -2,16 +2,16 @@
 import type { Book } from 'helpers/types';
 
 export type PropsType = {
-  pageLimit: ?number,
+  pageLimit: number,
   books: Array<Book>,
   handleDelete: Function,
   userType: string,
 };
 
 export type StateType = {
-  currentPage: ?number,
+  currentPage: number,
   currentBooks: Array<Book>,
   books: Array<Book>,
-  pageLimit: ?number,
+  pageLimit: number,
   options: Array<number>,
 };

@@ -14,6 +14,7 @@ const Pagination = ({
   handlePageLimit,
   options,
   userType,
+  handleDelete,
 }: PropsType) => (
   <>
     <div className="container d-flex flex-wrap justify-content-between">
@@ -22,7 +23,9 @@ const Pagination = ({
     </div>
     <div className="d-flex flex-wrap">
       {currentBooks &&
-        currentBooks.map(book => <Book key={book._id} book={book} userType={userType} />)}
+        currentBooks.map(book => (
+          <Book key={book._id} book={book} userType={userType} handleDelete={handleDelete} />
+        ))}
     </div>
     <div className="d-flex flex-wrap flex-row py-4  justify-content-center align-items-center">
       <nav>
