@@ -1,4 +1,4 @@
-// flow
+// @flow
 import React from 'react';
 
 const Filter = ({ type = 'text', className = 'form-control', name, value, onChange }) => (

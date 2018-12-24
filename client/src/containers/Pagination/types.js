@@ -1,4 +1,4 @@
-// flow
+// @flow
 import type { Book } from 'helpers/types';
 
 export type PropsType = {

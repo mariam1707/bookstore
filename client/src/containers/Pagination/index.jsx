@@ -1,4 +1,4 @@
-// flow
+// @flow
 import * as React from 'react';
 import Pagination from 'components/Pagination';
 import { equals } from 'ramda';

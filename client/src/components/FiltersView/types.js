@@ -1,4 +1,4 @@
-// flow
+// @flow
 import type { Genre } from 'helpers/types';
 
 export type PropsType = {

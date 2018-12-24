@@ -1,4 +1,4 @@
-// flow
+// @flow
 import React from 'react';
 import type { PropsType } from './types';
 
