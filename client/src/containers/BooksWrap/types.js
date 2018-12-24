@@ -10,9 +10,8 @@ export type PropsType = {
   fetchGenresRequest: Function,
 };
 export type StateType = {
-  filterGenres: string,
   selectedValue: string,
-  filterTitle: string,
-  filterAuthor: string,
+  filterTitleValue: string,
+  filterAuthorValue: string,
   books: Array<Book>,
 };

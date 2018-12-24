@@ -2,9 +2,9 @@
 import type { Book, Genre } from 'helpers/types';
 
 export type PropsType = {
-  selectedValue: ?number,
-  filterTitle: Function,
-  filterAuthor: Function,
+  selectedValue: ?string,
+  filterTitleValue: string,
+  filterAuthorValue: string,
   books: Array<Book>,
   handleChangeSelect: Function,
   handleChangeFilter: Function,

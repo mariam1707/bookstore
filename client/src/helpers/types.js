@@ -1,17 +1,17 @@
 // @flow
 export type Book = {
-  _id: string,
-  title: string,
-  author: string,
-  image: string,
-  price: number,
-  genre: string,
-  date: Date,
+  _id: ?string,
+  title: ?string,
+  author: ?string,
+  image: ?string,
+  price: ?number,
+  genre: ?string,
+  date: ?Date,
 };
 
 export type Genres = {
-  _id: string,
-  genre: string,
+  _id: ?string,
+  genre: ?string,
 };
 
 export type User = {

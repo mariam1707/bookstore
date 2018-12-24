@@ -7,8 +7,8 @@ import type { PropsType } from './types';
 const FiltersView = ({
   genres,
   handleChangeSelect,
-  filterTitle,
-  filterAuthor,
+  filterTitleValue,
+  filterAuthorValue,
   handleChangeFilter,
   selectedvalue,
 }: PropsType) => (
@@ -29,8 +29,8 @@ const FiltersView = ({
       <input
         type="text"
         className="form-control"
-        name="filterTitle"
-        value={filterTitle}
+        name="filterTitleValue"
+        value={filterTitleValue}
         onChange={handleChangeFilter}
       />
     </div>
@@ -41,8 +41,8 @@ const FiltersView = ({
       <input
         type="text"
         className="form-control"
-        name="filterAuthor"
-        value={filterAuthor}
+        name="filterAuthorValue"
+        value={filterAuthorValue}
         onChange={handleChangeFilter}
       />
     </div>

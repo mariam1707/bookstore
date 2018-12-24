@@ -45,10 +45,9 @@ export default compose(
 
     state = {
       books: Object.values(this.props.books),
-      filterGenres: '',
       selectedValue: 'All',
-      filterTitle: '',
-      filterAuthor: '',
+      filterTitleValue: '',
+      filterAuthorValue: '',
     };
 
     componentDidMount(): void {
@@ -81,24 +80,24 @@ export default compose(
       book.title
         .toLowerCase()
         .replace(/\s+/g, '')
-        .includes(this.state.filterTitle.replace(/\s+/g, ''));
+        .includes(this.state.filterTitleValue.replace(/\s+/g, ''));
 
     filterAuthor = book =>
       book.author
         .toLowerCase()
         .replace(/\s+/g, '')
-        .includes(this.state.filterAuthor.replace(/\s+/g, ''));
+        .includes(this.state.filterAuthorValue.replace(/\s+/g, ''));
 
     render() {
-      const { selectedValue, filterTitle, filterAuthor, books } = this.state;
+      const { selectedValue, filterTitleValue, filterAuthorValue, books } = this.state;
 
       const { bookDeleteWatcher, userType, genres } = this.props;
       if (books.length === 0) return null;
       return (
         <BooksWrap
           selectedValue={selectedValue}
-          filterTitle={filterTitle}
-          filterAuthor={filterAuthor}
+          filterTitleValue={filterTitleValue}
+          filterAuthorValue={filterAuthorValue}
           books={books}
           handleChangeSelect={this.handleChangeSelect}
           handleChangeFilter={this.handleChangeFilter}

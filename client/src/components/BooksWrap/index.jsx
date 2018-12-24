@@ -7,8 +7,8 @@ import type { PropsType } from './types';
 
 const BooksWrap = ({
   selectedValue,
-  filterTitle,
-  filterAuthor,
+  filterTitleValue,
+  filterAuthorValue,
   books,
   handleChangeSelect,
   handleChangeFilter,
@@ -25,8 +25,8 @@ const BooksWrap = ({
         <FiltersView
           genres={genres}
           handleChangeSelect={handleChangeSelect}
-          filterTitle={filterTitle}
-          filterAuthor={filterAuthor}
+          filterTitleValue={filterTitleValue}
+          filterAuthorValue={filterAuthorValue}
           handleChangeFilter={handleChangeFilter}
           selectedValue={selectedValue}
         />
