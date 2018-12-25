@@ -1,8 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { push } from 'connected-react-router';
-import setAuthToken from '../utils/setAuthToken';
+import { push } from 'react-router-redux';
 import {
   SET_CURRENT_USER_WATCHER,
   authErrorsAction,
@@ -10,7 +9,9 @@ import {
   setCurrentUserAction,
   UNSET_CURRENT_USER,
   SET_NEW_PASSWORD,
-} from '../actions/auth';
+} from 'actions/auth';
+import { fetchGenresRequest, fetchBooksRequest } from 'actions/books';
+import setAuthToken from '../utils/setAuthToken';
 
 export function* makeAuth({ payload }) {
   const opt = {
@@ -76,6 +77,8 @@ export function* setUser() {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwtDecode(localStorage.jwtToken);
     yield put(setCurrentUserAction(decoded));
+    yield put(fetchBooksRequest());
+    yield put(fetchGenresRequest());
 
     // const currentTime = Date.now() / 1000;
     // if (decoded.exp < currentTime) {

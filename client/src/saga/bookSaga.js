@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 import axios from 'axios';
 
 import {
@@ -107,6 +108,7 @@ export function* addBook({ payload }) {
   try {
     yield call(axios, options);
     yield put(fetchBooksRequest());
+    yield put(push('/'));
   } catch (error) {
     const message = error.response.data;
     yield put(fetchBooksError(message));

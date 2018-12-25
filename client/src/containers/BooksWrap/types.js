@@ -5,9 +5,7 @@ export type PropsType = {
   books: Array<{ ...Book }>,
   genres: Array<{ ...Genres }>,
   userType: string,
-  fetchBooksRequest: Function,
   bookDeleteWatcher: Function,
-  fetchGenresRequest: Function,
 };
 export type StateType = {
   selectedValue: string,

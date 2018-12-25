@@ -33,6 +33,8 @@ export default compose(
       },
     };
 
+    componentDidMount = () => {};
+
     handleChange = (e: SyntheticInputEvent<>) => {
       this.setState({
         ...this.state,

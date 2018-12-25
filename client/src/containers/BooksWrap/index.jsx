@@ -7,12 +7,7 @@ import setDisplayName from 'recompose/setDisplayName';
 
 import BooksWrap from 'components/BooksWrap';
 
-import {
-  fetchBooksRequest,
-  bookDeleteWatcher,
-  fetchGenresRequest,
-  setDateFilterWatcher,
-} from 'actions/books';
+import { bookDeleteWatcher, setDateFilterWatcher } from 'actions/books';
 
 import type { PropsType, StateType } from './types';
 
@@ -25,9 +20,7 @@ export default compose(
       userType: state.auth.user.user_type,
     }),
     {
-      fetchBooksRequest,
       bookDeleteWatcher,
-      fetchGenresRequest,
       setDateFilterWatcher,
     }
   )
@@ -49,11 +42,6 @@ export default compose(
       filterTitleValue: '',
       filterAuthorValue: '',
     };
-
-    componentDidMount(): void {
-      this.props.fetchBooksRequest();
-      this.props.fetchGenresRequest();
-    }
 
     handleChangeSelect = e => {
       this.setState({
