@@ -73,12 +73,12 @@ export function* RestorePass({ payload }) {
 }
 
 export function* setUser() {
+  yield put(fetchBooksRequest());
+  yield put(fetchGenresRequest());
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwtDecode(localStorage.jwtToken);
     yield put(setCurrentUserAction(decoded));
-    yield put(fetchBooksRequest());
-    yield put(fetchGenresRequest());
 
     // const currentTime = Date.now() / 1000;
     // if (decoded.exp < currentTime) {
