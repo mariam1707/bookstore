@@ -5,10 +5,10 @@ import { equals } from 'ramda';
 import Book from 'components/Book';
 import type { PropsType, StateType } from './types';
 
-class BookContainer extends React.Component<PropsType, StateType> {
+class BookContainer extends React.PureComponent<PropsType, StateType> {
   static getDerivedStateFromProps(nextProps: Object, prevState: Object) {
     if (!equals(prevState.book, nextProps.book)) {
-      console.log('GDSFP BOOK');
+      // console.log('GDSFP BOOK');
       return {
         book: nextProps.book,
       };
@@ -22,15 +22,15 @@ class BookContainer extends React.Component<PropsType, StateType> {
     showModal: false,
   };
 
-  shouldComponentUpdate = (nextProps, nextState) => {
-    const { book, showModal } = this.state;
-    console.log('SCU BOOK');
+  // shouldComponentUpdate = (nextProps, nextState) => {
+  //   const { book, showModal } = this.state;
+  //   // console.log('SCU BOOK');
 
-    if (equals(book, nextState.book) && showModal === nextState.showModal) {
-      return false;
-    }
-    return true;
-  };
+  //   if (equals(book, nextState.book) && showModal === nextState.showModal) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   handleShow = () => {
     this.setState({

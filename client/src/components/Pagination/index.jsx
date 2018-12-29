@@ -22,7 +22,6 @@ const Pagination = ({
       <Pages currentPage={currentPage} totalPages={totalPages} />
     </div>
     <div className="d-flex flex-wrap">
-      {console.log('1231')}
       {currentBooks &&
         currentBooks.map(book => (
           <Book key={book._id} book={book} userType={userType} handleDelete={handleDelete} />
