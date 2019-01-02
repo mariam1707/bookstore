@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
-import { bookUpdateWatcher } from '../../actions/books';
+import { bookUpdateWatcher } from 'actions/books';
 
 const modalRoot = document.getElementById('modal-root');
 
