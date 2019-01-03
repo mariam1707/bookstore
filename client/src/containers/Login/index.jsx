@@ -45,7 +45,7 @@ export default compose(
     render() {
       const { email, password, errors } = this.state;
       return (
-        <div>
+        <>
           <Login
             email={email}
             password={password}
@@ -53,7 +53,7 @@ export default compose(
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
-        </div>
+        </>
       );
     }
   }

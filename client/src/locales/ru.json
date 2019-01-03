@@ -25,5 +25,7 @@
     "login.restorePassword": "Восстановить пароль",
     "filters.genres": "Жанры",
     "filters.bookTitle": "Название книги",
-    "filters.authorName": "Имя автора"
+    "filters.authorName": "Имя автора",
+    "restore.newpassword": "Новый пароль",
+    "restore.restorePassword": "Восстановить пароль"
 }

@@ -25,5 +25,7 @@
     "login.restorePassword": "Restore password",
     "filters.genres": "Genres",
     "filters.bookTitle": "Book title",
-    "filters.authorName": "Author name"
+    "filters.authorName": "Author name",
+    "restore.newpassword": "New password",
+    "restore.restorePassword": "Restore password"
 }

@@ -1,0 +1,51 @@
+.no-margin{
+    margin: 0;
+}
+.welcome-text{
+    margin: auto 0;
+}
+.header-links-wrapper{
+    display: flex;
+    align-items: center;
+    width:100%;
+    justify-content: flex-end;
+}
+.userLinks, .guestLinks{
+    display: flex;
+    align-items: center;
+    p{
+        color:white;
+    }
+    a{
+        color:white;
+    }
+    a:hover{
+        color: grey;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-links-wrapper{
+        display: flex;
+        align-items: center;
+        width:100%;
+        flex-direction: column;
+    }
+    .userLinks, .guestLinks{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+       
+        p{
+            padding: .375rem .75rem;
+        }
+    }
+    .language-wrapper{
+        display:flex;
+        flex-direction: column;
+    }
+    .create-book-wrapper{
+        text-align: center;
+        padding: .375rem .75rem;
+    }
+}
