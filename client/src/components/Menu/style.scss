@@ -23,7 +23,9 @@
         color: grey;
     }
 }
-
+.create-book-wrapper{
+    min-width: 150px;
+}
 @media (max-width: 767px) {
     .header-links-wrapper{
         display: flex;
