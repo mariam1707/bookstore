@@ -241,6 +241,7 @@ module.exports = {
                       types: './src/types',
                       constants: './src/constants',
                       locales: './src/locales',
+                      hocs: './src/hocs',
                     },
                   },
                 ],
