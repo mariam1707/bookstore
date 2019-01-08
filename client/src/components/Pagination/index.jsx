@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import Book from 'containers/Book';
+// import Book from 'containers/Book';
+import Book from 'components/Book';
 import Pages from 'components/Pages';
 import PaginationSelect from 'components/PaginationSelect';
 import type { PropsType } from './types';
