@@ -3,10 +3,12 @@ import React from 'react';
 import Moment from 'react-moment';
 import { setDisplayName, compose, lifecycle } from 'recompose';
 import { equals } from 'ramda';
+import { FormattedMessage } from 'react-intl';
 import ModalEdit from 'components/ModalEdit';
 import isAdmin from 'utils/isAdmin';
 import withShowModal from 'hocs/withShowModal';
 import type { PropsType } from './types';
+import messages from './messages';
 import './book.scss';
 
 export default compose(
@@ -35,7 +37,7 @@ export default compose(
           {isAdmin(userType) && (
             <div className="btn-group">
               <button type="button" className="btn btn-primary" onClick={show}>
-                Edit
+                <FormattedMessage {...messages.edit} />
               </button>
               {isModal ? <ModalEdit book={book} handleClose={hide} /> : null}
               <button
@@ -43,7 +45,7 @@ export default compose(
                 className="btn btn-primary"
                 onClick={() => handleDelete(book._id)}
               >
-                Delete
+                <FormattedMessage {...messages.delete} />
               </button>
             </div>
           )}

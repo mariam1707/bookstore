@@ -27,5 +27,7 @@
     "filters.bookTitle": "Название книги",
     "filters.authorName": "Имя автора",
     "restore.newpassword": "Новый пароль",
-    "restore.restorePassword": "Восстановить пароль"
+    "restore.restorePassword": "Восстановить пароль",
+    "book.edit": "Редактировать",
+    "book.delete": "Удалить"
 }

@@ -27,5 +27,7 @@
     "filters.bookTitle": "Book title",
     "filters.authorName": "Author name",
     "restore.newpassword": "New password",
-    "restore.restorePassword": "Restore password"
+    "restore.restorePassword": "Restore password",
+    "book.edit": "Edit",
+    "book.delete": "Delete"
 }

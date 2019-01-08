@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose, setDisplayName } from 'recompose';
 
 import { bookUpdateWatcher } from 'actions/books';
+import './style.scss';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -67,66 +68,65 @@ export default compose(
         <div className="modal">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">{book.title}</h5>
-              <input
-                type="text"
-                className="form-control"
-                name="title"
-                value={book.title}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="card-body">
-              <ul className="list-group list-group-flush">
-                <div className="form-group">
-                  <p>{book.author}</p>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="author"
-                    value={book.author}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <p>{book.price}</p>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="price"
-                    value={book.price}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <p>Картинка</p>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="image"
-                    onChange={this.handleChange}
-                    value={this.state.book.image}
-                    placeholder="Can be empty"
-                  />
-                </div>
-                <div className="form-group">
-                  <p>Жанры</p>
-                  <select
-                    className="form-control"
-                    value={this.state.book.genre}
-                    onChange={this.handleChangeSelect}
-                  >
-                    {genres &&
-                      genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
-                  </select>
-                </div>
-              </ul>
-              <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>
-                Save
-              </button>
-              <button type="button" className="btn btn-primary" onClick={this.props.handleClose}>
-                Close
-              </button>
+              <div className="form-group">
+                <p className="card-title">{book.title}</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="title"
+                  value={book.title}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <p>{book.author}</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="author"
+                  value={book.author}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <p>{book.price}</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="price"
+                  value={book.price}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <p>Картинка</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="image"
+                  onChange={this.handleChange}
+                  value={this.state.book.image}
+                  placeholder="Can be empty"
+                />
+              </div>
+              <div className="form-group">
+                <p>Жанры</p>
+                <select
+                  className="form-control"
+                  value={this.state.book.genre}
+                  onChange={this.handleChangeSelect}
+                >
+                  {genres && genres.map(genre => <option key={genre._id}> {genre.genre} </option>)}
+                </select>
+              </div>
+              <div className="box-footer">
+                <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>
+                  Save
+                </button>
+                <button type="button" className="btn btn-primary" onClick={this.props.handleClose}>
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>,
