@@ -35,19 +35,19 @@ export default compose(
         </p>
         <div className="d-flex justify-content-between align-items-center">
           {isAdmin(userType) && (
-            <div className="btn-group">
+            <>
               <button type="button" className="btn btn-primary" onClick={show}>
                 <FormattedMessage {...messages.edit} />
               </button>
               {isModal ? <ModalEdit book={book} handleClose={hide} /> : null}
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-danger"
                 onClick={() => handleDelete(book._id)}
               >
                 <FormattedMessage {...messages.delete} />
               </button>
-            </div>
+            </>
           )}
         </div>
       </div>
