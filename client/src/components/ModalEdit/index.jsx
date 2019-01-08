@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import compose from 'recompose/compose';
+import { compose, setDisplayName } from 'recompose';
 
 import { bookUpdateWatcher } from 'actions/books';
 
 const modalRoot = document.getElementById('modal-root');
 
 export default compose(
+  setDisplayName('ModalEdit'),
   connect(
     state => ({
       genres: state.books.genres,

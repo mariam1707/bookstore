@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
+import { compose, setDisplayName } from 'recompose';
 import type { PropsType } from './types';
 
-export default ({ totalPages, currentPage }: PropsType) => (
+export default compose(setDisplayName('Pages'))(({ totalPages, currentPage }: PropsType) => (
   <div>
     {currentPage && (
       <span className="current-page d-inline-block h-100 text-secondary">
@@ -11,4 +12,4 @@ export default ({ totalPages, currentPage }: PropsType) => (
       </span>
     )}
   </div>
-);
+));
