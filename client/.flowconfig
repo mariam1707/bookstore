@@ -19,6 +19,7 @@ module.name_mapper='^reducers' -> '<PROJECT_ROOT>/src/reducers'
 module.name_mapper='^saga' -> '<PROJECT_ROOT>/src/saga'
 module.name_mapper='^utils' -> '<PROJECT_ROOT>/src/utils'
 module.name_mapper='^helpers' -> '<PROJECT_ROOT>/src/helpers'
+module.name_mapper='^hocs' -> '<PROJECT_ROOT>/src/hocs'
 module.name_mapper='.*\(.scss\)' -> 'empty/object'
 module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/libdefs/SCSSFlowStub.js'
 
