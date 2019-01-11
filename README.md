@@ -10,6 +10,6 @@
 --------------
 
 *flow (temporary solution, working on it)*
-###cd client
-###npm i
-###npm run flow
+### cd client
+### npm i
+### npm run flow
