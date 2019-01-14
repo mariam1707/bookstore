@@ -86,6 +86,7 @@ export default compose(setDisplayName('PaginationContainer'))(
       if (totalPages >= 2) {
         pages = range(1, totalPages);
       }
+      const isPages = currentPage < totalPages;
       return (
         <Pagination
           pages={pages}
@@ -97,6 +98,7 @@ export default compose(setDisplayName('PaginationContainer'))(
           options={options}
           userType={userType}
           handleDelete={handleDelete}
+          isPages={isPages}
         />
       );
     }

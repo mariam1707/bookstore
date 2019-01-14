@@ -16,11 +16,12 @@ const Pagination = ({
   options,
   userType,
   handleDelete,
+  isPages,
 }: PropsType) => (
   <>
     <div className="container d-flex flex-wrap justify-content-between">
       <PaginationSelect handlePerPage={handlePageLimit} options={options} />
-      <Pages currentPage={currentPage} totalPages={totalPages} />
+      {isPages && <Pages currentPage={currentPage} totalPages={totalPages} />}
     </div>
     <div className="d-flex flex-wrap">
       {currentBooks &&
