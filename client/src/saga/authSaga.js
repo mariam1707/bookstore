@@ -1,6 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 import { push } from 'react-router-redux';
 import {
   SET_CURRENT_USER_WATCHER,
@@ -40,7 +41,10 @@ export function* GetUser({ payload }) {
   try {
     const response = yield call(axios, opt);
     const { token } = response.data;
+
     localStorage.setItem('jwtToken', token);
+    Cookies.set('user', 'active', { expires: 1 });
+
     setAuthToken(token);
     const decoded = jwtDecode(token);
     yield put(setCurrentUserAction(decoded));
@@ -75,16 +79,10 @@ export function* RestorePass({ payload }) {
 export function* setUser() {
   yield put(fetchBooksRequest());
   yield put(fetchGenresRequest());
-  if (localStorage.jwtToken) {
+  if (Cookies.get('user')) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwtDecode(localStorage.jwtToken);
     yield put(setCurrentUserAction(decoded));
-
-    // const currentTime = Date.now() / 1000;
-    // if (decoded.exp < currentTime) {
-    //   yield put(unsetCurrentUserSaga);
-    //   window.location.href = '/';
-    // }
   }
 }
 
