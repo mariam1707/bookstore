@@ -11,4 +11,5 @@ export type PropsType = {
   options: Array<number>,
   userType: string,
   handleDelete: Function,
+  isPages: boolean,
 };
