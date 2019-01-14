@@ -10,8 +10,7 @@ const ProfileSchema = new Schema({
         type: String,
         required: true,
         max:40,
-    },
-    //usual or admin
+    },   
     user_type: {
         type: String,
         required: true

@@ -21,7 +21,6 @@ const range = (from, to, step = 1) => {
 export default compose(setDisplayName('PaginationContainer'))(
   class extends React.PureComponent<PropsType, StateType> {
     static getDerivedStateFromProps(nextProps, prevState) {
-      // console.log('GDSFP PAGINATION');
       if (!equals(prevState.books, nextProps.books)) {
         const currentBooks = nextProps.books.slice(0, 0 + prevState.pageLimit);
         return {
@@ -43,26 +42,14 @@ export default compose(setDisplayName('PaginationContainer'))(
 
     componentDidMount() {
       this.gotoPage(1);
-      // this.onPageChanged({ currentPage: 1 });
     }
-
-    // shouldComponentUpdate = (nextProps, nextState) => {
-    //   const { currentBooks } = this.state;
-    //   // console.log('SCU PAGINATION CONT');
-    //   if (equals(currentBooks, nextState.currentBooks)) {
-    //     return false;
-    //   }
-    //   return true;
-    // };
 
     onPageChanged = data => {
       const { books } = this.props;
-      // const { books } = this.state;
       const { currentPage } = data;
       const { currentBooks, pageLimit } = this.state;
       const offset = (currentPage - 1) * +pageLimit;
       const currentBooksNew = books.slice(offset, offset + +pageLimit);
-      // console.log('onPageChanged');
       if (!equals(currentBooks, currentBooksNew)) {
         this.setState({ currentBooks: currentBooksNew });
       }
@@ -76,7 +63,6 @@ export default compose(setDisplayName('PaginationContainer'))(
       const paginationData = {
         currentPage,
       };
-      // console.log('goToPage');
       this.setState({ currentPage }, () => this.onPageChanged(paginationData));
     };
 
@@ -100,7 +86,6 @@ export default compose(setDisplayName('PaginationContainer'))(
       if (totalPages >= 2) {
         pages = range(1, totalPages);
       }
-      // console.log('pagination container', currentBooks);
       return (
         <Pagination
           pages={pages}

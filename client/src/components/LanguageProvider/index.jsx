@@ -5,7 +5,6 @@ import en from 'react-intl/locale-data/en';
 import ru from 'react-intl/locale-data/ru';
 import { connect } from 'react-redux';
 import { setDisplayName, compose } from 'recompose';
-// import Login from 'containers/Login';
 import messages from 'locales/messages';
 
 import type { PropsType } from './types';

@@ -12,7 +12,7 @@ const Genres = require('../../models/Genres');
 
 // @route   GET api/profile/test
 // @desc    Tests post route
-// @acess   public
+// @access   public
 router.get('/test', (req,res) => {
     return res.json({
         'msg': 'Profile Works!'
@@ -21,7 +21,7 @@ router.get('/test', (req,res) => {
 
 // @route   GET api/genres
 // @desc    Get genres
-// @acess   public
+// @access   public
 
 router.get('/',(req,res) => {
     Genres.find()
@@ -30,11 +30,10 @@ router.get('/',(req,res) => {
 });
 
 router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    // if(req.user.user_type === 'admin'){
+   
    const newGenre = new Book({
        genre: req.body.genre,      
    });
-     // }
 
    newGenre.save().then(genre => res.json(genre));
 });
