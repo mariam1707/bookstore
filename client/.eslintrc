@@ -44,7 +44,8 @@
         "jsx-a11y/label-has-for": 0,
         "import/no-unresolved": 0,
         "array-callback-return": 0,
-        "import/no-extraneous-dependencies": 0
+        "import/no-extraneous-dependencies": 0,
+        "react/prefer-stateless-function": 0
     },
     "plugins": [
         "prettier"

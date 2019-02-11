@@ -3,6 +3,7 @@ import React from 'react';
 
 import FiltersView from 'components/FiltersView';
 import Pagination from 'containers/Pagination';
+import Form from 'containers/Form';
 import type { PropsType } from './types';
 
 const BooksWrap = ({
@@ -21,6 +22,7 @@ const BooksWrap = ({
 }: PropsType) => (
   <>
     <div className="container">
+      <Form />
       <div className="d-flex flex-wrap justify-content-sm-around">
         <FiltersView
           genres={genres}
