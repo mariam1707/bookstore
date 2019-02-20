@@ -5,6 +5,7 @@ import setDisplayName from 'recompose/setDisplayName';
 import compose from 'recompose/compose';
 import Login from 'components/Login';
 import { setCurrentUserWatcherAction } from 'actions/auth';
+import { stopTimerAction } from 'actions/timer';
 import type { PropsType, StateType } from './types';
 
 export default compose(
@@ -12,9 +13,11 @@ export default compose(
   connect(
     state => ({
       auth: state.auth,
+      isOnTimer: state.timer.isOn,
     }),
     {
       setCurrentUserWatcherAction,
+      stopTimerAction,
     }
   )
 )(
@@ -52,6 +55,8 @@ export default compose(
             errors={errors}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            handleStopTimer={this.props.stopTimerAction}
+            isOnTimer={this.props.isOnTimer}
           />
         </>
       );

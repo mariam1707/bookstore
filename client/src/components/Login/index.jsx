@@ -3,11 +3,20 @@ import React from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import Timer from 'components/Timer';
 import messages from './messages';
 import type { PropsType } from './types';
 import './style.scss';
 
-const Login = ({ email, password, errors, handleChange, handleSubmit }: PropsType) => (
+const Login = ({
+  email,
+  password,
+  errors,
+  handleChange,
+  handleSubmit,
+  handleStopTimer,
+  isOnTimer,
+}: PropsType) => (
   <form className="box" onSubmit={handleSubmit}>
     <p className="inscriptions">Email</p>
     <input
@@ -43,6 +52,20 @@ const Login = ({ email, password, errors, handleChange, handleSubmit }: PropsTyp
     <Link className="nav-link" to="/restore">
       <FormattedMessage {...messages.restorePassword} />
     </Link>
+    {isOnTimer && (
+      <>
+        <button type="button" className="btn btn-primary" onClick={() => handleStopTimer()}>
+          Верифицировать пароль
+        </button>
+        <Timer
+          isOn={isOnTimer}
+          // fromTime={80}
+          toTime={1550692800000}
+          // timeToCount={10000}
+          stopTimer={handleStopTimer}
+        />
+      </>
+    )}
   </form>
 );
 

@@ -5,6 +5,7 @@ import books from './books';
 import auth from './auth';
 import pagination from './pagination';
 import locale from './locale';
+import { timer } from './timer';
 
 export default () =>
   combineReducers({
@@ -14,4 +15,5 @@ export default () =>
     auth,
     pagination,
     locale,
+    timer,
   });
