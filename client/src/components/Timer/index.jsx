@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './style.scss';
 
 class Timer extends React.Component {
   static getDerivedStateFromProps(props, state) {
@@ -86,11 +87,16 @@ class Timer extends React.Component {
   render() {
     if (!this.state.isOn) return null;
     return (
-      <>
-        <p>
-          Time left: {this.state.minutes}:{this.state.seconds}
-        </p>
-      </>
+      <div className="clock-container">
+        <div className="clock-col">
+          <p className="clock-minutes clock-timer">{this.state.minutes}</p>
+          <p className="clock-label">Minutes</p>
+        </div>
+        <div className="clock-col">
+          <p className="clock-seconds clock-timer">{this.state.seconds}</p>
+          <p className="clock-label">Seconds</p>
+        </div>
+      </div>
     );
   }
 }
